@@ -102,21 +102,40 @@ include_directories("${PROJECT_SOURCE_DIR}")
 #geopsypack/mkdmg \
 #geopsypack/bugparser \
 
-### Geopsy libs package 
-# Without GUI
+### Geopsy libs packages 
+# Libs without GUI
 add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-libs/GpCoreTools)
 add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-libs/QGpCoreTools)
+add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-libs/QGpGuiTools)
 add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-libs/QGpCoreMath)
 add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-libs/QGpCoreWave)
-# With GUI
-add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-libs/QGpGuiMath)
-add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-libs/QGpGuiTools)
-add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-libs/QGpGuiWave)
-### 
-
+## libs GUI
 add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-libs/SciFigs)
+add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-libs/QGpGuiMath)
+add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-libs/QGpGuiWave)
+add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-libs/QGpCompatibility)
+#### 
 
-add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-libs/figue)
+#### Programs 
+add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-figue)
+#### 
 
-add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-libs/QGpCoreMath)
+### dinver
+add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-dinver/DinverCore)
+add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-dinver/DinverGui)
+add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-dinver/DinverDCCore)
+add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-dinver/DinverDCGui)
+add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-dinver/dinver)
+add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-dinver/dinverdc)
+add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-dinver/dinverext)
+add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-dinver/dinvermatlab)
+###
+
+#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-libs/QGpCoreStat)
+
+#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-geopsy/GeopsyCore)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-geopsy/GeopsyGui)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-geopsy/geopsyfigs)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-geopsy/GeopsySLink)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-geopsy/GeopsySLinkGui)
 
