@@ -5,7 +5,7 @@
 
 cmake_minimum_required(VERSION 3.9)
 
-project(figue VERSION 1.0.0 DESCRIPTION "figue description")
+project(@@P_NAME@@ VERSION 1.0.0 DESCRIPTION "@@P_NAME@@ description")
 
 ### Modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
@@ -109,36 +109,6 @@ find_package(GMP REQUIRED)
 find_package(LAPACK REQUIRED)
 # Find BLAS
 find_package(BLAS REQUIRED)
-## Find QGpCoreTools
-#find_library(QGPCORETOOLS_LIBRARY
-    #NAMES QGpCoreTools
-    #HINTS ${THIS_LIB_PATH}
-#)
-#message(STATUS "QGPCORETOOLS_LIBRARY: ${QGPCORETOOLS_LIBRARY}")
-## Find QGpGuiTools
-#find_library(QGPGUITOOLS_LIBRARY
-    #NAMES QGpGuiTools
-    #HINTS ${THIS_LIB_PATH}
-#)
-#message(STATUS "QGPGUITOOLS_LIBRARY: ${QGPGUITOOLS_LIBRARY}")
-## Find QGpCoreMath
-#find_library(QGPCOREMATH_LIBRARY
-    #NAMES QGpCoreMath
-    #HINTS ${THIS_LIB_PATH}
-#)
-#message(STATUS "QGPCOREMATH_LIBRARY: ${QGPCOREMATH_LIBRARY}")
-## Find QGpGuiMath
-#find_library(QGPGUIMATH_LIBRARY
-    #NAMES QGpGuiMath
-    #HINTS ${THIS_LIB_PATH}
-#)
-#message(STATUS "QGPGUIMATH_LIBRARY: ${QGPGUIMATH_LIBRARY}")
-## Find SciFigs
-#find_library(SCIFIGS_LIBRARY
-    #NAMES SciFigs
-    #HINTS ${THIS_LIB_PATH}
-#)
-#message(STATUS "SCIFIGS_LIBRARY: ${SCIFIGS_LIBRARY}")
 ###
 
 ### Qt5 support
@@ -163,8 +133,7 @@ set(QT5_LIBRARIES Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Qml Qt5::Network Qt5::Pri
 set(TARGET ${CMAKE_PROJECT_NAME})
 
 set(CPP_SRCS
-    src/main.cpp
-    src/MainWindow.cpp
+@@CPP_SOURCES@@
 )
 
 # Headers got to include/*
@@ -174,15 +143,12 @@ set(HEA_INC
 
 # Headers got to include/GpCoreTools/*
 set(HEA_SRCS
-    src/figueInstallPath.h
-    src/figueVersion.h
-    src/MainWindow.h
-    src/stable.h
+@@HEA_SOURCES@@
 )
 
 # Headers got to include/*
 set(UI_SRCS
-
+@@UI_SOURCES@@
 )
 
 #

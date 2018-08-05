@@ -8,14 +8,23 @@ EXE_DIR = 'exe'
 F_NAME = 'CMakeLists.txt'
 D_NAME = 'cmake'
 
-P_REP = '@@P_NAME@@'
-CPP_REP = '@@CPP_SOURCES@@'
-HEA_REP = '@@HEA_SOURCES@@'
-UI_REP = '@@UI_SOURCES@@'
+P_REP = "@@P_NAME@@"
+CPP_REP = "@@CPP_SOURCES@@"
+HEA_REP = "@@HEA_SOURCES@@"
+UI_REP = "@@UI_SOURCES@@"
 
 
 def main():
     parser = OptionParser()
+
+    parser.add_option(
+        "-n", 
+        "--name", 
+        type="string",
+        dest="name",
+        help="Project name", 
+        metavar="NAME"
+    )
 
     parser.add_option(
         "-p", 
@@ -44,7 +53,7 @@ def main():
         dest="executable",
         action="store_true",
         help="Project is a executable",
-        default=True,
+        default=False,
         metavar="EXECUTABLE"
     )
 
@@ -75,30 +84,34 @@ def main():
     print(options)
     print(args)
 
-    ppath = get_ppath(ppath)
-    spath = get_spath(ppath)
-    
-    # Get list of files in the project
-    fcpp = list_cpp(ppath, sdir)
-    fhpp = list_hpp(ppath, sdir)
-    fui = list_ui(ppath, sdir)
-    
-    # read cmake file
-    if options.executable:
-        cmake_file = os.path.abspath( os.path.join('./', TEM_DIR, EXE_DIR, F_NAME) )
-        cmake_dir = os.path.abspath( os.path.join('./', TEM_DIR, EXE_DIR, D_NAME) )
-    if options.library:
-        cmake_file = os.path.abspath( os.path.join('./', TEM_DIR, LIB_DIR, F_NAME) )
-        cmake_dir = os.path.abspath( os.path.join('./', TEM_DIR, LIB_DIR, D_NAME) )
-    
-    # Read file in string
-    fstr = cmake_file(cmake_file)
-    # Change string
-    fstr.replace( P_REP, '\n'.join(fcpp) )
-    fstr.replace( CPP_REP, '\n'.join(fcpp))
-    fstr.replace( HEA_REP, '\n'.join(fhpp))
-    fstr.replace( UI_REP, '\n'.join(fui))    
+    ppath = os.path.abspath( options.path )
+    sdir = options.source
 
+    # Check if exists
+    if os.path.exists(ppath) and os.path.exists( os.path.join(ppath, sdir) ):
+        # Get list of files in the project
+        fcpp = list_cpp(ppath, sdir)
+        fhpp = list_hpp(ppath, sdir)
+        fui = list_ui(ppath, sdir)
+        
+        # read cmake file
+        if options.executable:
+            cmake_file = os.path.abspath( os.path.join('./', TEM_DIR, EXE_DIR, F_NAME) )
+            cmake_dir = os.path.abspath( os.path.join('./', TEM_DIR, EXE_DIR, D_NAME) )
+        if options.library:
+            cmake_file = os.path.abspath( os.path.join('./', TEM_DIR, LIB_DIR, F_NAME) )
+            cmake_dir = os.path.abspath( os.path.join('./', TEM_DIR, LIB_DIR, D_NAME) )
+        
+        # Read file in string
+        fstr = read_cmake_file(cmake_file)
+        # Change string
+        fstr = fstr.replace( P_REP, options.name )
+        fstr = fstr.replace( CPP_REP, '\n    '.join(fcpp))
+        fstr = fstr.replace( HEA_REP, '\n    '.join(fhpp))
+        fstr = fstr.replace( UI_REP, '\n    '.join(fui))    
+        f = open('/tmp/CMakeLists.txt', 'wt', encoding='utf-8')
+        f.write(fstr)
+        f.close()
 
 def get_ppath(ppath):
     pass
@@ -106,9 +119,9 @@ def get_ppath(ppath):
 def get_spath(sdir):
     pass
 
-def cmake_file(fpath):
-    f = open(path,'r')
-    return r.read()
+def read_cmake_file(fpath):
+    f = open(fpath,'r')
+    return f.read()
 
 def list_fwe(ppath, sdir, fext):
     import os
