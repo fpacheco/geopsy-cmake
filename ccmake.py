@@ -142,7 +142,10 @@ def list_fwe(ppath, sdir, fext):
     files.sort()
     for file in files:
         if file.endswith(fext):
-            flist.append( sdir + '/' +file )
+            if sdir:
+                flist.append( sdir + '/' +file )
+            else:
+                flist.append( file )
     return flist
 
 def list_cpp(ppath, sdir):
