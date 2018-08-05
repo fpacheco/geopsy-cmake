@@ -5,7 +5,7 @@
 
 cmake_minimum_required(VERSION 3.9)
 
-project(@@PNAME@@ VERSION 1.0.0 DESCRIPTION "@@PNAME@@ description")
+project(@@P_NAME@@ VERSION 1.0.0 DESCRIPTION "@@P_NAME@@ description")
 
 ### Modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
@@ -151,12 +151,12 @@ set(CPP_SRCS
 
 # Headers got to include/*
 set(HEA_INC
-    src/DinverDCGui.h
+
 )
 
 # Headers got to include/GpCoreTools/*
 set(HEA_SRCS
-@@HEADER_SOURCES@@
+@@HEA_SOURCES@@
 )
 
 # Headers got to include/*

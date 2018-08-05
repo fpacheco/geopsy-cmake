@@ -2,6 +2,18 @@
 from optparse import OptionParser
 import os
 
+TEM_DIR = 'templates'
+LIB_DIR = 'lib'
+EXE_DIR = 'exe'
+F_NAME = 'CMakeLists.txt'
+D_NAME = 'cmake'
+
+P_REP = '@@P_NAME@@'
+CPP_REP = '@@CPP_SOURCES@@'
+HEA_REP = '@@HEA_SOURCES@@'
+UI_REP = '@@UI_SOURCES@@'
+
+
 def main():
     parser = OptionParser()
 
@@ -65,6 +77,28 @@ def main():
 
     ppath = get_ppath(ppath)
     spath = get_spath(ppath)
+    
+    # Get list of files in the project
+    fcpp = list_cpp(ppath, sdir)
+    fhpp = list_hpp(ppath, sdir)
+    fui = list_ui(ppath, sdir)
+    
+    # read cmake file
+    if options.executable:
+        cmake_file = os.path.abspath( os.path.join('./', TEM_DIR, EXE_DIR, F_NAME) )
+        cmake_dir = os.path.abspath( os.path.join('./', TEM_DIR, EXE_DIR, D_NAME) )
+    if options.library:
+        cmake_file = os.path.abspath( os.path.join('./', TEM_DIR, LIB_DIR, F_NAME) )
+        cmake_dir = os.path.abspath( os.path.join('./', TEM_DIR, LIB_DIR, D_NAME) )
+    
+    # Read file in string
+    fstr = cmake_file(cmake_file)
+    # Change string
+    fstr.replace( P_REP, '\n'.join(fcpp) )
+    fstr.replace( CPP_REP, '\n'.join(fcpp))
+    fstr.replace( HEA_REP, '\n'.join(fhpp))
+    fstr.replace( UI_REP, '\n'.join(fui))    
+
 
 def get_ppath(ppath):
     pass
