@@ -180,6 +180,9 @@ set (EXECUTABLE_OUTPUT_PATH ${THIS_BIN_PATH})
 set (LIBRARY_OUTPUT_PATH ${THIS_LIB_PATH})
 ### 
 
+# Add resources from file
+qt5_add_resources(QRCS @@QRC_FILE@@)
+
 # Create shared library
 add_library(${PROJECT_NAME} SHARED ${CPP_SRCS})
 target_link_libraries(${PROJECT_NAME} ${ZLIB_LIBRARIES} ${MPFR_LIBRARIES} ${GMP_LIBRARIES})

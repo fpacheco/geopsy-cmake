@@ -173,21 +173,26 @@ set (LIBRARY_OUTPUT_PATH ${THIS_LIB_PATH})
 ### 
 
 # Add resources from file
-qt5_add_resources(QRCS figue.qrc)
+qt5_add_resources(QRCS @@QRC_FILE@@)
 
 # Create executable
 add_executable(${PROJECT_NAME} ${CPP_SRCS} ${UI_HEADERS} ${QRCS})
-#add_library(${PROJECT_NAME} SHARED ${CPP_SRCS})
 target_link_libraries(${PROJECT_NAME} ${ZLIB_LIBRARIES} ${MPFR_LIBRARIES} ${GMP_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} ${BLAS_LIBRARIES} ${LAPACK_LIBRARIES}) 
 target_link_libraries(${PROJECT_NAME} Threads::Threads)
 target_link_libraries(${PROJECT_NAME} ${QT5_LIBRARIES})
-
+# Geopsy libraries - Comment out
 target_link_libraries(${PROJECT_NAME} QGpCoreTools)
 target_link_libraries(${PROJECT_NAME} QGpGuiTools)
 target_link_libraries(${PROJECT_NAME} QGpCoreMath)
 target_link_libraries(${PROJECT_NAME} QGpGuiMath)
+target_link_libraries(${PROJECT_NAME} QGpCoreWave)
+target_link_libraries(${PROJECT_NAME} QGpGuiWave)
 target_link_libraries(${PROJECT_NAME} SciFigs)
+target_link_libraries(${PROJECT_NAME} DinverCore)
+target_link_libraries(${PROJECT_NAME} DinverGui)
+target_link_libraries(${PROJECT_NAME} DinverDCCore)
+target_link_libraries(${PROJECT_NAME} DinverDCGui)
 
 # Set VERSION
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
