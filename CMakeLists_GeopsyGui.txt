@@ -271,6 +271,10 @@ set(UI_SRCS
     geopsy-src/geopsy/GeopsyGui/src/WindowingParameterWidget.ui
 )
 
+
+# Include header files for compilation
+include_directories(geopsy-src/geopsy/GeopsyGui/src)
+
 #
 # Generate necessary headers from .ui files. (qmake lets `uic` do this job.)
 # hint from [Cross-platform Qt5 project using cmake](http://stackoverflow.com/questions/21174586/cross-platform-qt5-project-using-cmake)
@@ -292,9 +296,6 @@ foreach( file_i ${HEA_SRCS})
   )
 endforeach( file_i )
 
-# Include header files for compilation
-include_directories(src)
-
 ### Set BUILD PATHS
 # Set library build path 
 set (EXECUTABLE_OUTPUT_PATH ${THIS_BIN_PATH})
@@ -303,7 +304,7 @@ set (LIBRARY_OUTPUT_PATH ${THIS_LIB_PATH})
 ### 
 
 # Add resources from file
-qt5_add_resources(QRCS GeopsyGui.qrc)
+qt5_add_resources(QRCS geopsy-src/geopsy/GeopsyGui/GeopsyGui.qrc)
 
 # Create shared library
 add_library(${PROJECT_NAME} SHARED ${CPP_SRCS})

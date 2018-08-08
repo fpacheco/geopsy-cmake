@@ -208,7 +208,7 @@ set(HEA_SRCS
 )
 
 # Include header files for compilation
-include_directories(src)
+include_directories(geopsy-src/lib/GpCoreTools/src)
 
 ### Set BUILD PATHS
 # Set library build path 

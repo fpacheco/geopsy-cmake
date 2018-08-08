@@ -379,7 +379,7 @@ set(UI_SRCS
 # QT5_WRAP_UI(UI_GENERATED_HEADERS ${UI_SRCS})
 
 # Include header files for compilation
-include_directories(src)
+include_directories(geopsy-src/geopsy/GeopsyCore/src)
 
 # Dont do TimePick.moc
 set_property(SOURCE geopsy-src/geopsy/GeopsyCore/src/TimePick.cpp PROPERTY SKIP_AUTOMOC ON)

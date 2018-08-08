@@ -183,7 +183,7 @@ geopsy-src/geopsy/GeopsySLinkGui/src/SeedLinkLoader.ui
 # QT5_WRAP_UI(UI_GENERATED_HEADERS ${UI_SRCS})
 
 # Include header files for compilation
-include_directories(src)
+include_directories(geopsy-src/geopsy/GeopsySLinkGui/src)
 
 ### Set BUILD PATHS
 # Set library build path 

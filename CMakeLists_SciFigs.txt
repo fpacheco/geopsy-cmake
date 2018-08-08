@@ -397,7 +397,7 @@ set(UI_SRCS
 # QT5_WRAP_UI(UI_GENERATED_HEADERS ${UI_SRCS})
 
 # Include header files for compilation
-include_directories(src)
+include_directories(geopsy-src/lib/SciFigs/src)
 
 #get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
 #foreach(dir ${dirs})
@@ -412,7 +412,7 @@ set (LIBRARY_OUTPUT_PATH ${THIS_LIB_PATH})
 ### 
 
 # Add resources from file
-qt5_add_resources(QRCS SciFigs.qrc)
+qt5_add_resources(QRCS geopsy-src/lib/SciFigs/SciFigs.qrc)
 
 # Create shared library
 add_library(${PROJECT_NAME} SHARED ${CPP_SRCS} ${QRCS})
