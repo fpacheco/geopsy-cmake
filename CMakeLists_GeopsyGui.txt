@@ -109,18 +109,6 @@ find_package(GMP REQUIRED)
 find_package(LAPACK REQUIRED)
 # Find BLAS
 find_package(BLAS REQUIRED)
-## Find QGpCoreTools
-#find_library(QGPCORETOOLS_LIBRARY
-    #NAMES QGpCoreTools
-    #HINTS ${THIS_LIB_PATH}
-#)
-#message(STATUS "QGPCORETOOLS_LIBRARY: ${QGPCORETOOLS_LIBRARY}")
-## Find QGpCoreMath
-#find_library(QGPCOREMATH_LIBRARY
-    #NAMES QGpCoreMath
-    #HINTS ${THIS_LIB_PATH}
-#)
-#message(STATUS "QGPCOREMATH_LIBRARY: ${QGPCOREMATH_LIBRARY}")
 ###
 
 ### Qt5 support
@@ -131,11 +119,11 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 # Find Qt5 and add components Widgets, Qml, Sql, Network
 find_package(Qt5 COMPONENTS Core Gui Widgets Qml Network PrintSupport REQUIRED)
-INCLUDE_DIRECTORIES(${Qt5Core_INCLUDE_DIRS})
+#INCLUDE_DIRECTORIES(${Qt5Core_INCLUDE_DIRS})
 #INCLUDE_DIRECTORIES(${Qt5Qml_INCLUDE_DIRS})
 #INCLUDE_DIRECTORIES(${Qt5Network_INCLUDE_DIRS})
 
-set(QT5_LIBRARIES Qt5::Core Qt5::Widgets)
+set(QT5_LIBRARIES Qt5::Core Qt5::Gui Qt5::Widgets)
 #set(QT5_LIBRARIES Qt5::Core Qt5::Qml Qt5::Network)
 #message(STATUS "QT5_LIBRARIES: ${QT5_LIBRARIES}")
 #message(STATUS "Qt5Core_LIBRARIES: ${Qt5Core_LIBRARIES}")
@@ -143,7 +131,8 @@ set(QT5_LIBRARIES Qt5::Core Qt5::Widgets)
 #message(STATUS "Qt5Qml_INCLUDE_DIRS: ${Qt5Qml_INCLUDE_DIRS}")
 ###
 
-set(TARGET ${CMAKE_PROJECT_NAME})
+#set(TARGET ${CMAKE_PROJECT_NAME})
+set(TARGET ${PROJECT_NAME})
 
 set(CPP_SRCS
 geopsy-src/geopsy/GeopsyGui/src/AbstractGraphicWindow.cpp
@@ -247,8 +236,8 @@ set(HEA_SRCS
 # Headers got to include/*
 set(UI_SRCS
     geopsy-src/geopsy/GeopsyGui/src/TaperParameterWidget.ui
-    geopsy-src/geopsy/GeopsyGui/src/TimeRangeParameterWidget.ui
-    geopsy-src/geopsy/GeopsyGui/src/ArrayDefinition.ui    
+    geopsy-src/geopsy/GeopsyGui/src/TimeRangeParameterWidget.ui    
+    geopsy-src/geopsy/GeopsyGui/src/ArrayDefinition.ui
     geopsy-src/geopsy/GeopsyGui/src/AsciiSignalComponentsWidget.ui
     geopsy-src/geopsy/GeopsyGui/src/AsciiSignalFormatEditor.ui
     geopsy-src/geopsy/GeopsyGui/src/AsciiSignalRulesWidget.ui
@@ -279,8 +268,8 @@ include_directories(geopsy-src/geopsy/GeopsyGui/src)
 # Generate necessary headers from .ui files. (qmake lets `uic` do this job.)
 # hint from [Cross-platform Qt5 project using cmake](http://stackoverflow.com/questions/21174586/cross-platform-qt5-project-using-cmake)
 #
-QT5_WRAP_UI(UI_GENERATED_HEADERS ${UI_SRCS})
-message(STATUS "UI_GENERATED_HEADERS: ${UI_GENERATED_HEADERS}")
+# QT5_WRAP_UI(UI_GENERATED_HEADERS ${UI_SRCS})
+# message(STATUS "UI_GENERATED_HEADERS: ${UI_GENERATED_HEADERS}")
 
 foreach( file_i ${HEA_INC})
   file(
@@ -350,7 +339,7 @@ endforeach( file_i )
 
 # Generated UI headers to include/${PROJECT_NAME}/*
 add_custom_command(
-    TARGET ${PROJECT_NAME} POST_BUILD
+    TARGET ${PROJECT_NAME} PRE_BUILD
     COMMAND ${CMAKE_COMMAND}
     ARGS -E copy ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_autogen/include/ui_* ${THIS_INC_PATH}/${PROJECT_NAME}    
 )

@@ -17,95 +17,95 @@ set(PROJECT_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
 include_directories("${PROJECT_INCLUDE_DIR}")
 include_directories("${PROJECT_SOURCE_DIR}")
 
-#lib/QGpCoreTools \
-#lib/QGpGuiTools \
-#lib/QGpCoreMath \
-#lib/SciFigs \
-#lib/QGpGuiMath \
-#figue \
-#lib/QGpCoreWave \
-#lib/QGpGuiWave \
-#lib/QGpCompatibility \
-#geopsy/GeopsyCore \
-#geopsy/GeopsyGui \
-#geopsy/geopsyfigs \
-#geopsy/GeopsySLink \
-#geopsy/GeopsySLinkGui \
-#dinver/DinverCore \
-#dinver/DinverGui \
-#dinver/DinverDCCore \
-#dinver/DinverDCGui \
-#lib/QGpCoreStat \
-#geopsy/ArrayCore \
-#geopsy/ArrayGui \
-#geopsy/MonoStation \
-#geopsy/geopsy-src/fk \
-#geopsy/geopsy \
-#geopsy/vslarray \
-#dinver/dinver \
-#waran/WaranCore \
-#waran/TapePositioningSystem \
-#waran/waran \
-#waran/warangps \
-#geopsy/tools/geopsyarray \
-#geopsy/tools/geopsyhv \
-#geopsy/tools/geopsydamping \
-#geopsy/tools/geopsytfa \
-#geopsy/tools/geopsynr \
-#geopsy/tools/geopsyptmotion \
-#geopsy/tools/geopsyrefra \
-#geopsy/tools/hvtfa \
-#geopsy/campbelltob3 \
-#dinver/dinverdc \
-#dinver/dinverext \
-#spac2disp \
-#max2curve \
-#gptools/gppoisson \
-#gptools/gpprofile \
-#gptools/gpdc \
-#gptools/gplivemodel \
-#gptools/gpec8 \
-#gptools/gpdcreport \
-#gptools/gptarget \
-#gptools/gpviewdcreport \
-#gptools/gpdcmisfit \
-#gptools/gpell \
-#gptools/gpgroup2phase \
-#gptools/gpmodel2param \
-#gptools/gpparam2model \
-#gptools/gpdepths \
-#gptools/gpsort \
-#gptools/gpcurve \
-#gptools/gprandom \
-#gptools/gpspac \
-#gptools/gprefra \
-#gptools/gpsignal \
-#gptools/gphistogram \
-#gptools/gpviewmax \
-#gptools/gpdistance \
-#gptools/gptime \
-#gptools/gpcoord \
-#gptools/gpreplace \
-#gptools/gpsh \
-#gptools/gpmt \
-#gptools/gpgridsearch \
-#gptools/gpfksimulator \
-#gptools/gpmaplayer \
-#lib/GpCoreTools \
-#waran/warangpsd \
-#waran/waranscreend \
-#waran/waranecho \
-#waran/warannetd \
-#waran/warand \
-#waran/dascubed \
-#dinver/dinvermatlab \
-#geopsy/matfiles \
-#geopsypack/GeopsyPackCore \
-#geopsypack/geopsypackinstall \
-#geopsypack/geopsypackd \
-#geopsypack/selfcompress \
-#geopsypack/mkdmg \
-#geopsypack/bugparser \
+#lib/QGpCoreTools)
+#lib/QGpGuiTools)
+#lib/QGpCoreMath)
+#lib/SciFigs)
+#lib/QGpGuiMath)
+#figue)
+#lib/QGpCoreWave)
+#lib/QGpGuiWave)
+#lib/QGpCompatibility)
+#geopsy/GeopsyCore)
+#geopsy/GeopsyGui)
+#geopsy/geopsyfigs)
+#geopsy/GeopsySLink)
+#geopsy/GeopsySLinkGui)
+#dinver/DinverCore)
+#dinver/DinverGui)
+#dinver/DinverDCCore)
+#dinver/DinverDCGui)
+#lib/QGpCoreStat)
+#geopsy/ArrayCore)
+#geopsy/ArrayGui)
+#geopsy/MonoStation)
+#geopsy/geopsy-src/fk)
+#geopsy/geopsy)
+#geopsy/vslarray)
+#dinver/dinver)
+#waran/WaranCore)
+#waran/TapePositioningSystem)
+#waran/waran)
+#waran/warangps)
+#geopsy/tools/geopsyarray)
+#geopsy/tools/geopsyhv)
+#geopsy/tools/geopsydamping)
+#geopsy/tools/geopsytfa)
+#geopsy/tools/geopsynr)
+#geopsy/tools/geopsyptmotion)
+#geopsy/tools/geopsyrefra)
+#geopsy/tools/hvtfa)
+#geopsy/campbelltob3)
+#dinver/dinverdc)
+#dinver/dinverext)
+#spac2disp)
+#max2curve)
+#gptools/gppoisson)
+#gptools/gpprofile)
+#gptools/gpdc)
+#gptools/gplivemodel)
+#gptools/gpec8)
+#gptools/gpdcreport)
+#gptools/gptarget)
+#gptools/gpviewdcreport)
+#gptools/gpdcmisfit)
+#gptools/gpell)
+#gptools/gpgroup2phase)
+#gptools/gpmodel2param)
+#gptools/gpparam2model)
+#gptools/gpdepths)
+#gptools/gpsort)
+#gptools/gpcurve)
+#gptools/gprandom)
+#gptools/gpspac)
+#gptools/gprefra)
+#gptools/gpsignal)
+#gptools/gphistogram)
+#gptools/gpviewmax)
+#gptools/gpdistance)
+#gptools/gptime)
+#gptools/gpcoord)
+#gptools/gpreplace)
+#gptools/gpsh)
+#gptools/gpmt)
+#gptools/gpgridsearch)
+#gptools/gpfksimulator)
+#gptools/gpmaplayer)
+#lib/GpCoreTools)
+#waran/warangpsd)
+#waran/waranscreend)
+#waran/waranecho)
+#waran/warannetd)
+#waran/warand)
+#waran/dascubed)
+#dinver/dinvermatlab)
+#geopsy/matfiles)
+#geopsypack/GeopsyPackCore)
+#geopsypack/geopsypackinstall)
+#geopsypack/geopsypackd)
+#geopsypack/selfcompress)
+#geopsypack/mkdmg)
+#geopsypack/bugparser)
 
 ### Geopsy libs packages 
 # lib
@@ -119,7 +119,6 @@ include(CMakeLists_QGpGuiMath.txt)
 include(CMakeLists_QGpGuiWave.txt)
 include(CMakeLists_QGpCompatibility.txt)
 include(CMakeLists_figue.txt)
-# include(CMakeLists_QGpCoreStat.txt)
 # geopsy
 include(CMakeLists_GeopsyCore.txt)
 include(CMakeLists_GeopsyGui.txt)
@@ -136,4 +135,11 @@ include(CMakeLists_dinverdc.txt)
 include(CMakeLists_dinverext.txt)
 include(CMakeLists_dinvermatlab.txt)
 
+include(CMakeLists_QGpCoreStat.txt)
+include(CMakeLists_ArrayCore.txt)
+include(CMakeLists_ArrayGui.txt)
+include(CMakeLists_MonoStation.txt)
+include(CMakeLists_geopsy-fk.txt)
+include(CMakeLists_geopsy.txt)
+#include(CMakeLists_vslarray.txt)
 

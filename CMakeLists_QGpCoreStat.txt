@@ -5,7 +5,7 @@
 
 cmake_minimum_required(VERSION 3.9)
 
-project(dinverdc VERSION 1.0.0 DESCRIPTION "dinverdc description")
+project(QGpCoreStat VERSION 1.0.0 DESCRIPTION "QGpCoreStat description")
 
 ### Modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
@@ -105,10 +105,6 @@ find_package(ZLIB REQUIRED)
 find_package(MPFR REQUIRED)
 # Find GMP
 find_package(GMP REQUIRED)
-# Find LAPACK
-find_package(LAPACK REQUIRED)
-# Find BLAS
-find_package(BLAS REQUIRED)
 ###
 
 ### Qt5 support
@@ -118,70 +114,54 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 # Find Qt5 and add components Widgets, Qml, Sql, Network
-find_package(Qt5 COMPONENTS Core Gui Widgets Qml Network PrintSupport REQUIRED)
+find_package(Qt5 COMPONENTS Core Qml Network REQUIRED)
 INCLUDE_DIRECTORIES(${Qt5Core_INCLUDE_DIRS})
 #INCLUDE_DIRECTORIES(${Qt5Qml_INCLUDE_DIRS})
 #INCLUDE_DIRECTORIES(${Qt5Network_INCLUDE_DIRS})
 
-set(QT5_LIBRARIES Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Qml Qt5::Network Qt5::PrintSupport)
+set(QT5_LIBRARIES Qt5::Core Qt5::Qml Qt5::Network)
 #message(STATUS "QT5_LIBRARIES: ${QT5_LIBRARIES}")
 #message(STATUS "Qt5Core_LIBRARIES: ${Qt5Core_LIBRARIES}")
 #message(STATUS "Qt5Core_INCLUDE_DIRS: ${Qt5Core_INCLUDE_DIRS}")
 #message(STATUS "Qt5Qml_INCLUDE_DIRS: ${Qt5Qml_INCLUDE_DIRS}")
-message(STATUS "CMAKE_CURRENT_BINARY_DIR: ${CMAKE_CURRENT_BINARY_DIR}")
-message(STATUS "Autogen goes to: ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_autogen")
 ###
 
 set(TARGET ${CMAKE_PROJECT_NAME})
 
 set(CPP_SRCS
-    geopsy-src/dinver/dinverdc/src/AutocorrTargetWidget.cpp
-    geopsy-src/dinver/dinverdc/src/DCPlugin.cpp
-    geopsy-src/dinver/dinverdc/src/DispersionTargetWidget.cpp
-    geopsy-src/dinver/dinverdc/src/EllipticityCurveTargetWidget.cpp
-    geopsy-src/dinver/dinverdc/src/EllipticityPeakTargetWidget.cpp
-    geopsy-src/dinver/dinverdc/src/MagnetoTelluricTargetWidget.cpp
-    geopsy-src/dinver/dinverdc/src/ParamGroundModelWidget.cpp
-    geopsy-src/dinver/dinverdc/src/ParamLayerWidget.cpp
-    geopsy-src/dinver/dinverdc/src/ParamProfileWidget.cpp
-    geopsy-src/dinver/dinverdc/src/RefractionTargetWidget.cpp
-    geopsy-src/dinver/dinverdc/src/RingBrowser.cpp
-    geopsy-src/dinver/dinverdc/src/TargetListFrameWidget.cpp
-    geopsy-src/dinver/dinverdc/src/TargetListWidget.cpp
+    geopsy-src/lib/QGpCoreStat/src/Densities.cpp
+    geopsy-src/lib/QGpCoreStat/src/GaussianMixtureParameters.cpp
+    geopsy-src/lib/QGpCoreStat/src/HistogramDensities.cpp
+    geopsy-src/lib/QGpCoreStat/src/HistogramReader.cpp
+    geopsy-src/lib/QGpCoreStat/src/Likelihood.cpp
+    geopsy-src/lib/QGpCoreStat/src/QGpCoreStat.cpp
+    geopsy-src/lib/QGpCoreStat/src/SampleFilter.cpp
 )
 
 # Headers got to include/*
 set(HEA_INC
-
+    geopsy-src/lib/QGpCoreStat/src/QGpCoreStat.h
 )
 
 # Headers got to include/GpCoreTools/*
 set(HEA_SRCS
-    geopsy-src/dinver/dinverdc/src/AutocorrTargetWidget.h
-    geopsy-src/dinver/dinverdc/src/DCPlugin.h
-    geopsy-src/dinver/dinverdc/src/DispersionTargetWidget.h
-    geopsy-src/dinver/dinverdc/src/EllipticityCurveTargetWidget.h
-    geopsy-src/dinver/dinverdc/src/EllipticityPeakTargetWidget.h
-    geopsy-src/dinver/dinverdc/src/MagnetoTelluricTargetWidget.h
-    geopsy-src/dinver/dinverdc/src/ParamGroundModelWidget.h
-    geopsy-src/dinver/dinverdc/src/ParamLayerWidget.h
-    geopsy-src/dinver/dinverdc/src/ParamProfileWidget.h
-    geopsy-src/dinver/dinverdc/src/RefractionTargetWidget.h
-    geopsy-src/dinver/dinverdc/src/RingBrowser.h
-    geopsy-src/dinver/dinverdc/src/TargetListFrameWidget.h
-    geopsy-src/dinver/dinverdc/src/TargetListWidget.h
-    geopsy-src/dinver/dinverdc/src/dinverdcInstallPath.h
-    geopsy-src/dinver/dinverdc/src/dinverdcVersion.h
+    geopsy-src/lib/QGpCoreStat/src/Densities.h
+    geopsy-src/lib/QGpCoreStat/src/GaussianMixtureParameters.h
+    geopsy-src/lib/QGpCoreStat/src/HistogramDensities.h
+    geopsy-src/lib/QGpCoreStat/src/HistogramReader.h
+    geopsy-src/lib/QGpCoreStat/src/Likelihood.h
+    geopsy-src/lib/QGpCoreStat/src/QGpCoreStatDLLExport.h
+    geopsy-src/lib/QGpCoreStat/src/QGpCoreStat.h
+    geopsy-src/lib/QGpCoreStat/src/QGpCoreStatInstallPath.h
+    geopsy-src/lib/QGpCoreStat/src/QGpCoreStatStatic.h
+    geopsy-src/lib/QGpCoreStat/src/QGpCoreStatVersion.h
+    geopsy-src/lib/QGpCoreStat/src/SampleFilter.h
+    geopsy-src/lib/QGpCoreStat/src/stable.h
 )
 
 # Headers got to include/*
 set(UI_SRCS
-    geopsy-src/dinver/dinverdc/src/EllipticityPeakTargetWidget.ui
-    geopsy-src/dinver/dinverdc/src/ParamLayerWidget.ui
-    geopsy-src/dinver/dinverdc/src/ParamProfileWidget.ui
-    geopsy-src/dinver/dinverdc/src/RingBrowser.ui
-    geopsy-src/dinver/dinverdc/src/TargetListFrameWidget.ui
-    geopsy-src/dinver/dinverdc/src/TargetListWidget.ui
+
 )
 
 #
@@ -191,12 +171,7 @@ set(UI_SRCS
 # QT5_WRAP_UI(UI_GENERATED_HEADERS ${UI_SRCS})
 
 # Include header files for compilation
-include_directories(geopsy-src/dinver/dinverdc/src)
-
-#get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
-#foreach(dir ${dirs})
-  #message(STATUS "dir='${dir}'")
-#endforeach()
+include_directories(geopsy-src/lib/QGpCoreStat/src)
 
 ### Set BUILD PATHS
 # Set library build path 
@@ -205,42 +180,6 @@ set (EXECUTABLE_OUTPUT_PATH ${THIS_BIN_PATH})
 set (LIBRARY_OUTPUT_PATH ${THIS_LIB_PATH})
 ### 
 
-# Add resources from file
-qt5_add_resources(QRCS geopsy-src/dinver/dinverdc/dinverdc.qrc)
-
-# Create shared library
-#add_executable(${PROJECT_NAME} ${CPP_SRCS} ${UI_HEADERS} ${QRCS})
-add_library(${PROJECT_NAME} SHARED ${CPP_SRCS} ${HEA_SRCS} ${QRCS})
-target_link_libraries(${PROJECT_NAME} ${ZLIB_LIBRARIES} ${MPFR_LIBRARIES} ${GMP_LIBRARIES})
-target_link_libraries(${PROJECT_NAME} ${BLAS_LIBRARIES} ${LAPACK_LIBRARIES}) 
-target_link_libraries(${PROJECT_NAME} Threads::Threads)
-target_link_libraries(${PROJECT_NAME} ${QT5_LIBRARIES})
-
-#-lQGpCoreTools -lQGpGuiTools -lQGpCoreMath -lQGpGuiMath 
-# -lSciFigs -lQGpCoreWave -lQGpGuiWave -lDinverCore -lDinverDCCore -lDinverDCGui -lDinverGui -lQGpCompatibility  
-target_link_libraries(${PROJECT_NAME} QGpCoreTools)
-target_link_libraries(${PROJECT_NAME} QGpGuiTools)
-target_link_libraries(${PROJECT_NAME} QGpCoreMath)
-target_link_libraries(${PROJECT_NAME} QGpGuiMath)
-target_link_libraries(${PROJECT_NAME} SciFigs)
-target_link_libraries(${PROJECT_NAME} QGpCoreWave)
-target_link_libraries(${PROJECT_NAME} QGpGuiWave)
-target_link_libraries(${PROJECT_NAME} QGpCoreWave)
-target_link_libraries(${PROJECT_NAME} DinverCore)
-target_link_libraries(${PROJECT_NAME} DinverGui)
-target_link_libraries(${PROJECT_NAME} DinverDCCore)
-target_link_libraries(${PROJECT_NAME} DinverDCGui)
-target_link_libraries(${PROJECT_NAME} QGpCompatibility)
-
-
-# Set VERSION
-set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
-
-# Set SOVERSION. Major version.
-set_target_properties(${PROJECT_NAME} PROPERTIES SOVERSION 1)
-
-### Headers copies, PRE and POST BUILD
-# Include headers (include/*)
 foreach( file_i ${HEA_INC})
     file(
         COPY ${CMAKE_CURRENT_SOURCE_DIR}/${file_i}
@@ -256,19 +195,40 @@ foreach( file_i ${HEA_SRCS})
     )
 endforeach( file_i )
 
-# Generated UI headers to include/${PROJECT_NAME}/*
-add_custom_command(
-    TARGET ${PROJECT_NAME} POST_BUILD
-    COMMAND ${CMAKE_COMMAND}
-    ARGS -E copy ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_autogen/include/ui_* ${THIS_INC_PATH}/${PROJECT_NAME}    
-)
+# Create shared library
+add_library(${PROJECT_NAME} SHARED ${CPP_SRCS})
+target_link_libraries(${PROJECT_NAME} ${ZLIB_LIBRARIES} ${MPFR_LIBRARIES} ${GMP_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} Threads::Threads)
+target_link_libraries(${PROJECT_NAME} ${QT5_LIBRARIES})
+# -lQGpCoreTools -lQGpCoreMath -lDinverCore 
+target_link_libraries(${PROJECT_NAME} QGpCoreTools)
+target_link_libraries(${PROJECT_NAME} QGpCoreMath)
+target_link_libraries(${PROJECT_NAME} DinverCore)
 
+# Set VERSION
+set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
+
+# Set SOVERSION. Major version.
+set_target_properties(${PROJECT_NAME} PROPERTIES SOVERSION 1)
+
+### POST BUILD
+# Include headers (include/*)
 foreach( file_i ${HEA_INC})
     add_custom_command(
         TARGET ${PROJECT_NAME}
         POST_BUILD
         COMMAND ${CMAKE_COMMAND}
         ARGS -E copy ${CMAKE_CURRENT_SOURCE_DIR}/${file_i} ${THIS_INC_PATH}
+    )
+endforeach( file_i )
+
+# All other headers (include/${PROJECT_NAME}/*)
+foreach( file_i ${HEA_SRCS})
+    add_custom_command(
+        TARGET ${PROJECT_NAME}
+        POST_BUILD
+        COMMAND ${CMAKE_COMMAND}
+        ARGS -E copy ${CMAKE_CURRENT_SOURCE_DIR}/${file_i} ${THIS_INC_PATH}/${PROJECT_NAME}
     )
 endforeach( file_i )
 ###

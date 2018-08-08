@@ -215,6 +215,7 @@ target_link_libraries(${PROJECT_NAME} ${QT5_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} QGpCoreTools)
 target_link_libraries(${PROJECT_NAME} QGpCoreMath)
 target_link_libraries(${PROJECT_NAME} QGpGuiTools)
+target_link_libraries(${PROJECT_NAME} QGpGuiWave)
 target_link_libraries(${PROJECT_NAME} DinverCore)
 
 # Set VERSION
