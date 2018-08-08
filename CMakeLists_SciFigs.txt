@@ -1,0 +1,465 @@
+### RFPV ###
+### Pass variables like this ... 
+# cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DGEOPSY_APP_BUILD_PATH=/tmp/geopsy ..
+###
+
+cmake_minimum_required(VERSION 3.9)
+
+project(SciFigs VERSION 1.0.0 DESCRIPTION "SciFigs description")
+
+### Modules
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules")
+###
+
+### Cxx options 
+# With c++11
+set(CMAKE_CXX_STANDARD 11)
+# Warnings
+if(MSVC)
+  # Force to always compile with W4
+  if(CMAKE_CXX_FLAGS MATCHES "/W[0-4]")
+    string(REGEX REPLACE "/W[0-4]" "/W4" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+  else()
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4")
+  endif()
+elseif(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
+  # Update if necessary
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-long-long -Wdeprecated -pedantic")
+endif()
+###
+
+# General build directory 
+if(GEOPSY_APP_BUILD_PATH)
+    # Global build
+    set(THIS_BUILD_PATH ${GEOPSY_APP_BUILD_PATH})
+else()
+    set(THIS_BUILD_PATH ${CMAKE_BINARY_DIR})
+endif()
+
+# General bin directory 
+if(GEOPSY_APP_BIN_PATH)
+    # Global build
+    set(THIS_BIN_PATH ${GEOPSY_APP_BIN_PATH})
+else()
+    set(THIS_BIN_PATH "${THIS_BUILD_PATH}/bin")
+endif()
+
+# General include directory 
+if(GEOPSY_APP_INC_PATH)
+    # Global build
+    set(THIS_INC_PATH ${GEOPSY_APP_INC_PATH})
+else()
+    set(THIS_INC_PATH "${THIS_BUILD_PATH}/include")
+endif()
+
+# General library directory 
+if(GEOPSY_APP_LIB_PATH)
+    # Global build
+    set(THIS_LIB_PATH ${GEOPSY_APP_LIB_PATH})
+else()
+    set(THIS_LIB_PATH "${THIS_BUILD_PATH}/lib")
+endif()
+
+#message(STATUS "THIS_BUILD_PATH: ${THIS_BUILD_PATH}")
+#message(STATUS "THIS_BIN_PATH: ${THIS_BIN_PATH}")
+#message(STATUS "THIS_INC_PATH: ${THIS_INC_PATH}")
+#message(STATUS "THIS_LIB_PATH: ${THIS_LIB_PATH}")
+
+### Add library directory to search path 
+link_directories(${THIS_LIB_PATH})
+###
+
+### Add include directory to search path 
+include_directories(${THIS_INC_PATH})
+###
+
+# RFPV: bin and lib should created automatically
+# Create include if not exists 
+if(NOT EXISTS ${THIS_INC_PATH})
+    file(MAKE_DIRECTORY ${THIS_INC_PATH})
+    #add_custom_command(
+        #TARGET ${PROJECT_NAME}
+        #POST_BUILD    
+        #file(MAKE_DIRECTORY ${THIS_INC_PATH})
+    #)
+endif()
+
+# Create include/${PROJECT_NAME} if not exists 
+if(NOT EXISTS ${THIS_INC_PATH}/${PROJECT_NAME})
+    file(MAKE_DIRECTORY ${THIS_INC_PATH}/${PROJECT_NAME})
+    #add_custom_command(
+        #TARGET ${PROJECT_NAME}
+        #POST_BUILD    
+        #file(MAKE_DIRECTORY ${THIS_INC_PATH}/${PROJECT_NAME})
+    #)
+endif()
+
+### Find packages
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+# Find libpthread
+find_package(Threads REQUIRED)
+# Find zlib
+find_package(ZLIB REQUIRED)
+# Find MPFR
+find_package(MPFR REQUIRED)
+# Find GMP
+find_package(GMP REQUIRED)
+# Find LAPACK
+find_package(LAPACK REQUIRED)
+# Find BLAS
+find_package(BLAS REQUIRED)
+###
+
+### Qt5 support
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+# Find Qt5 and add components Widgets, Qml, Sql, Network
+find_package(Qt5 COMPONENTS Core Gui Widgets Qml Network Svg PrintSupport REQUIRED)
+INCLUDE_DIRECTORIES(${Qt5Core_INCLUDE_DIRS})
+#INCLUDE_DIRECTORIES(${Qt5Qml_INCLUDE_DIRS})
+#INCLUDE_DIRECTORIES(${Qt5Network_INCLUDE_DIRS})
+
+set(QT5_LIBRARIES Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Qml Qt5::Network Qt5::Svg Qt5::PrintSupport)
+#message(STATUS "QT5_LIBRARIES: ${QT5_LIBRARIES}")
+#message(STATUS "Qt5Core_LIBRARIES: ${Qt5Core_LIBRARIES}")
+#message(STATUS "Qt5Core_INCLUDE_DIRS: ${Qt5Core_INCLUDE_DIRS}")
+#message(STATUS "Qt5Qml_INCLUDE_DIRS: ${Qt5Qml_INCLUDE_DIRS}")
+###
+
+set(TARGET ${CMAKE_PROJECT_NAME})
+
+set(CPP_SRCS
+    geopsy-src/lib/SciFigs/src/AbstractLine.cpp
+    geopsy-src/lib/SciFigs/src/AbstractNameLine.cpp
+    geopsy-src/lib/SciFigs/src/ActivityMonitor.cpp
+    geopsy-src/lib/SciFigs/src/AlignGridParameters.cpp
+    geopsy-src/lib/SciFigs/src/Axis.cpp
+    geopsy-src/lib/SciFigs/src/AxisFormatProperties.cpp
+    geopsy-src/lib/SciFigs/src/AxisScaleProperties.cpp
+    geopsy-src/lib/SciFigs/src/AxisWindow.cpp
+    geopsy-src/lib/SciFigs/src/Brush.cpp
+    geopsy-src/lib/SciFigs/src/CircleMask.cpp
+    geopsy-src/lib/SciFigs/src/CircleViewer.cpp
+    geopsy-src/lib/SciFigs/src/ColorMapLayer.cpp
+    geopsy-src/lib/SciFigs/src/ColorMapProperties.cpp
+    geopsy-src/lib/SciFigs/src/ColorMapTable.cpp
+    geopsy-src/lib/SciFigs/src/ColorMapWidget.cpp
+    geopsy-src/lib/SciFigs/src/ColorPaletteEditor.cpp
+    geopsy-src/lib/SciFigs/src/ComplexStatisticalLine.cpp
+    geopsy-src/lib/SciFigs/src/CoordTip.cpp
+    geopsy-src/lib/SciFigs/src/ExportOptions.cpp
+    geopsy-src/lib/SciFigs/src/Font.cpp
+    geopsy-src/lib/SciFigs/src/GraphContent.cpp
+    geopsy-src/lib/SciFigs/src/GraphContentFormatProperties.cpp
+    geopsy-src/lib/SciFigs/src/GraphContentLayer.cpp
+    geopsy-src/lib/SciFigs/src/GraphContentLayerFactory.cpp
+    geopsy-src/lib/SciFigs/src/GraphContentLayerProperties.cpp
+    geopsy-src/lib/SciFigs/src/GraphContentOptions.cpp
+    geopsy-src/lib/SciFigs/src/GraphicObject.cpp
+    geopsy-src/lib/SciFigs/src/GraphicObjectFactory.cpp
+    geopsy-src/lib/SciFigs/src/GraphicObjectGeometryProperties.cpp
+    geopsy-src/lib/SciFigs/src/GraphicObjectIdProperties.cpp
+    geopsy-src/lib/SciFigs/src/GraphicObjectPrintProperties.cpp
+    geopsy-src/lib/SciFigs/src/GraphicSheet.cpp
+    geopsy-src/lib/SciFigs/src/GraphicSheetMenu.cpp
+    geopsy-src/lib/SciFigs/src/GraphicSheetProperties.cpp
+    geopsy-src/lib/SciFigs/src/GridMaxFollower.cpp
+    geopsy-src/lib/SciFigs/src/GridPlot.cpp
+    geopsy-src/lib/SciFigs/src/GridProperties.cpp
+    geopsy-src/lib/SciFigs/src/GridViewer.cpp
+    geopsy-src/lib/SciFigs/src/HistogramLayer.cpp
+    geopsy-src/lib/SciFigs/src/ImageWidget.cpp
+    geopsy-src/lib/SciFigs/src/ImageWidgetProperties.cpp
+    geopsy-src/lib/SciFigs/src/IrregularGrid2DDraw.cpp
+    geopsy-src/lib/SciFigs/src/IrregularGrid2DPlot.cpp
+    geopsy-src/lib/SciFigs/src/LayerLocker.cpp
+    geopsy-src/lib/SciFigs/src/LayerMouseTracking.cpp
+    geopsy-src/lib/SciFigs/src/LayerPainter.cpp
+    geopsy-src/lib/SciFigs/src/LayerPainterRequest.cpp
+    geopsy-src/lib/SciFigs/src/LayerPainterThread.cpp
+    geopsy-src/lib/SciFigs/src/Legend.cpp
+    geopsy-src/lib/SciFigs/src/LegendFormatProperties.cpp
+    geopsy-src/lib/SciFigs/src/LegendItem.cpp
+    geopsy-src/lib/SciFigs/src/LegendItemWidget.cpp
+    geopsy-src/lib/SciFigs/src/LegendProperties.cpp
+    geopsy-src/lib/SciFigs/src/LegendTable.cpp
+    geopsy-src/lib/SciFigs/src/LegendTableDelegate.cpp
+    geopsy-src/lib/SciFigs/src/LegendTableItem.cpp
+    geopsy-src/lib/SciFigs/src/LegendWidget.cpp
+    geopsy-src/lib/SciFigs/src/LineDelegate.cpp
+    geopsy-src/lib/SciFigs/src/LineEditor.cpp
+    geopsy-src/lib/SciFigs/src/LineFactory.cpp
+    geopsy-src/lib/SciFigs/src/LineItem.cpp
+    geopsy-src/lib/SciFigs/src/LineLayer.cpp
+    geopsy-src/lib/SciFigs/src/LineLayerProperties.cpp
+    geopsy-src/lib/SciFigs/src/ListInterpole.cpp
+    geopsy-src/lib/SciFigs/src/LiveGridLayer.cpp
+    geopsy-src/lib/SciFigs/src/LiveGridLayerProperties.cpp
+    geopsy-src/lib/SciFigs/src/MakeUpFilter.cpp
+    geopsy-src/lib/SciFigs/src/MeshLayer.cpp
+    geopsy-src/lib/SciFigs/src/MouseTracking.cpp
+    geopsy-src/lib/SciFigs/src/NameLine.cpp
+    geopsy-src/lib/SciFigs/src/NameLineDelegate.cpp
+    geopsy-src/lib/SciFigs/src/NameLineItem.cpp
+    geopsy-src/lib/SciFigs/src/NameLineLayer.cpp
+    geopsy-src/lib/SciFigs/src/NameLineLayerProperties.cpp
+    geopsy-src/lib/SciFigs/src/OrderTip.cpp
+    geopsy-src/lib/SciFigs/src/PageLimit.cpp
+    geopsy-src/lib/SciFigs/src/PaintProgress.cpp
+    geopsy-src/lib/SciFigs/src/ParallelBand.cpp
+    geopsy-src/lib/SciFigs/src/ParallelBands.cpp
+    geopsy-src/lib/SciFigs/src/Pen.cpp
+    geopsy-src/lib/SciFigs/src/PlotLine2D.cpp
+    geopsy-src/lib/SciFigs/src/PlotLine.cpp
+    geopsy-src/lib/SciFigs/src/PointProperties.cpp
+    geopsy-src/lib/SciFigs/src/PolarGridPlot.cpp
+    geopsy-src/lib/SciFigs/src/RealStatisticalLine.cpp
+    geopsy-src/lib/SciFigs/src/Scale.cpp
+    geopsy-src/lib/SciFigs/src/SciFigs.cpp
+    geopsy-src/lib/SciFigs/src/SciFigsGlobal.cpp
+    geopsy-src/lib/SciFigs/src/SciFigsPlugin.cpp
+    geopsy-src/lib/SciFigs/src/SciFigsPreferences.cpp
+    geopsy-src/lib/SciFigs/src/SciFigsXMLEditor.cpp
+    geopsy-src/lib/SciFigs/src/SelectionWidget.cpp
+    geopsy-src/lib/SciFigs/src/SheetSelectionWidget.cpp
+    geopsy-src/lib/SciFigs/src/SlopeEstimator.cpp
+    geopsy-src/lib/SciFigs/src/Symbol.cpp
+    geopsy-src/lib/SciFigs/src/TextEdit.cpp
+    geopsy-src/lib/SciFigs/src/TextEditProperties.cpp
+    geopsy-src/lib/SciFigs/src/XMLSciFigs.cpp
+    geopsy-src/lib/SciFigs/src/XUniqueYColorLines.cpp
+    geopsy-src/lib/SciFigs/src/XYColorLines.cpp
+    geopsy-src/lib/SciFigs/src/XYColorLinesProperties.cpp
+    geopsy-src/lib/SciFigs/src/XYColorPlot.cpp
+    geopsy-src/lib/SciFigs/src/XYPlot.cpp
+    geopsy-src/lib/SciFigs/src/XYPlotProperties.cpp
+    geopsy-src/lib/SciFigs/src/XYValueLines.cpp
+    geopsy-src/lib/SciFigs/src/XYValuePlot.cpp
+)
+
+# Headers got to include/*
+set(HEA_INC
+    geopsy-src/lib/SciFigs/src/SciFigs.h
+)
+
+# Headers got to include/GpCoreTools/*
+set(HEA_SRCS
+    geopsy-src/lib/SciFigs/src/AbstractLine.h
+    geopsy-src/lib/SciFigs/src/AbstractNameLine.h
+    geopsy-src/lib/SciFigs/src/ActivityMonitor.h
+    geopsy-src/lib/SciFigs/src/AlignGridParameters.h
+    geopsy-src/lib/SciFigs/src/AxisFormatProperties.h
+    geopsy-src/lib/SciFigs/src/Axis.h
+    geopsy-src/lib/SciFigs/src/AxisScaleProperties.h
+    geopsy-src/lib/SciFigs/src/AxisWindow.h
+    geopsy-src/lib/SciFigs/src/Brush.h
+    geopsy-src/lib/SciFigs/src/CircleMask.h
+    geopsy-src/lib/SciFigs/src/CircleViewer.h
+    geopsy-src/lib/SciFigs/src/ColorMapLayer.h
+    geopsy-src/lib/SciFigs/src/ColorMapProperties.h
+    geopsy-src/lib/SciFigs/src/ColorMapTable.h
+    geopsy-src/lib/SciFigs/src/ColorMapWidget.h
+    geopsy-src/lib/SciFigs/src/ColorPaletteEditor.h
+    geopsy-src/lib/SciFigs/src/ComplexStatisticalLine.h
+    geopsy-src/lib/SciFigs/src/CoordTip.h
+    geopsy-src/lib/SciFigs/src/ExportOptions.h
+    geopsy-src/lib/SciFigs/src/Font.h
+    geopsy-src/lib/SciFigs/src/GraphContentFormatProperties.h
+    geopsy-src/lib/SciFigs/src/GraphContent.h
+    geopsy-src/lib/SciFigs/src/GraphContentLayerFactory.h
+    geopsy-src/lib/SciFigs/src/GraphContentLayer.h
+    geopsy-src/lib/SciFigs/src/GraphContentLayerProperties.h
+    geopsy-src/lib/SciFigs/src/GraphContentOptions.h
+    geopsy-src/lib/SciFigs/src/GraphicObjectFactory.h
+    geopsy-src/lib/SciFigs/src/GraphicObjectGeometryProperties.h
+    geopsy-src/lib/SciFigs/src/GraphicObject.h
+    geopsy-src/lib/SciFigs/src/GraphicObjectIdProperties.h
+    geopsy-src/lib/SciFigs/src/GraphicObjectPrintProperties.h
+    geopsy-src/lib/SciFigs/src/GraphicSheet.h
+    geopsy-src/lib/SciFigs/src/GraphicSheetMenu.h
+    geopsy-src/lib/SciFigs/src/GraphicSheetProperties.h
+    geopsy-src/lib/SciFigs/src/GridMaxFollower.h
+    geopsy-src/lib/SciFigs/src/GridPlot.h
+    geopsy-src/lib/SciFigs/src/GridProperties.h
+    geopsy-src/lib/SciFigs/src/GridViewer.h
+    geopsy-src/lib/SciFigs/src/HistogramLayer.h
+    geopsy-src/lib/SciFigs/src/ImageWidget.h
+    geopsy-src/lib/SciFigs/src/ImageWidgetProperties.h
+    geopsy-src/lib/SciFigs/src/IrregularGrid2DDraw.h
+    geopsy-src/lib/SciFigs/src/IrregularGrid2DPlot.h
+    geopsy-src/lib/SciFigs/src/LayerLocker.h
+    geopsy-src/lib/SciFigs/src/LayerMouseTracking.h
+    geopsy-src/lib/SciFigs/src/LayerPainter.h
+    geopsy-src/lib/SciFigs/src/LayerPainterRequest.h
+    geopsy-src/lib/SciFigs/src/LayerPainterThread.h
+    geopsy-src/lib/SciFigs/src/LegendFormatProperties.h
+    geopsy-src/lib/SciFigs/src/Legend.h
+    geopsy-src/lib/SciFigs/src/LegendItem.h
+    geopsy-src/lib/SciFigs/src/LegendItemWidget.h
+    geopsy-src/lib/SciFigs/src/LegendProperties.h
+    geopsy-src/lib/SciFigs/src/LegendTableDelegate.h
+    geopsy-src/lib/SciFigs/src/LegendTable.h
+    geopsy-src/lib/SciFigs/src/LegendTableItem.h
+    geopsy-src/lib/SciFigs/src/LegendWidget.h
+    geopsy-src/lib/SciFigs/src/LineDelegate.h
+    geopsy-src/lib/SciFigs/src/LineEditor.h
+    geopsy-src/lib/SciFigs/src/LineFactory.h
+    geopsy-src/lib/SciFigs/src/LineItem.h
+    geopsy-src/lib/SciFigs/src/LineLayer.h
+    geopsy-src/lib/SciFigs/src/LineLayerProperties.h
+    geopsy-src/lib/SciFigs/src/ListInterpole.h
+    geopsy-src/lib/SciFigs/src/LiveGridLayer.h
+    geopsy-src/lib/SciFigs/src/LiveGridLayerProperties.h
+    geopsy-src/lib/SciFigs/src/MakeUpFilter.h
+    geopsy-src/lib/SciFigs/src/MeshLayer.h
+    geopsy-src/lib/SciFigs/src/MouseTracking.h
+    geopsy-src/lib/SciFigs/src/NameLineDelegate.h
+    geopsy-src/lib/SciFigs/src/NameLine.h
+    geopsy-src/lib/SciFigs/src/NameLineItem.h
+    geopsy-src/lib/SciFigs/src/NameLineLayer.h
+    geopsy-src/lib/SciFigs/src/NameLineLayerProperties.h
+    geopsy-src/lib/SciFigs/src/OrderTip.h
+    geopsy-src/lib/SciFigs/src/PageLimit.h
+    geopsy-src/lib/SciFigs/src/PaintProgress.h
+    geopsy-src/lib/SciFigs/src/ParallelBand.h
+    geopsy-src/lib/SciFigs/src/ParallelBands.h
+    geopsy-src/lib/SciFigs/src/Pen.h
+    geopsy-src/lib/SciFigs/src/PlotLine2D.h
+    geopsy-src/lib/SciFigs/src/PlotLine.h
+    geopsy-src/lib/SciFigs/src/PointProperties.h
+    geopsy-src/lib/SciFigs/src/PolarGridPlot.h
+    geopsy-src/lib/SciFigs/src/RealStatisticalLine.h
+    geopsy-src/lib/SciFigs/src/Scale.h
+    geopsy-src/lib/SciFigs/src/SciFigsDLLExport.h
+    geopsy-src/lib/SciFigs/src/SciFigsGlobal.h
+    geopsy-src/lib/SciFigs/src/SciFigs.h
+    geopsy-src/lib/SciFigs/src/SciFigsInstallPath.h
+    geopsy-src/lib/SciFigs/src/SciFigsPlugin.h
+    geopsy-src/lib/SciFigs/src/SciFigsPreferences.h
+    geopsy-src/lib/SciFigs/src/SciFigsStatic.h
+    geopsy-src/lib/SciFigs/src/SciFigsVersion.h
+    geopsy-src/lib/SciFigs/src/SciFigsXMLEditor.h
+    geopsy-src/lib/SciFigs/src/SelectionWidget.h
+    geopsy-src/lib/SciFigs/src/SheetSelectionWidget.h
+    geopsy-src/lib/SciFigs/src/SlopeEstimator.h
+    geopsy-src/lib/SciFigs/src/stable.h
+    geopsy-src/lib/SciFigs/src/Symbol.h
+    geopsy-src/lib/SciFigs/src/TextEdit.h
+    geopsy-src/lib/SciFigs/src/TextEditProperties.h
+    geopsy-src/lib/SciFigs/src/XMLSciFigs.h
+    geopsy-src/lib/SciFigs/src/XUniqueYColorLines.h
+    geopsy-src/lib/SciFigs/src/XYColorLines.h
+    geopsy-src/lib/SciFigs/src/XYColorLinesProperties.h
+    geopsy-src/lib/SciFigs/src/XYColorPlot.h
+    geopsy-src/lib/SciFigs/src/XYPlot.h
+    geopsy-src/lib/SciFigs/src/XYPlotProperties.h
+    geopsy-src/lib/SciFigs/src/XYValueLines.h
+    geopsy-src/lib/SciFigs/src/XYValuePlot.h
+)
+
+# Headers got to include/*
+set(UI_SRCS
+    geopsy-src/lib/SciFigs/src/AlignGridParameters.ui
+    geopsy-src/lib/SciFigs/src/AxisFormatProperties.ui
+    geopsy-src/lib/SciFigs/src/AxisScaleProperties.ui
+    geopsy-src/lib/SciFigs/src/ColorMapProperties.ui
+    geopsy-src/lib/SciFigs/src/ColorPaletteEditor.ui
+    geopsy-src/lib/SciFigs/src/GraphContentFormatProperties.ui
+    geopsy-src/lib/SciFigs/src/GraphContentLayerProperties.ui
+    geopsy-src/lib/SciFigs/src/GraphicObjectGeometryProperties.ui
+    geopsy-src/lib/SciFigs/src/GraphicObjectIdProperties.ui
+    geopsy-src/lib/SciFigs/src/GraphicObjectPrintProperties.ui
+    geopsy-src/lib/SciFigs/src/GraphicSheetProperties.ui
+    geopsy-src/lib/SciFigs/src/GridProperties.ui
+    geopsy-src/lib/SciFigs/src/ImageWidgetProperties.ui
+    geopsy-src/lib/SciFigs/src/LegendFormatProperties.ui
+    geopsy-src/lib/SciFigs/src/LegendProperties.ui
+    geopsy-src/lib/SciFigs/src/LineLayerProperties.ui
+    geopsy-src/lib/SciFigs/src/ListInterpole.ui
+    geopsy-src/lib/SciFigs/src/LiveGridLayerProperties.ui
+    geopsy-src/lib/SciFigs/src/MakeUpFilter.ui
+    geopsy-src/lib/SciFigs/src/NameLineLayerProperties.ui
+    geopsy-src/lib/SciFigs/src/PointProperties.ui
+    geopsy-src/lib/SciFigs/src/SciFigsPreferences.ui
+    geopsy-src/lib/SciFigs/src/TextEditProperties.ui
+    geopsy-src/lib/SciFigs/src/XYColorLinesProperties.ui
+    geopsy-src/lib/SciFigs/src/XYPlotProperties.ui
+)
+
+#
+# Generate necessary headers from .ui files. (qmake lets `uic` do this job.)
+# hint from [Cross-platform Qt5 project using cmake](http://stackoverflow.com/questions/21174586/cross-platform-qt5-project-using-cmake)
+#
+# QT5_WRAP_UI(UI_GENERATED_HEADERS ${UI_SRCS})
+
+# Include header files for compilation
+include_directories(src)
+
+#get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
+#foreach(dir ${dirs})
+  #message(STATUS "dir='${dir}'")
+#endforeach()
+
+### Set BUILD PATHS
+# Set library build path 
+set (EXECUTABLE_OUTPUT_PATH ${THIS_BIN_PATH})
+# Set library build path 
+set (LIBRARY_OUTPUT_PATH ${THIS_LIB_PATH})
+### 
+
+# Add resources from file
+qt5_add_resources(QRCS SciFigs.qrc)
+
+# Create shared library
+add_library(${PROJECT_NAME} SHARED ${CPP_SRCS} ${QRCS})
+target_link_libraries(${PROJECT_NAME} ${ZLIB_LIBRARIES} ${MPFR_LIBRARIES} ${GMP_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${BLAS_LIBRARIES} ${LAPACK_LIBRARIES}) 
+target_link_libraries(${PROJECT_NAME} Threads::Threads)
+target_link_libraries(${PROJECT_NAME} ${QT5_LIBRARIES})
+# This
+target_link_libraries(${PROJECT_NAME} QGpCoreTools)
+target_link_libraries(${PROJECT_NAME} QGpCoreMath)
+target_link_libraries(${PROJECT_NAME} QGpGuiTools)
+
+# Set VERSION
+set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
+
+# Set SOVERSION. Major version.
+set_target_properties(${PROJECT_NAME} PROPERTIES SOVERSION 1)
+
+### POST BUILD
+# Include headers (include/*)
+foreach( file_i ${HEA_INC})
+    file(
+        COPY ${CMAKE_CURRENT_SOURCE_DIR}/${file_i}
+        DESTINATION ${THIS_INC_PATH}
+    )    
+endforeach( file_i )
+# All other headers (include/${PROJECT_NAME}/*)
+foreach( file_i ${HEA_SRCS})
+    file(
+        COPY ${CMAKE_CURRENT_SOURCE_DIR}/${file_i} 
+        DESTINATION ${THIS_INC_PATH}/${PROJECT_NAME}
+    )
+endforeach( file_i )
+
+# Generated UI headers to include/${PROJECT_NAME}/*
+add_custom_command(
+    TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND}
+    ARGS -E copy ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_autogen/include/ui_* ${THIS_INC_PATH}/${PROJECT_NAME}    
+)
+###
+
+### Install actions 
+## TODO: review this
+# Install library
+install(TARGETS ${PROJECT_NAME} DESTINATION lib/${PROJECT_NAME})
+
+# Install library headers
+file(GLOB HEADERS include/*.h)
+install(FILES ${HEADERS} DESTINATION include/${PROJECT_NAME})

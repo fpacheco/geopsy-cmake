@@ -1,6 +1,11 @@
 cmake_minimum_required(VERSION 2.6)
 
 project(Geopsy_App)
+
+### Modules
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules")
+###
  
 set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/build)
  
@@ -34,7 +39,7 @@ include_directories("${PROJECT_SOURCE_DIR}")
 #geopsy/ArrayCore \
 #geopsy/ArrayGui \
 #geopsy/MonoStation \
-#geopsy/geopsy-fk \
+#geopsy/geopsy-src/fk \
 #geopsy/geopsy \
 #geopsy/vslarray \
 #dinver/dinver \
@@ -103,39 +108,66 @@ include_directories("${PROJECT_SOURCE_DIR}")
 #geopsypack/bugparser \
 
 ### Geopsy libs packages 
-# Libs without GUI
-add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-libs/GpCoreTools)
-add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-libs/QGpCoreTools)
-add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-libs/QGpGuiTools)
-add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-libs/QGpCoreMath)
-add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-libs/QGpCoreWave)
+# lib
+include(CMakeLists_GpCoreTools.txt)
+include(CMakeLists_QGpCoreTools.txt)
+include(CMakeLists_QGpGuiTools.txt)
+include(CMakeLists_QGpCoreMath.txt)
+include(CMakeLists_QGpCoreWave.txt)
+include(CMakeLists_SciFigs.txt)
+include(CMakeLists_QGpGuiMath.txt)
+include(CMakeLists_QGpGuiWave.txt)
+include(CMakeLists_QGpCompatibility.txt)
+include(CMakeLists_figue.txt)
+# include(CMakeLists_QGpCoreStat.txt)
+# geopsy
+include(CMakeLists_GeopsyCore.txt)
+include(CMakeLists_GeopsyGui.txt)
+include(CMakeLists_geopsyfigs.txt)
+include(CMakeLists_GeopsySLink.txt)
+include(CMakeLists_GeopsySLinkGui.txt)
+# dinver
+include(CMakeLists_DinverCore.txt)
+include(CMakeLists_DinverGui.txt)
+include(CMakeLists_DinverDCCore.txt)
+include(CMakeLists_DinverDCGui.txt)
+include(CMakeLists_dinver.txt)
+include(CMakeLists_dinverdc.txt)
+include(CMakeLists_dinverext.txt)
+include(CMakeLists_dinvermatlab.txt)
+
+
+#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/lib/GpCoreTools)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/lib/QGpCoreTools)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/lib/QGpGuiTools)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/lib/QGpCoreMath)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/lib/QGpCoreWave)
 ## libs GUI
-add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-libs/SciFigs)
-add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-libs/QGpGuiMath)
-add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-libs/QGpGuiWave)
-add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-libs/QGpCompatibility)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/lib/SciFigs)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/lib/QGpGuiMath)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/lib/QGpGuiWave)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/lib/QGpCompatibility)
 #### 
-
 #### Programs 
-add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-figue)
-#### 
+# add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/figue)
+####
 
-### dinver
-add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-dinver/DinverCore)
-add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-dinver/DinverGui)
-add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-dinver/DinverDCCore)
-add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-dinver/DinverDCGui)
-add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-dinver/dinver)
-add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-dinver/dinverdc)
-add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-dinver/dinverext)
-add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-dinver/dinvermatlab)
+####
+#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/GeopsyCore)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/GeopsyGui)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/geopsyfigs)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/GeopsySLink)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/GeopsySLinkGui)
+####
+
+### Include cmake files for every project 
+#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/dinver/DinverCore)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/dinver/DinverGui)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/dinver/DinverDCCore)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/dinver/DinverDCGui)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/libs/QGpCoreStat)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/dinver/dinver)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/dinver/dinverdc)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/dinver/dinverext)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/dinver/dinvermatlab)
 ###
-
-#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-libs/QGpCoreStat)
-
-#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-geopsy/GeopsyCore)
-#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-geopsy/GeopsyGui)
-#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-geopsy/geopsyfigs)
-#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-geopsy/GeopsySLink)
-#add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-geopsy/GeopsySLinkGui)
-

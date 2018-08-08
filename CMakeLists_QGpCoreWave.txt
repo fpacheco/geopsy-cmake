@@ -1,0 +1,324 @@
+### RFPV ###
+### Pass variables like this ... 
+# cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DGEOPSY_APP_BUILD_PATH=/tmp/geopsy ..
+###
+
+cmake_minimum_required(VERSION 3.9)
+
+project(QGpCoreWave VERSION 1.0.0 DESCRIPTION "QGpCoreWave description")
+
+### Modules
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules")
+###
+
+### Cxx options 
+# With c++11
+set(CMAKE_CXX_STANDARD 11)
+# Warnings
+if(MSVC)
+  # Force to always compile with W4
+  if(CMAKE_CXX_FLAGS MATCHES "/W[0-4]")
+    string(REGEX REPLACE "/W[0-4]" "/W4" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+  else()
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4")
+  endif()
+elseif(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
+  # Update if necessary
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-long-long -Wdeprecated -pedantic")
+endif()
+###
+
+# General build directory 
+if(GEOPSY_APP_BUILD_PATH)
+    # Global build
+    set(THIS_BUILD_PATH ${GEOPSY_APP_BUILD_PATH})
+else()
+    set(THIS_BUILD_PATH ${CMAKE_BINARY_DIR})
+endif()
+
+# General bin directory 
+if(GEOPSY_APP_BIN_PATH)
+    # Global build
+    set(THIS_BIN_PATH ${GEOPSY_APP_BIN_PATH})
+else()
+    set(THIS_BIN_PATH "${THIS_BUILD_PATH}/bin")
+endif()
+
+# General include directory 
+if(GEOPSY_APP_INC_PATH)
+    # Global build
+    set(THIS_INC_PATH ${GEOPSY_APP_INC_PATH})
+else()
+    set(THIS_INC_PATH "${THIS_BUILD_PATH}/include")
+endif()
+
+# General library directory 
+if(GEOPSY_APP_LIB_PATH)
+    # Global build
+    set(THIS_LIB_PATH ${GEOPSY_APP_LIB_PATH})
+else()
+    set(THIS_LIB_PATH "${THIS_BUILD_PATH}/lib")
+endif()
+
+#message(STATUS "THIS_BUILD_PATH: ${THIS_BUILD_PATH}")
+#message(STATUS "THIS_BIN_PATH: ${THIS_BIN_PATH}")
+#message(STATUS "THIS_INC_PATH: ${THIS_INC_PATH}")
+#message(STATUS "THIS_LIB_PATH: ${THIS_LIB_PATH}")
+
+### Add library directory to search path 
+link_directories(${THIS_LIB_PATH})
+###
+
+### Add include directory to search path 
+include_directories(${THIS_INC_PATH})
+###
+
+# RFPV: bin and lib should created automatically
+# Create include if not exists 
+if(NOT EXISTS ${THIS_INC_PATH})
+    file(MAKE_DIRECTORY ${THIS_INC_PATH})
+    #add_custom_command(
+        #TARGET ${PROJECT_NAME}
+        #POST_BUILD    
+        #file(MAKE_DIRECTORY ${THIS_INC_PATH})
+    #)
+endif()
+
+# Create include/${PROJECT_NAME} if not exists 
+if(NOT EXISTS ${THIS_INC_PATH}/${PROJECT_NAME})
+    file(MAKE_DIRECTORY ${THIS_INC_PATH}/${PROJECT_NAME})
+    #add_custom_command(
+        #TARGET ${PROJECT_NAME}
+        #POST_BUILD    
+        #file(MAKE_DIRECTORY ${THIS_INC_PATH}/${PROJECT_NAME})
+    #)
+endif()
+
+### Find packages
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+# Find libpthread
+find_package(Threads REQUIRED)
+# Find zlib
+find_package(ZLIB REQUIRED)
+# Find MPFR
+find_package(MPFR REQUIRED)
+# Find GMP
+find_package(GMP REQUIRED)
+# Find LAPACK
+find_package(LAPACK REQUIRED)
+# Find BLAS
+find_package(BLAS REQUIRED)
+## Find QGpCoreTools
+#find_library(QGPCORETOOLS_LIBRARY
+    #NAMES QGpCoreTools
+    #HINTS ${THIS_LIB_PATH}
+#)
+#message(STATUS "QGPCORETOOLS_LIBRARY: ${QGPCORETOOLS_LIBRARY}")
+## Find QGpCoreMath
+#find_library(QGPCOREMATH_LIBRARY
+    #NAMES QGpCoreMath
+    #HINTS ${THIS_LIB_PATH}
+#)
+#message(STATUS "QGPCOREMATH_LIBRARY: ${QGPCOREMATH_LIBRARY}")
+###
+
+### Qt5 support
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+# Find Qt5 and add components Widgets, Qml, Sql, Network
+find_package(Qt5 COMPONENTS Core Qml Network REQUIRED)
+INCLUDE_DIRECTORIES(${Qt5Core_INCLUDE_DIRS})
+#INCLUDE_DIRECTORIES(${Qt5Qml_INCLUDE_DIRS})
+#INCLUDE_DIRECTORIES(${Qt5Network_INCLUDE_DIRS})
+
+set(QT5_LIBRARIES Qt5::Core Qt5::Qml Qt5::Network)
+#message(STATUS "QT5_LIBRARIES: ${QT5_LIBRARIES}")
+#message(STATUS "Qt5Core_LIBRARIES: ${Qt5Core_LIBRARIES}")
+#message(STATUS "Qt5Core_INCLUDE_DIRS: ${Qt5Core_INCLUDE_DIRS}")
+#message(STATUS "Qt5Qml_INCLUDE_DIRS: ${Qt5Qml_INCLUDE_DIRS}")
+###
+
+set(TARGET ${CMAKE_PROJECT_NAME})
+
+set(CPP_SRCS
+    geopsy-src/lib/QGpCoreWave/src/ArrivalTime.cpp
+    geopsy-src/lib/QGpCoreWave/src/AutocorrCurves.cpp
+    geopsy-src/lib/QGpCoreWave/src/AutocorrDispersion.cpp
+    geopsy-src/lib/QGpCoreWave/src/AutocorrEngine.cpp
+    geopsy-src/lib/QGpCoreWave/src/AutocorrFactory.cpp
+    geopsy-src/lib/QGpCoreWave/src/AutocorrProxy.cpp
+    geopsy-src/lib/QGpCoreWave/src/AutocorrRing.cpp
+    geopsy-src/lib/QGpCoreWave/src/Dispersion.cpp
+    geopsy-src/lib/QGpCoreWave/src/DispersionFactory.cpp
+    geopsy-src/lib/QGpCoreWave/src/DispersionProxy.cpp
+    geopsy-src/lib/QGpCoreWave/src/Ellipticity.cpp
+    geopsy-src/lib/QGpCoreWave/src/EllipticityFactory.cpp
+    geopsy-src/lib/QGpCoreWave/src/EllipticityProxy.cpp
+    geopsy-src/lib/QGpCoreWave/src/FactoryPoint.cpp
+    geopsy-src/lib/QGpCoreWave/src/FortranInterface.cpp
+    geopsy-src/lib/QGpCoreWave/src/GeophysicalModel.cpp
+    geopsy-src/lib/QGpCoreWave/src/Love.cpp
+    geopsy-src/lib/QGpCoreWave/src/LoveFunction.cpp
+    geopsy-src/lib/QGpCoreWave/src/MagnetoTelluricCurve.cpp
+    geopsy-src/lib/QGpCoreWave/src/MagnetoTelluricFactory.cpp
+    geopsy-src/lib/QGpCoreWave/src/MagnetoTelluricPoint.cpp
+    geopsy-src/lib/QGpCoreWave/src/MagnetoTelluricPointOptions.cpp
+    geopsy-src/lib/QGpCoreWave/src/MagnetoTelluricProxy.cpp
+    geopsy-src/lib/QGpCoreWave/src/ModalCurve.cpp
+    geopsy-src/lib/QGpCoreWave/src/ModalFactory.cpp
+    geopsy-src/lib/QGpCoreWave/src/ModalProxy.cpp
+    geopsy-src/lib/QGpCoreWave/src/ModalRefine.cpp
+    geopsy-src/lib/QGpCoreWave/src/ModalStorage.cpp
+    geopsy-src/lib/QGpCoreWave/src/Mode.cpp
+    geopsy-src/lib/QGpCoreWave/src/Podvin2D.cpp
+    geopsy-src/lib/QGpCoreWave/src/Podvin3D.cpp
+    geopsy-src/lib/QGpCoreWave/src/Profile.cpp
+    geopsy-src/lib/QGpCoreWave/src/QGpCoreWave.cpp
+    geopsy-src/lib/QGpCoreWave/src/Rayleigh.cpp
+    geopsy-src/lib/QGpCoreWave/src/RayleighFunction.cpp
+    geopsy-src/lib/QGpCoreWave/src/RefractionCurve.cpp
+    geopsy-src/lib/QGpCoreWave/src/RefractionDippingModel.cpp
+    geopsy-src/lib/QGpCoreWave/src/RefractionFactory.cpp
+    geopsy-src/lib/QGpCoreWave/src/RefractionProxy.cpp
+    geopsy-src/lib/QGpCoreWave/src/Resistivity1DModel.cpp
+    geopsy-src/lib/QGpCoreWave/src/Seismic1DModel.cpp
+    geopsy-src/lib/QGpCoreWave/src/ShAmplification.cpp
+    geopsy-src/lib/QGpCoreWave/src/TheoreticalFK.cpp
+    geopsy-src/lib/QGpCoreWave/src/TheoreticalLinearFK.cpp
+    geopsy-src/lib/QGpCoreWave/src/TiltNode.cpp
+    geopsy-src/lib/QGpCoreWave/src/TiltPath.cpp
+)
+
+# Headers got to include/*
+set(HEA_INC
+    geopsy-src/lib/QGpCoreWave/src/QGpCoreWave.h
+)
+
+# Headers got to include/GpCoreTools/*
+set(HEA_SRCS
+    geopsy-src/lib/QGpCoreWave/src/ArrivalTime.h
+    geopsy-src/lib/QGpCoreWave/src/AutocorrCurves.h
+    geopsy-src/lib/QGpCoreWave/src/AutocorrDispersion.h
+    geopsy-src/lib/QGpCoreWave/src/AutocorrEngine.h
+    geopsy-src/lib/QGpCoreWave/src/AutocorrFactory.h
+    geopsy-src/lib/QGpCoreWave/src/AutocorrProxy.h
+    geopsy-src/lib/QGpCoreWave/src/AutocorrRing.h
+    geopsy-src/lib/QGpCoreWave/src/DispersionFactory.h
+    geopsy-src/lib/QGpCoreWave/src/Dispersion.h
+    geopsy-src/lib/QGpCoreWave/src/DispersionProxy.h
+    geopsy-src/lib/QGpCoreWave/src/EllipticityFactory.h
+    geopsy-src/lib/QGpCoreWave/src/Ellipticity.h
+    geopsy-src/lib/QGpCoreWave/src/EllipticityProxy.h
+    geopsy-src/lib/QGpCoreWave/src/FactoryPoint.h
+    geopsy-src/lib/QGpCoreWave/src/FortranInterface.h
+    geopsy-src/lib/QGpCoreWave/src/GeophysicalModel.h
+    geopsy-src/lib/QGpCoreWave/src/LoveFunction.h
+    geopsy-src/lib/QGpCoreWave/src/Love.h
+    geopsy-src/lib/QGpCoreWave/src/MagnetoTelluricCurve.h
+    geopsy-src/lib/QGpCoreWave/src/MagnetoTelluricFactory.h
+    geopsy-src/lib/QGpCoreWave/src/MagnetoTelluricPoint.h
+    geopsy-src/lib/QGpCoreWave/src/MagnetoTelluricPointOptions.h
+    geopsy-src/lib/QGpCoreWave/src/MagnetoTelluricProxy.h
+    geopsy-src/lib/QGpCoreWave/src/ModalCurve.h
+    geopsy-src/lib/QGpCoreWave/src/ModalFactory.h
+    geopsy-src/lib/QGpCoreWave/src/ModalProxy.h
+    geopsy-src/lib/QGpCoreWave/src/ModalRefine.h
+    geopsy-src/lib/QGpCoreWave/src/ModalStorage.h
+    geopsy-src/lib/QGpCoreWave/src/Mode.h
+    geopsy-src/lib/QGpCoreWave/src/Podvin2D.h
+    geopsy-src/lib/QGpCoreWave/src/Podvin3D.h
+    geopsy-src/lib/QGpCoreWave/src/Profile.h
+    geopsy-src/lib/QGpCoreWave/src/QGpCoreWaveDLLExport.h
+    geopsy-src/lib/QGpCoreWave/src/QGpCoreWaveInstallPath.h
+    geopsy-src/lib/QGpCoreWave/src/QGpCoreWaveStatic.h
+    geopsy-src/lib/QGpCoreWave/src/QGpCoreWaveVersion.h
+    geopsy-src/lib/QGpCoreWave/src/RayleighFunction.h
+    geopsy-src/lib/QGpCoreWave/src/Rayleigh.h
+    geopsy-src/lib/QGpCoreWave/src/RefractionCurve.h
+    geopsy-src/lib/QGpCoreWave/src/RefractionDippingModel.h
+    geopsy-src/lib/QGpCoreWave/src/RefractionFactory.h
+    geopsy-src/lib/QGpCoreWave/src/RefractionProxy.h
+    geopsy-src/lib/QGpCoreWave/src/Resistivity1DModel.h
+    geopsy-src/lib/QGpCoreWave/src/Seismic1DModel.h
+    geopsy-src/lib/QGpCoreWave/src/ShAmplification.h
+    geopsy-src/lib/QGpCoreWave/src/TheoreticalFK.h
+    geopsy-src/lib/QGpCoreWave/src/TheoreticalLinearFK.h
+    geopsy-src/lib/QGpCoreWave/src/TiltNode.h
+    geopsy-src/lib/QGpCoreWave/src/TiltPath.h
+)
+
+# Headers got to include/*
+set(UI_SRCS
+
+)
+
+#
+# Generate necessary headers from .ui files. (qmake lets `uic` do this job.)
+# hint from [Cross-platform Qt5 project using cmake](http://stackoverflow.com/questions/21174586/cross-platform-qt5-project-using-cmake)
+#
+# QT5_WRAP_UI(UI_GENERATED_HEADERS ${UI_SRCS})
+
+# Include header files for compilation
+include_directories(src)
+
+#get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
+#foreach(dir ${dirs})
+  #message(STATUS "dir='${dir}'")
+#endforeach()
+
+### Set BUILD PATHS
+# Set library build path 
+set (EXECUTABLE_OUTPUT_PATH ${THIS_BIN_PATH})
+# Set library build path 
+set (LIBRARY_OUTPUT_PATH ${THIS_LIB_PATH})
+### 
+
+# Create shared library
+add_library(${PROJECT_NAME} SHARED ${CPP_SRCS})
+target_link_libraries(${PROJECT_NAME} ${ZLIB_LIBRARIES} ${MPFR_LIBRARIES} ${GMP_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${BLAS_LIBRARIES} ${LAPACK_LIBRARIES}) 
+target_link_libraries(${PROJECT_NAME} Threads::Threads)
+target_link_libraries(${PROJECT_NAME} ${QT5_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} QGpCoreTools)
+target_link_libraries(${PROJECT_NAME} QGpCoreMath)
+
+# Set VERSION
+set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
+
+# Set SOVERSION. Major version.
+set_target_properties(${PROJECT_NAME} PROPERTIES SOVERSION 1)
+
+### POST BUILD
+# Include headers (include/*)
+foreach( file_i ${HEA_INC})
+    add_custom_command(
+        TARGET ${PROJECT_NAME}
+        POST_BUILD
+        COMMAND ${CMAKE_COMMAND}
+        ARGS -E copy ${CMAKE_CURRENT_SOURCE_DIR}/${file_i} ${THIS_INC_PATH}
+    )
+endforeach( file_i )
+
+# All other headers (include/${PROJECT_NAME}/*)
+foreach( file_i ${HEA_SRCS})
+    add_custom_command(
+        TARGET ${PROJECT_NAME}
+        POST_BUILD
+        COMMAND ${CMAKE_COMMAND}
+        ARGS -E copy ${CMAKE_CURRENT_SOURCE_DIR}/${file_i} ${THIS_INC_PATH}/${PROJECT_NAME}
+    )
+endforeach( file_i )
+###
+
+### Install actions 
+## TODO: review this
+# Install library
+install(TARGETS ${PROJECT_NAME} DESTINATION lib/${PROJECT_NAME})
+
+# Install library headers
+file(GLOB HEADERS include/*.h)
+install(FILES ${HEADERS} DESTINATION include/${PROJECT_NAME})
