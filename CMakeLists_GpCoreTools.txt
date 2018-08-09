@@ -33,11 +33,11 @@ endif()
 # General build directory 
 if(CMAKE_MODULAR_BUILD)
     # Global build
-    set(THIS_REL_SRC "src")
-    #message(STATUS "****** Modular (src: ${THIS_REL_SRC}) ******")
+    set(THIS_REL_PATH ".")
+    #message(STATUS "****** Modular (src: ${THIS_REL_PATH}/src) ******")
 else()
-    set(THIS_REL_SRC "geopsy-src/lib/GpCoreTools/src")
-    #message(STATUS "****** Monolithic (src: ${THIS_REL_SRC}) ******")
+    set(THIS_REL_PATH "geopsy-src/lib/GpCoreTools")
+    #message(STATUS "****** Monolithic (src: ${THIS_REL_PATH}/src) ******")
 endif()
 
 # General build directory 
@@ -116,109 +116,109 @@ if(NOT EXISTS ${THIS_INC_PATH}/${PROJECT_NAME})
 endif()
 
 set(CPP_SRCS
-    ${THIS_REL_SRC}/Address.cpp
-    ${THIS_REL_SRC}/ApplicationHelp.cpp
-    ${THIS_REL_SRC}/Average.cpp
-    ${THIS_REL_SRC}/ByteOrder.cpp
-    ${THIS_REL_SRC}/Chrono.cpp
-    ${THIS_REL_SRC}/CoreApplication.cpp
-    ${THIS_REL_SRC}/DaemonApplication.cpp
-    ${THIS_REL_SRC}/DynamicBuffer.cpp
-    ${THIS_REL_SRC}/Event.cpp
-    ${THIS_REL_SRC}/EventLoop.cpp
-    ${THIS_REL_SRC}/EventStream.cpp
-    ${THIS_REL_SRC}/File.cpp
-    ${THIS_REL_SRC}/FletcherChecksum.cpp
-    ${THIS_REL_SRC}/GpCoreTools.cpp
-    ${THIS_REL_SRC}/InfiniteLoop.cpp
-    ${THIS_REL_SRC}/Leds.cpp
-    ${THIS_REL_SRC}/LinearRegression.cpp
-    ${THIS_REL_SRC}/Log.cpp
-    ${THIS_REL_SRC}/MessageClassId.cpp
-    ${THIS_REL_SRC}/MessageClassIdHeader.cpp
-    ${THIS_REL_SRC}/MessageClassIdOnly.cpp
-    ${THIS_REL_SRC}/MessageRaw.cpp
-    ${THIS_REL_SRC}/MessageRawHeader.cpp
-    ${THIS_REL_SRC}/MovingStatistics.cpp
-    ${THIS_REL_SRC}/NewTimerEvent.cpp
-    ${THIS_REL_SRC}/PackageInfo.cpp
-    ${THIS_REL_SRC}/PThread.cpp
-    ${THIS_REL_SRC}/ScreenClient.cpp
-    ${THIS_REL_SRC}/Serial.cpp
-    ${THIS_REL_SRC}/StaticTcpClient.cpp
-    ${THIS_REL_SRC}/Statistics.cpp
-    ${THIS_REL_SRC}/Stream.cpp
-    ${THIS_REL_SRC}/TcpClientStream.cpp
-    ${THIS_REL_SRC}/TcpServerStream.cpp
-    ${THIS_REL_SRC}/Timer.cpp
-    ${THIS_REL_SRC}/TraceBug.cpp
-    ${THIS_REL_SRC}/Trace.cpp
-    ${THIS_REL_SRC}/TraceInfo.cpp
-    ${THIS_REL_SRC}/TraceStamp.cpp
-    ${THIS_REL_SRC}/UdpServerStream.cpp
-    ${THIS_REL_SRC}/UnixClientStream.cpp
-    ${THIS_REL_SRC}/UnixServerStream.cpp
-    ${THIS_REL_SRC}/Variant.cpp
+    ${THIS_REL_PATH}/src/Address.cpp
+    ${THIS_REL_PATH}/src/ApplicationHelp.cpp
+    ${THIS_REL_PATH}/src/Average.cpp
+    ${THIS_REL_PATH}/src/ByteOrder.cpp
+    ${THIS_REL_PATH}/src/Chrono.cpp
+    ${THIS_REL_PATH}/src/CoreApplication.cpp
+    ${THIS_REL_PATH}/src/DaemonApplication.cpp
+    ${THIS_REL_PATH}/src/DynamicBuffer.cpp
+    ${THIS_REL_PATH}/src/Event.cpp
+    ${THIS_REL_PATH}/src/EventLoop.cpp
+    ${THIS_REL_PATH}/src/EventStream.cpp
+    ${THIS_REL_PATH}/src/File.cpp
+    ${THIS_REL_PATH}/src/FletcherChecksum.cpp
+    ${THIS_REL_PATH}/src/GpCoreTools.cpp
+    ${THIS_REL_PATH}/src/InfiniteLoop.cpp
+    ${THIS_REL_PATH}/src/Leds.cpp
+    ${THIS_REL_PATH}/src/LinearRegression.cpp
+    ${THIS_REL_PATH}/src/Log.cpp
+    ${THIS_REL_PATH}/src/MessageClassId.cpp
+    ${THIS_REL_PATH}/src/MessageClassIdHeader.cpp
+    ${THIS_REL_PATH}/src/MessageClassIdOnly.cpp
+    ${THIS_REL_PATH}/src/MessageRaw.cpp
+    ${THIS_REL_PATH}/src/MessageRawHeader.cpp
+    ${THIS_REL_PATH}/src/MovingStatistics.cpp
+    ${THIS_REL_PATH}/src/NewTimerEvent.cpp
+    ${THIS_REL_PATH}/src/PackageInfo.cpp
+    ${THIS_REL_PATH}/src/PThread.cpp
+    ${THIS_REL_PATH}/src/ScreenClient.cpp
+    ${THIS_REL_PATH}/src/Serial.cpp
+    ${THIS_REL_PATH}/src/StaticTcpClient.cpp
+    ${THIS_REL_PATH}/src/Statistics.cpp
+    ${THIS_REL_PATH}/src/Stream.cpp
+    ${THIS_REL_PATH}/src/TcpClientStream.cpp
+    ${THIS_REL_PATH}/src/TcpServerStream.cpp
+    ${THIS_REL_PATH}/src/Timer.cpp
+    ${THIS_REL_PATH}/src/TraceBug.cpp
+    ${THIS_REL_PATH}/src/Trace.cpp
+    ${THIS_REL_PATH}/src/TraceInfo.cpp
+    ${THIS_REL_PATH}/src/TraceStamp.cpp
+    ${THIS_REL_PATH}/src/UdpServerStream.cpp
+    ${THIS_REL_PATH}/src/UnixClientStream.cpp
+    ${THIS_REL_PATH}/src/UnixServerStream.cpp
+    ${THIS_REL_PATH}/src/Variant.cpp
 )
 
 # Headers got to include/*
 set(HEA_INC
-    ${THIS_REL_SRC}/GpCoreTools.h
+    ${THIS_REL_PATH}/src/GpCoreTools.h
 )
 
 # Headers got to include/GpCoreTools/*
 set(HEA_SRCS
-    ${THIS_REL_SRC}/Address.h
-    ${THIS_REL_SRC}/ApplicationHelp.h
-    ${THIS_REL_SRC}/Average.h
-    ${THIS_REL_SRC}/ByteOrder.h
-    ${THIS_REL_SRC}/Chrono.h
-    ${THIS_REL_SRC}/CoreApplication.h
-    ${THIS_REL_SRC}/DaemonApplication.h
-    ${THIS_REL_SRC}/DynamicBuffer.h
-    ${THIS_REL_SRC}/Event.h
-    ${THIS_REL_SRC}/EventLoop.h
-    ${THIS_REL_SRC}/EventStream.h
-    ${THIS_REL_SRC}/File.h
-    ${THIS_REL_SRC}/FletcherChecksum.h
-    ${THIS_REL_SRC}/GpCoreToolsDLLExport.h
-    ${THIS_REL_SRC}/GpCoreToolsInstallPath.h
-    ${THIS_REL_SRC}/GpCoreToolsStatic.h
-    ${THIS_REL_SRC}/GpCoreToolsVersion.h
-    ${THIS_REL_SRC}/InfiniteLoop.h
-    ${THIS_REL_SRC}/Leds.h
-    ${THIS_REL_SRC}/LinearRegression.h
-    ${THIS_REL_SRC}/Log.h
-    ${THIS_REL_SRC}/MessageClassId.h
-    ${THIS_REL_SRC}/MessageClassIdHeader.h
-    ${THIS_REL_SRC}/MessageClassIdOnly.h
-    ${THIS_REL_SRC}/MessageRaw.h
-    ${THIS_REL_SRC}/MessageRawHeader.h
-    ${THIS_REL_SRC}/MovingStatistics.h
-    ${THIS_REL_SRC}/NewTimerEvent.h
-    ${THIS_REL_SRC}/PackageInfo.h
-    ${THIS_REL_SRC}/PThread.h
-    ${THIS_REL_SRC}/ScreenClient.h
-    ${THIS_REL_SRC}/Serial.h
-    ${THIS_REL_SRC}/stable.h
-    ${THIS_REL_SRC}/StaticTcpClient.h
-    ${THIS_REL_SRC}/Statistics.h
-    ${THIS_REL_SRC}/Stream.h
-    ${THIS_REL_SRC}/TcpClientStream.h
-    ${THIS_REL_SRC}/TcpServerStream.h
-    ${THIS_REL_SRC}/Timer.h
-    ${THIS_REL_SRC}/TraceBug.h
-    ${THIS_REL_SRC}/Trace.h
-    ${THIS_REL_SRC}/TraceInfo.h
-    ${THIS_REL_SRC}/TraceStamp.h
-    ${THIS_REL_SRC}/UdpServerStream.h
-    ${THIS_REL_SRC}/UnixClientStream.h
-    ${THIS_REL_SRC}/UnixServerStream.h
-    ${THIS_REL_SRC}/Variant.h
+    ${THIS_REL_PATH}/src/Address.h
+    ${THIS_REL_PATH}/src/ApplicationHelp.h
+    ${THIS_REL_PATH}/src/Average.h
+    ${THIS_REL_PATH}/src/ByteOrder.h
+    ${THIS_REL_PATH}/src/Chrono.h
+    ${THIS_REL_PATH}/src/CoreApplication.h
+    ${THIS_REL_PATH}/src/DaemonApplication.h
+    ${THIS_REL_PATH}/src/DynamicBuffer.h
+    ${THIS_REL_PATH}/src/Event.h
+    ${THIS_REL_PATH}/src/EventLoop.h
+    ${THIS_REL_PATH}/src/EventStream.h
+    ${THIS_REL_PATH}/src/File.h
+    ${THIS_REL_PATH}/src/FletcherChecksum.h
+    ${THIS_REL_PATH}/src/GpCoreToolsDLLExport.h
+    ${THIS_REL_PATH}/src/GpCoreToolsInstallPath.h
+    ${THIS_REL_PATH}/src/GpCoreToolsStatic.h
+    ${THIS_REL_PATH}/src/GpCoreToolsVersion.h
+    ${THIS_REL_PATH}/src/InfiniteLoop.h
+    ${THIS_REL_PATH}/src/Leds.h
+    ${THIS_REL_PATH}/src/LinearRegression.h
+    ${THIS_REL_PATH}/src/Log.h
+    ${THIS_REL_PATH}/src/MessageClassId.h
+    ${THIS_REL_PATH}/src/MessageClassIdHeader.h
+    ${THIS_REL_PATH}/src/MessageClassIdOnly.h
+    ${THIS_REL_PATH}/src/MessageRaw.h
+    ${THIS_REL_PATH}/src/MessageRawHeader.h
+    ${THIS_REL_PATH}/src/MovingStatistics.h
+    ${THIS_REL_PATH}/src/NewTimerEvent.h
+    ${THIS_REL_PATH}/src/PackageInfo.h
+    ${THIS_REL_PATH}/src/PThread.h
+    ${THIS_REL_PATH}/src/ScreenClient.h
+    ${THIS_REL_PATH}/src/Serial.h
+    ${THIS_REL_PATH}/src/stable.h
+    ${THIS_REL_PATH}/src/StaticTcpClient.h
+    ${THIS_REL_PATH}/src/Statistics.h
+    ${THIS_REL_PATH}/src/Stream.h
+    ${THIS_REL_PATH}/src/TcpClientStream.h
+    ${THIS_REL_PATH}/src/TcpServerStream.h
+    ${THIS_REL_PATH}/src/Timer.h
+    ${THIS_REL_PATH}/src/TraceBug.h
+    ${THIS_REL_PATH}/src/Trace.h
+    ${THIS_REL_PATH}/src/TraceInfo.h
+    ${THIS_REL_PATH}/src/TraceStamp.h
+    ${THIS_REL_PATH}/src/UdpServerStream.h
+    ${THIS_REL_PATH}/src/UnixClientStream.h
+    ${THIS_REL_PATH}/src/UnixServerStream.h
+    ${THIS_REL_PATH}/src/Variant.h
 )
 
 # Include header files for compilation
-include_directories(${THIS_REL_SRC})
+include_directories(${THIS_REL_PATH}/src)
 
 ### Set BUILD PATHS
 # Set library build path 
