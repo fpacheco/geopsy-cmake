@@ -109,12 +109,11 @@ find_package(GMP REQUIRED)
 find_package(LAPACK REQUIRED)
 # Find BLAS
 find_package(BLAS REQUIRED)
-## Find QGpCoreTools
-#find_library(QGPCORETOOLS_LIBRARY
-    #NAMES QGpCoreTools
-    #HINTS ${THIS_LIB_PATH}
-#)
-#message(STATUS "QGPCORETOOLS_LIBRARY: ${QGPCORETOOLS_LIBRARY}")
+message(STATUS "BLAS:  ${BLAS}")
+message(STATUS "BLAS_LIBRARIES:  ${BLAS_LIBRARIES}")
+message(STATUS "BLAS_INCLUDE_DIR:  ${BLAS_INCLUDE_DIR}")
+# Find FFTW
+find_package(FFTW REQUIRED)
 ###
 
 ### Qt5 support

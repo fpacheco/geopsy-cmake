@@ -295,7 +295,9 @@ set (LIBRARY_OUTPUT_PATH ${THIS_LIB_PATH})
 qt5_add_resources(QRCS geopsy-src/geopsy/geopsy/geopsy.qrc)
 
 # Create shared library
-add_library(${PROJECT_NAME} SHARED ${CPP_SRCS} ${QRCS})
+# add_library(${PROJECT_NAME} SHARED ${CPP_SRCS} ${QRCS})
+# Create executable
+add_executable(${PROJECT_NAME} ${CPP_SRCS} ${UI_HEADERS} ${QRCS})
 target_link_libraries(${PROJECT_NAME} ${ZLIB_LIBRARIES} ${MPFR_LIBRARIES} ${GMP_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} ${BLAS_LIBRARIES} ${LAPACK_LIBRARIES}) 
 target_link_libraries(${PROJECT_NAME} Threads::Threads)
