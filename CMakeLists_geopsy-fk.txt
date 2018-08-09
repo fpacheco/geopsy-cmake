@@ -5,7 +5,7 @@
 
 cmake_minimum_required(VERSION 3.9)
 
-project(fk VERSION 1.0.0 DESCRIPTION "fk description")
+project(geopsy-fk VERSION 1.0.0 DESCRIPTION "geopsy-fk description")
 
 ### Modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
@@ -197,7 +197,7 @@ target_link_libraries(${PROJECT_NAME} ${QT5_LIBRARIES})
 # -lQGpCoreTools -lArrayCore -lGaussianMixture -lDinverCore -lGeopsyCore -lQGpCoreWave -lQGpCoreTools -lQGpCoreMath -lQGpCompatibility -lmseed -lfftw3 -lopenblas
 target_link_libraries(${PROJECT_NAME} QGpCoreTools)
 target_link_libraries(${PROJECT_NAME} ArrayCore)
-target_link_libraries(${PROJECT_NAME} QGpCoreStats)
+target_link_libraries(${PROJECT_NAME} QGpCoreStat)
 target_link_libraries(${PROJECT_NAME} DinverCore)
 target_link_libraries(${PROJECT_NAME} GeopsyCore)
 target_link_libraries(${PROJECT_NAME} QGpCoreWave)
@@ -240,11 +240,13 @@ foreach( file_i ${HEA_INC})
 endforeach( file_i )
 
 # Generated UI headers to include/${PROJECT_NAME}/*
+if (UI_SRCS)
 add_custom_command(
     TARGET ${PROJECT_NAME} POST_BUILD
     COMMAND ${CMAKE_COMMAND}
     ARGS -E copy ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_autogen/include/ui_* ${THIS_INC_PATH}/${PROJECT_NAME}    
 )
+endif()
 ###
 
 ### Install actions 
