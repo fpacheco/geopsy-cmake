@@ -31,6 +31,16 @@ endif()
 ###
 
 # General build directory 
+if(CMAKE_MODULAR_BUILD)
+    # Global build
+    set(THIS_REL_SRC "src")
+    #message(STATUS "****** Modular (src: ${THIS_REL_SRC}) ******")
+else()
+    set(THIS_REL_SRC "geopsy-src/lib/GpCoreTools/src")
+    #message(STATUS "****** Monolithic (src: ${THIS_REL_SRC}) ******")
+endif()
+
+# General build directory 
 if(GEOPSY_APP_BUILD_PATH)
     # Global build
     set(THIS_BUILD_PATH ${GEOPSY_APP_BUILD_PATH})
@@ -106,109 +116,109 @@ if(NOT EXISTS ${THIS_INC_PATH}/${PROJECT_NAME})
 endif()
 
 set(CPP_SRCS
-    geopsy-src/lib/GpCoreTools/src/Address.cpp
-    geopsy-src/lib/GpCoreTools/src/ApplicationHelp.cpp
-    geopsy-src/lib/GpCoreTools/src/Average.cpp
-    geopsy-src/lib/GpCoreTools/src/ByteOrder.cpp
-    geopsy-src/lib/GpCoreTools/src/Chrono.cpp
-    geopsy-src/lib/GpCoreTools/src/CoreApplication.cpp
-    geopsy-src/lib/GpCoreTools/src/DaemonApplication.cpp
-    geopsy-src/lib/GpCoreTools/src/DynamicBuffer.cpp
-    geopsy-src/lib/GpCoreTools/src/Event.cpp
-    geopsy-src/lib/GpCoreTools/src/EventLoop.cpp
-    geopsy-src/lib/GpCoreTools/src/EventStream.cpp
-    geopsy-src/lib/GpCoreTools/src/File.cpp
-    geopsy-src/lib/GpCoreTools/src/FletcherChecksum.cpp
-    geopsy-src/lib/GpCoreTools/src/GpCoreTools.cpp
-    geopsy-src/lib/GpCoreTools/src/InfiniteLoop.cpp
-    geopsy-src/lib/GpCoreTools/src/Leds.cpp
-    geopsy-src/lib/GpCoreTools/src/LinearRegression.cpp
-    geopsy-src/lib/GpCoreTools/src/Log.cpp
-    geopsy-src/lib/GpCoreTools/src/MessageClassId.cpp
-    geopsy-src/lib/GpCoreTools/src/MessageClassIdHeader.cpp
-    geopsy-src/lib/GpCoreTools/src/MessageClassIdOnly.cpp
-    geopsy-src/lib/GpCoreTools/src/MessageRaw.cpp
-    geopsy-src/lib/GpCoreTools/src/MessageRawHeader.cpp
-    geopsy-src/lib/GpCoreTools/src/MovingStatistics.cpp
-    geopsy-src/lib/GpCoreTools/src/NewTimerEvent.cpp
-    geopsy-src/lib/GpCoreTools/src/PackageInfo.cpp
-    geopsy-src/lib/GpCoreTools/src/PThread.cpp
-    geopsy-src/lib/GpCoreTools/src/ScreenClient.cpp
-    geopsy-src/lib/GpCoreTools/src/Serial.cpp
-    geopsy-src/lib/GpCoreTools/src/StaticTcpClient.cpp
-    geopsy-src/lib/GpCoreTools/src/Statistics.cpp
-    geopsy-src/lib/GpCoreTools/src/Stream.cpp
-    geopsy-src/lib/GpCoreTools/src/TcpClientStream.cpp
-    geopsy-src/lib/GpCoreTools/src/TcpServerStream.cpp
-    geopsy-src/lib/GpCoreTools/src/Timer.cpp
-    geopsy-src/lib/GpCoreTools/src/TraceBug.cpp
-    geopsy-src/lib/GpCoreTools/src/Trace.cpp
-    geopsy-src/lib/GpCoreTools/src/TraceInfo.cpp
-    geopsy-src/lib/GpCoreTools/src/TraceStamp.cpp
-    geopsy-src/lib/GpCoreTools/src/UdpServerStream.cpp
-    geopsy-src/lib/GpCoreTools/src/UnixClientStream.cpp
-    geopsy-src/lib/GpCoreTools/src/UnixServerStream.cpp
-    geopsy-src/lib/GpCoreTools/src/Variant.cpp
+    ${THIS_REL_SRC}/Address.cpp
+    ${THIS_REL_SRC}/ApplicationHelp.cpp
+    ${THIS_REL_SRC}/Average.cpp
+    ${THIS_REL_SRC}/ByteOrder.cpp
+    ${THIS_REL_SRC}/Chrono.cpp
+    ${THIS_REL_SRC}/CoreApplication.cpp
+    ${THIS_REL_SRC}/DaemonApplication.cpp
+    ${THIS_REL_SRC}/DynamicBuffer.cpp
+    ${THIS_REL_SRC}/Event.cpp
+    ${THIS_REL_SRC}/EventLoop.cpp
+    ${THIS_REL_SRC}/EventStream.cpp
+    ${THIS_REL_SRC}/File.cpp
+    ${THIS_REL_SRC}/FletcherChecksum.cpp
+    ${THIS_REL_SRC}/GpCoreTools.cpp
+    ${THIS_REL_SRC}/InfiniteLoop.cpp
+    ${THIS_REL_SRC}/Leds.cpp
+    ${THIS_REL_SRC}/LinearRegression.cpp
+    ${THIS_REL_SRC}/Log.cpp
+    ${THIS_REL_SRC}/MessageClassId.cpp
+    ${THIS_REL_SRC}/MessageClassIdHeader.cpp
+    ${THIS_REL_SRC}/MessageClassIdOnly.cpp
+    ${THIS_REL_SRC}/MessageRaw.cpp
+    ${THIS_REL_SRC}/MessageRawHeader.cpp
+    ${THIS_REL_SRC}/MovingStatistics.cpp
+    ${THIS_REL_SRC}/NewTimerEvent.cpp
+    ${THIS_REL_SRC}/PackageInfo.cpp
+    ${THIS_REL_SRC}/PThread.cpp
+    ${THIS_REL_SRC}/ScreenClient.cpp
+    ${THIS_REL_SRC}/Serial.cpp
+    ${THIS_REL_SRC}/StaticTcpClient.cpp
+    ${THIS_REL_SRC}/Statistics.cpp
+    ${THIS_REL_SRC}/Stream.cpp
+    ${THIS_REL_SRC}/TcpClientStream.cpp
+    ${THIS_REL_SRC}/TcpServerStream.cpp
+    ${THIS_REL_SRC}/Timer.cpp
+    ${THIS_REL_SRC}/TraceBug.cpp
+    ${THIS_REL_SRC}/Trace.cpp
+    ${THIS_REL_SRC}/TraceInfo.cpp
+    ${THIS_REL_SRC}/TraceStamp.cpp
+    ${THIS_REL_SRC}/UdpServerStream.cpp
+    ${THIS_REL_SRC}/UnixClientStream.cpp
+    ${THIS_REL_SRC}/UnixServerStream.cpp
+    ${THIS_REL_SRC}/Variant.cpp
 )
 
 # Headers got to include/*
 set(HEA_INC
-    geopsy-src/lib/GpCoreTools/src/GpCoreTools.h
+    ${THIS_REL_SRC}/GpCoreTools.h
 )
 
 # Headers got to include/GpCoreTools/*
 set(HEA_SRCS
-    geopsy-src/lib/GpCoreTools/src/Address.h
-    geopsy-src/lib/GpCoreTools/src/ApplicationHelp.h
-    geopsy-src/lib/GpCoreTools/src/Average.h
-    geopsy-src/lib/GpCoreTools/src/ByteOrder.h
-    geopsy-src/lib/GpCoreTools/src/Chrono.h
-    geopsy-src/lib/GpCoreTools/src/CoreApplication.h
-    geopsy-src/lib/GpCoreTools/src/DaemonApplication.h
-    geopsy-src/lib/GpCoreTools/src/DynamicBuffer.h
-    geopsy-src/lib/GpCoreTools/src/Event.h
-    geopsy-src/lib/GpCoreTools/src/EventLoop.h
-    geopsy-src/lib/GpCoreTools/src/EventStream.h
-    geopsy-src/lib/GpCoreTools/src/File.h
-    geopsy-src/lib/GpCoreTools/src/FletcherChecksum.h
-    geopsy-src/lib/GpCoreTools/src/GpCoreToolsDLLExport.h
-    geopsy-src/lib/GpCoreTools/src/GpCoreToolsInstallPath.h
-    geopsy-src/lib/GpCoreTools/src/GpCoreToolsStatic.h
-    geopsy-src/lib/GpCoreTools/src/GpCoreToolsVersion.h
-    geopsy-src/lib/GpCoreTools/src/InfiniteLoop.h
-    geopsy-src/lib/GpCoreTools/src/Leds.h
-    geopsy-src/lib/GpCoreTools/src/LinearRegression.h
-    geopsy-src/lib/GpCoreTools/src/Log.h
-    geopsy-src/lib/GpCoreTools/src/MessageClassId.h
-    geopsy-src/lib/GpCoreTools/src/MessageClassIdHeader.h
-    geopsy-src/lib/GpCoreTools/src/MessageClassIdOnly.h
-    geopsy-src/lib/GpCoreTools/src/MessageRaw.h
-    geopsy-src/lib/GpCoreTools/src/MessageRawHeader.h
-    geopsy-src/lib/GpCoreTools/src/MovingStatistics.h
-    geopsy-src/lib/GpCoreTools/src/NewTimerEvent.h
-    geopsy-src/lib/GpCoreTools/src/PackageInfo.h
-    geopsy-src/lib/GpCoreTools/src/PThread.h
-    geopsy-src/lib/GpCoreTools/src/ScreenClient.h
-    geopsy-src/lib/GpCoreTools/src/Serial.h
-    geopsy-src/lib/GpCoreTools/src/stable.h
-    geopsy-src/lib/GpCoreTools/src/StaticTcpClient.h
-    geopsy-src/lib/GpCoreTools/src/Statistics.h
-    geopsy-src/lib/GpCoreTools/src/Stream.h
-    geopsy-src/lib/GpCoreTools/src/TcpClientStream.h
-    geopsy-src/lib/GpCoreTools/src/TcpServerStream.h
-    geopsy-src/lib/GpCoreTools/src/Timer.h
-    geopsy-src/lib/GpCoreTools/src/TraceBug.h
-    geopsy-src/lib/GpCoreTools/src/Trace.h
-    geopsy-src/lib/GpCoreTools/src/TraceInfo.h
-    geopsy-src/lib/GpCoreTools/src/TraceStamp.h
-    geopsy-src/lib/GpCoreTools/src/UdpServerStream.h
-    geopsy-src/lib/GpCoreTools/src/UnixClientStream.h
-    geopsy-src/lib/GpCoreTools/src/UnixServerStream.h
-    geopsy-src/lib/GpCoreTools/src/Variant.h
+    ${THIS_REL_SRC}/Address.h
+    ${THIS_REL_SRC}/ApplicationHelp.h
+    ${THIS_REL_SRC}/Average.h
+    ${THIS_REL_SRC}/ByteOrder.h
+    ${THIS_REL_SRC}/Chrono.h
+    ${THIS_REL_SRC}/CoreApplication.h
+    ${THIS_REL_SRC}/DaemonApplication.h
+    ${THIS_REL_SRC}/DynamicBuffer.h
+    ${THIS_REL_SRC}/Event.h
+    ${THIS_REL_SRC}/EventLoop.h
+    ${THIS_REL_SRC}/EventStream.h
+    ${THIS_REL_SRC}/File.h
+    ${THIS_REL_SRC}/FletcherChecksum.h
+    ${THIS_REL_SRC}/GpCoreToolsDLLExport.h
+    ${THIS_REL_SRC}/GpCoreToolsInstallPath.h
+    ${THIS_REL_SRC}/GpCoreToolsStatic.h
+    ${THIS_REL_SRC}/GpCoreToolsVersion.h
+    ${THIS_REL_SRC}/InfiniteLoop.h
+    ${THIS_REL_SRC}/Leds.h
+    ${THIS_REL_SRC}/LinearRegression.h
+    ${THIS_REL_SRC}/Log.h
+    ${THIS_REL_SRC}/MessageClassId.h
+    ${THIS_REL_SRC}/MessageClassIdHeader.h
+    ${THIS_REL_SRC}/MessageClassIdOnly.h
+    ${THIS_REL_SRC}/MessageRaw.h
+    ${THIS_REL_SRC}/MessageRawHeader.h
+    ${THIS_REL_SRC}/MovingStatistics.h
+    ${THIS_REL_SRC}/NewTimerEvent.h
+    ${THIS_REL_SRC}/PackageInfo.h
+    ${THIS_REL_SRC}/PThread.h
+    ${THIS_REL_SRC}/ScreenClient.h
+    ${THIS_REL_SRC}/Serial.h
+    ${THIS_REL_SRC}/stable.h
+    ${THIS_REL_SRC}/StaticTcpClient.h
+    ${THIS_REL_SRC}/Statistics.h
+    ${THIS_REL_SRC}/Stream.h
+    ${THIS_REL_SRC}/TcpClientStream.h
+    ${THIS_REL_SRC}/TcpServerStream.h
+    ${THIS_REL_SRC}/Timer.h
+    ${THIS_REL_SRC}/TraceBug.h
+    ${THIS_REL_SRC}/Trace.h
+    ${THIS_REL_SRC}/TraceInfo.h
+    ${THIS_REL_SRC}/TraceStamp.h
+    ${THIS_REL_SRC}/UdpServerStream.h
+    ${THIS_REL_SRC}/UnixClientStream.h
+    ${THIS_REL_SRC}/UnixServerStream.h
+    ${THIS_REL_SRC}/Variant.h
 )
 
 # Include header files for compilation
-include_directories(geopsy-src/lib/GpCoreTools/src)
+include_directories(${THIS_REL_SRC})
 
 ### Set BUILD PATHS
 # Set library build path 
