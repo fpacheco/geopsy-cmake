@@ -30,6 +30,16 @@ endif()
 ###
 
 # General build directory 
+if(CMAKE_MODULAR_BUILD)
+    # Global build
+    set(THIS_REL_PATH ".")
+    #message(STATUS "****** Modular (src: ${THIS_REL_PATH}/src) ******")
+else()
+    set(THIS_REL_PATH "geopsy-src/lib/QGpCoreGui")
+    #message(STATUS "****** Monolithic (src: ${THIS_REL_PATH}/src) ******")
+endif()
+
+# General build directory 
 if(GEOPSY_APP_BUILD_PATH)
     # Global build
     set(THIS_BUILD_PATH ${GEOPSY_APP_BUILD_PATH})
@@ -141,165 +151,165 @@ message(STATUS "Autogen goes to: ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_aut
 set(TARGET ${CMAKE_PROJECT_NAME})
 
 set(CPP_SRCS
-    geopsy-src/lib/QGpGuiTools/src/Application.cpp
-    geopsy-src/lib/QGpGuiTools/src/Attachments.cpp
-    geopsy-src/lib/QGpGuiTools/src/BugReport.cpp
-    geopsy-src/lib/QGpGuiTools/src/Cast.cpp
-    geopsy-src/lib/QGpGuiTools/src/CheckComboBox.cpp
-    geopsy-src/lib/QGpGuiTools/src/CheckComboBoxModel.cpp
-    geopsy-src/lib/QGpGuiTools/src/ColorButton.cpp
-    geopsy-src/lib/QGpGuiTools/src/ColorHistogram.cpp
-    geopsy-src/lib/QGpGuiTools/src/ColumnTextColumnsProperties.cpp
-    geopsy-src/lib/QGpGuiTools/src/ColumnTextDelegate.cpp
-    geopsy-src/lib/QGpGuiTools/src/ColumnTextItem.cpp
-    geopsy-src/lib/QGpGuiTools/src/ColumnTextLinesProperties.cpp
-    geopsy-src/lib/QGpGuiTools/src/ColumnTextSectionsProperties.cpp
-    geopsy-src/lib/QGpGuiTools/src/ColumnTextWidget.cpp
-    geopsy-src/lib/QGpGuiTools/src/ConnectionParam.cpp
-    geopsy-src/lib/QGpGuiTools/src/Dialog.cpp
-    geopsy-src/lib/QGpGuiTools/src/DockWidget.cpp
-    geopsy-src/lib/QGpGuiTools/src/DoubleSpinBox.cpp
-    geopsy-src/lib/QGpGuiTools/src/ExpandTabTitle.cpp
-    geopsy-src/lib/QGpGuiTools/src/ExpandTabWidget.cpp
-    geopsy-src/lib/QGpGuiTools/src/ExpressionEditor.cpp
-    geopsy-src/lib/QGpGuiTools/src/FindReplaceWidget.cpp
-    geopsy-src/lib/QGpGuiTools/src/FrozenWidget.cpp
-    geopsy-src/lib/QGpGuiTools/src/GuiGlobal.cpp
-    geopsy-src/lib/QGpGuiTools/src/GuiMessage.cpp
-    geopsy-src/lib/QGpGuiTools/src/HttpAccess.cpp
-    geopsy-src/lib/QGpGuiTools/src/HttpProxy.cpp
-    geopsy-src/lib/QGpGuiTools/src/HttpProxyList.cpp
-    geopsy-src/lib/QGpGuiTools/src/HttpProxyObject.cpp
-    geopsy-src/lib/QGpGuiTools/src/HttpProxyScript.cpp
-    geopsy-src/lib/QGpGuiTools/src/LogView.cpp
-    geopsy-src/lib/QGpGuiTools/src/LogWidget.cpp
-    geopsy-src/lib/QGpGuiTools/src/LoopProgressWidget.cpp
-    geopsy-src/lib/QGpGuiTools/src/MessageBox.cpp
-    geopsy-src/lib/QGpGuiTools/src/MultiDocumentEnvironment.cpp
-    geopsy-src/lib/QGpGuiTools/src/MultiDocumentSubWindow.cpp
-    geopsy-src/lib/QGpGuiTools/src/MultiDocumentTabBar.cpp
-    geopsy-src/lib/QGpGuiTools/src/MultiDocumentTab.cpp
-    geopsy-src/lib/QGpGuiTools/src/MultiDocumentTabWidget.cpp
-    geopsy-src/lib/QGpGuiTools/src/MultiDocumentWindow.cpp
-    geopsy-src/lib/QGpGuiTools/src/PluginApplication.cpp
-    geopsy-src/lib/QGpGuiTools/src/PrintDialogWrapper.cpp
-    geopsy-src/lib/QGpGuiTools/src/ProgressBar.cpp
-    geopsy-src/lib/QGpGuiTools/src/PropertyArea.cpp
-    geopsy-src/lib/QGpGuiTools/src/PropertyCategory.cpp
-    geopsy-src/lib/QGpGuiTools/src/PropertyCategorySettings.cpp
-    geopsy-src/lib/QGpGuiTools/src/PropertyContext.cpp
-    geopsy-src/lib/QGpGuiTools/src/PropertyEditor.cpp
-    geopsy-src/lib/QGpGuiTools/src/PropertyItem.cpp
-    geopsy-src/lib/QGpGuiTools/src/PropertyProxy.cpp
-    geopsy-src/lib/QGpGuiTools/src/PropertyTab.cpp
-    geopsy-src/lib/QGpGuiTools/src/PropertyTabSettings.cpp
-    geopsy-src/lib/QGpGuiTools/src/PropertyValue.cpp
-    geopsy-src/lib/QGpGuiTools/src/PropertyWidget.cpp
-    geopsy-src/lib/QGpGuiTools/src/QGpGuiTools.cpp
-    geopsy-src/lib/QGpGuiTools/src/RegExpRowSelector.cpp
-    geopsy-src/lib/QGpGuiTools/src/SamplingParameterWidget.cpp
-    geopsy-src/lib/QGpGuiTools/src/SendMail.cpp
-    geopsy-src/lib/QGpGuiTools/src/Settings.cpp
-    geopsy-src/lib/QGpGuiTools/src/SizeGrip.cpp
-    geopsy-src/lib/QGpGuiTools/src/TitledWidget.cpp
-    geopsy-src/lib/QGpGuiTools/src/UpdateIcon.cpp
-    geopsy-src/lib/QGpGuiTools/src/WidgetRect.cpp
-    geopsy-src/lib/QGpGuiTools/src/XMLEditor.cpp
-    geopsy-src/lib/QGpGuiTools/src/XMLItem.cpp
+    ${THIS_REL_PATH}/src/Application.cpp
+    ${THIS_REL_PATH}/src/Attachments.cpp
+    ${THIS_REL_PATH}/src/BugReport.cpp
+    ${THIS_REL_PATH}/src/Cast.cpp
+    ${THIS_REL_PATH}/src/CheckComboBox.cpp
+    ${THIS_REL_PATH}/src/CheckComboBoxModel.cpp
+    ${THIS_REL_PATH}/src/ColorButton.cpp
+    ${THIS_REL_PATH}/src/ColorHistogram.cpp
+    ${THIS_REL_PATH}/src/ColumnTextColumnsProperties.cpp
+    ${THIS_REL_PATH}/src/ColumnTextDelegate.cpp
+    ${THIS_REL_PATH}/src/ColumnTextItem.cpp
+    ${THIS_REL_PATH}/src/ColumnTextLinesProperties.cpp
+    ${THIS_REL_PATH}/src/ColumnTextSectionsProperties.cpp
+    ${THIS_REL_PATH}/src/ColumnTextWidget.cpp
+    ${THIS_REL_PATH}/src/ConnectionParam.cpp
+    ${THIS_REL_PATH}/src/Dialog.cpp
+    ${THIS_REL_PATH}/src/DockWidget.cpp
+    ${THIS_REL_PATH}/src/DoubleSpinBox.cpp
+    ${THIS_REL_PATH}/src/ExpandTabTitle.cpp
+    ${THIS_REL_PATH}/src/ExpandTabWidget.cpp
+    ${THIS_REL_PATH}/src/ExpressionEditor.cpp
+    ${THIS_REL_PATH}/src/FindReplaceWidget.cpp
+    ${THIS_REL_PATH}/src/FrozenWidget.cpp
+    ${THIS_REL_PATH}/src/GuiGlobal.cpp
+    ${THIS_REL_PATH}/src/GuiMessage.cpp
+    ${THIS_REL_PATH}/src/HttpAccess.cpp
+    ${THIS_REL_PATH}/src/HttpProxy.cpp
+    ${THIS_REL_PATH}/src/HttpProxyList.cpp
+    ${THIS_REL_PATH}/src/HttpProxyObject.cpp
+    ${THIS_REL_PATH}/src/HttpProxyScript.cpp
+    ${THIS_REL_PATH}/src/LogView.cpp
+    ${THIS_REL_PATH}/src/LogWidget.cpp
+    ${THIS_REL_PATH}/src/LoopProgressWidget.cpp
+    ${THIS_REL_PATH}/src/MessageBox.cpp
+    ${THIS_REL_PATH}/src/MultiDocumentEnvironment.cpp
+    ${THIS_REL_PATH}/src/MultiDocumentSubWindow.cpp
+    ${THIS_REL_PATH}/src/MultiDocumentTabBar.cpp
+    ${THIS_REL_PATH}/src/MultiDocumentTab.cpp
+    ${THIS_REL_PATH}/src/MultiDocumentTabWidget.cpp
+    ${THIS_REL_PATH}/src/MultiDocumentWindow.cpp
+    ${THIS_REL_PATH}/src/PluginApplication.cpp
+    ${THIS_REL_PATH}/src/PrintDialogWrapper.cpp
+    ${THIS_REL_PATH}/src/ProgressBar.cpp
+    ${THIS_REL_PATH}/src/PropertyArea.cpp
+    ${THIS_REL_PATH}/src/PropertyCategory.cpp
+    ${THIS_REL_PATH}/src/PropertyCategorySettings.cpp
+    ${THIS_REL_PATH}/src/PropertyContext.cpp
+    ${THIS_REL_PATH}/src/PropertyEditor.cpp
+    ${THIS_REL_PATH}/src/PropertyItem.cpp
+    ${THIS_REL_PATH}/src/PropertyProxy.cpp
+    ${THIS_REL_PATH}/src/PropertyTab.cpp
+    ${THIS_REL_PATH}/src/PropertyTabSettings.cpp
+    ${THIS_REL_PATH}/src/PropertyValue.cpp
+    ${THIS_REL_PATH}/src/PropertyWidget.cpp
+    ${THIS_REL_PATH}/src/QGpGuiTools.cpp
+    ${THIS_REL_PATH}/src/RegExpRowSelector.cpp
+    ${THIS_REL_PATH}/src/SamplingParameterWidget.cpp
+    ${THIS_REL_PATH}/src/SendMail.cpp
+    ${THIS_REL_PATH}/src/Settings.cpp
+    ${THIS_REL_PATH}/src/SizeGrip.cpp
+    ${THIS_REL_PATH}/src/TitledWidget.cpp
+    ${THIS_REL_PATH}/src/UpdateIcon.cpp
+    ${THIS_REL_PATH}/src/WidgetRect.cpp
+    ${THIS_REL_PATH}/src/XMLEditor.cpp
+    ${THIS_REL_PATH}/src/XMLItem.cpp
 )
 
 # Headers got to include/*
 set(HEA_INC
-    geopsy-src/lib/QGpGuiTools/src/QGpGuiTools.h
+    ${THIS_REL_PATH}/src/QGpGuiTools.h
 )
 
 # Headers got to include/GpCoreTools/*
 set(HEA_SRCS
-    geopsy-src/lib/QGpGuiTools/src/Application.h
-    geopsy-src/lib/QGpGuiTools/src/Attachments.h
-    geopsy-src/lib/QGpGuiTools/src/BugReport.h
-    geopsy-src/lib/QGpGuiTools/src/Cast.h
-    geopsy-src/lib/QGpGuiTools/src/CheckComboBox.h
-    geopsy-src/lib/QGpGuiTools/src/CheckComboBoxModel.h
-    geopsy-src/lib/QGpGuiTools/src/ColorButton.h
-    geopsy-src/lib/QGpGuiTools/src/ColorHistogram.h
-    geopsy-src/lib/QGpGuiTools/src/ColumnTextColumnsProperties.h
-    geopsy-src/lib/QGpGuiTools/src/ColumnTextDelegate.h
-    geopsy-src/lib/QGpGuiTools/src/ColumnTextItem.h
-    geopsy-src/lib/QGpGuiTools/src/ColumnTextLinesProperties.h
-    geopsy-src/lib/QGpGuiTools/src/ColumnTextSectionsProperties.h
-    geopsy-src/lib/QGpGuiTools/src/ColumnTextWidget.h
-    geopsy-src/lib/QGpGuiTools/src/ConnectionParam.h
-    geopsy-src/lib/QGpGuiTools/src/Dialog.h
-    geopsy-src/lib/QGpGuiTools/src/DockWidget.h
-    geopsy-src/lib/QGpGuiTools/src/DoubleSpinBox.h
-    geopsy-src/lib/QGpGuiTools/src/ExpandTabTitle.h
-    geopsy-src/lib/QGpGuiTools/src/ExpandTabWidget.h
-    geopsy-src/lib/QGpGuiTools/src/ExpressionEditor.h
-    geopsy-src/lib/QGpGuiTools/src/FindReplaceWidget.h
-    geopsy-src/lib/QGpGuiTools/src/FrozenWidget.h
-    geopsy-src/lib/QGpGuiTools/src/GuiGlobal.h
-    geopsy-src/lib/QGpGuiTools/src/GuiMessage.h
-    geopsy-src/lib/QGpGuiTools/src/HttpAccess.h
-    geopsy-src/lib/QGpGuiTools/src/HttpProxy.h
-    geopsy-src/lib/QGpGuiTools/src/HttpProxyList.h
-    geopsy-src/lib/QGpGuiTools/src/HttpProxyObject.h
-    geopsy-src/lib/QGpGuiTools/src/HttpProxyScript.h
-    geopsy-src/lib/QGpGuiTools/src/LogView.h
-    geopsy-src/lib/QGpGuiTools/src/LogWidget.h
-    geopsy-src/lib/QGpGuiTools/src/LoopProgressWidget.h
-    geopsy-src/lib/QGpGuiTools/src/MessageBox.h
-    geopsy-src/lib/QGpGuiTools/src/MultiDocumentEnvironment.h
-    geopsy-src/lib/QGpGuiTools/src/MultiDocumentSubWindow.h
-    geopsy-src/lib/QGpGuiTools/src/MultiDocumentTabBar.h
-    geopsy-src/lib/QGpGuiTools/src/MultiDocumentTab.h
-    geopsy-src/lib/QGpGuiTools/src/MultiDocumentTabWidget.h
-    geopsy-src/lib/QGpGuiTools/src/MultiDocumentWindow.h
-    geopsy-src/lib/QGpGuiTools/src/PluginApplication.h
-    geopsy-src/lib/QGpGuiTools/src/PrintDialogWrapper.h
-    geopsy-src/lib/QGpGuiTools/src/ProgressBar.h
-    geopsy-src/lib/QGpGuiTools/src/PropertyArea.h
-    geopsy-src/lib/QGpGuiTools/src/PropertyCategory.h
-    geopsy-src/lib/QGpGuiTools/src/PropertyCategorySettings.h
-    geopsy-src/lib/QGpGuiTools/src/PropertyContext.h
-    geopsy-src/lib/QGpGuiTools/src/PropertyEditor.h
-    geopsy-src/lib/QGpGuiTools/src/PropertyItem.h
-    geopsy-src/lib/QGpGuiTools/src/PropertyProxy.h
-    geopsy-src/lib/QGpGuiTools/src/PropertyTab.h
-    geopsy-src/lib/QGpGuiTools/src/PropertyTabSettings.h
-    geopsy-src/lib/QGpGuiTools/src/PropertyValue.h
-    geopsy-src/lib/QGpGuiTools/src/PropertyWidget.h
-    geopsy-src/lib/QGpGuiTools/src/QGpGuiToolsDLLExport.h
-    geopsy-src/lib/QGpGuiTools/src/QGpGuiTools.h
-    geopsy-src/lib/QGpGuiTools/src/QGpGuiToolsInstallPath.h
-    geopsy-src/lib/QGpGuiTools/src/QGpGuiToolsStatic.h
-    geopsy-src/lib/QGpGuiTools/src/QGpGuiToolsVersion.h
-    geopsy-src/lib/QGpGuiTools/src/RegExpRowSelector.h
-    geopsy-src/lib/QGpGuiTools/src/SamplingParameterWidget.h
-    geopsy-src/lib/QGpGuiTools/src/SendMail.h
-    geopsy-src/lib/QGpGuiTools/src/Settings.h
-    geopsy-src/lib/QGpGuiTools/src/SizeGrip.h
-    geopsy-src/lib/QGpGuiTools/src/stable.h
-    geopsy-src/lib/QGpGuiTools/src/TitledWidget.h
-    geopsy-src/lib/QGpGuiTools/src/UpdateIcon.h
-    geopsy-src/lib/QGpGuiTools/src/WidgetRect.h
-    geopsy-src/lib/QGpGuiTools/src/XMLEditor.h
-    geopsy-src/lib/QGpGuiTools/src/XMLItem.h
+    ${THIS_REL_PATH}/src/Application.h
+    ${THIS_REL_PATH}/src/Attachments.h
+    ${THIS_REL_PATH}/src/BugReport.h
+    ${THIS_REL_PATH}/src/Cast.h
+    ${THIS_REL_PATH}/src/CheckComboBox.h
+    ${THIS_REL_PATH}/src/CheckComboBoxModel.h
+    ${THIS_REL_PATH}/src/ColorButton.h
+    ${THIS_REL_PATH}/src/ColorHistogram.h
+    ${THIS_REL_PATH}/src/ColumnTextColumnsProperties.h
+    ${THIS_REL_PATH}/src/ColumnTextDelegate.h
+    ${THIS_REL_PATH}/src/ColumnTextItem.h
+    ${THIS_REL_PATH}/src/ColumnTextLinesProperties.h
+    ${THIS_REL_PATH}/src/ColumnTextSectionsProperties.h
+    ${THIS_REL_PATH}/src/ColumnTextWidget.h
+    ${THIS_REL_PATH}/src/ConnectionParam.h
+    ${THIS_REL_PATH}/src/Dialog.h
+    ${THIS_REL_PATH}/src/DockWidget.h
+    ${THIS_REL_PATH}/src/DoubleSpinBox.h
+    ${THIS_REL_PATH}/src/ExpandTabTitle.h
+    ${THIS_REL_PATH}/src/ExpandTabWidget.h
+    ${THIS_REL_PATH}/src/ExpressionEditor.h
+    ${THIS_REL_PATH}/src/FindReplaceWidget.h
+    ${THIS_REL_PATH}/src/FrozenWidget.h
+    ${THIS_REL_PATH}/src/GuiGlobal.h
+    ${THIS_REL_PATH}/src/GuiMessage.h
+    ${THIS_REL_PATH}/src/HttpAccess.h
+    ${THIS_REL_PATH}/src/HttpProxy.h
+    ${THIS_REL_PATH}/src/HttpProxyList.h
+    ${THIS_REL_PATH}/src/HttpProxyObject.h
+    ${THIS_REL_PATH}/src/HttpProxyScript.h
+    ${THIS_REL_PATH}/src/LogView.h
+    ${THIS_REL_PATH}/src/LogWidget.h
+    ${THIS_REL_PATH}/src/LoopProgressWidget.h
+    ${THIS_REL_PATH}/src/MessageBox.h
+    ${THIS_REL_PATH}/src/MultiDocumentEnvironment.h
+    ${THIS_REL_PATH}/src/MultiDocumentSubWindow.h
+    ${THIS_REL_PATH}/src/MultiDocumentTabBar.h
+    ${THIS_REL_PATH}/src/MultiDocumentTab.h
+    ${THIS_REL_PATH}/src/MultiDocumentTabWidget.h
+    ${THIS_REL_PATH}/src/MultiDocumentWindow.h
+    ${THIS_REL_PATH}/src/PluginApplication.h
+    ${THIS_REL_PATH}/src/PrintDialogWrapper.h
+    ${THIS_REL_PATH}/src/ProgressBar.h
+    ${THIS_REL_PATH}/src/PropertyArea.h
+    ${THIS_REL_PATH}/src/PropertyCategory.h
+    ${THIS_REL_PATH}/src/PropertyCategorySettings.h
+    ${THIS_REL_PATH}/src/PropertyContext.h
+    ${THIS_REL_PATH}/src/PropertyEditor.h
+    ${THIS_REL_PATH}/src/PropertyItem.h
+    ${THIS_REL_PATH}/src/PropertyProxy.h
+    ${THIS_REL_PATH}/src/PropertyTab.h
+    ${THIS_REL_PATH}/src/PropertyTabSettings.h
+    ${THIS_REL_PATH}/src/PropertyValue.h
+    ${THIS_REL_PATH}/src/PropertyWidget.h
+    ${THIS_REL_PATH}/src/QGpGuiToolsDLLExport.h
+    ${THIS_REL_PATH}/src/QGpGuiTools.h
+    ${THIS_REL_PATH}/src/QGpGuiToolsInstallPath.h
+    ${THIS_REL_PATH}/src/QGpGuiToolsStatic.h
+    ${THIS_REL_PATH}/src/QGpGuiToolsVersion.h
+    ${THIS_REL_PATH}/src/RegExpRowSelector.h
+    ${THIS_REL_PATH}/src/SamplingParameterWidget.h
+    ${THIS_REL_PATH}/src/SendMail.h
+    ${THIS_REL_PATH}/src/Settings.h
+    ${THIS_REL_PATH}/src/SizeGrip.h
+    ${THIS_REL_PATH}/src/stable.h
+    ${THIS_REL_PATH}/src/TitledWidget.h
+    ${THIS_REL_PATH}/src/UpdateIcon.h
+    ${THIS_REL_PATH}/src/WidgetRect.h
+    ${THIS_REL_PATH}/src/XMLEditor.h
+    ${THIS_REL_PATH}/src/XMLItem.h
 )
 
 # Headers got to include/*
 set(UI_SRCS
-    geopsy-src/lib/QGpGuiTools/src/Attachments.ui
-    geopsy-src/lib/QGpGuiTools/src/BugReport.ui
-    geopsy-src/lib/QGpGuiTools/src/ColumnTextColumnsProperties.ui
-    geopsy-src/lib/QGpGuiTools/src/ColumnTextLinesProperties.ui
-    geopsy-src/lib/QGpGuiTools/src/ColumnTextSectionsProperties.ui
-    geopsy-src/lib/QGpGuiTools/src/ColumnTextWidget.ui
-    geopsy-src/lib/QGpGuiTools/src/ConnectionParam.ui
-    geopsy-src/lib/QGpGuiTools/src/ExpressionEditor.ui
-    geopsy-src/lib/QGpGuiTools/src/FindReplaceWidget.ui
-    geopsy-src/lib/QGpGuiTools/src/MessageBox.ui
-    geopsy-src/lib/QGpGuiTools/src/SamplingParameterWidget.ui
+    ${THIS_REL_PATH}/src/Attachments.ui
+    ${THIS_REL_PATH}/src/BugReport.ui
+    ${THIS_REL_PATH}/src/ColumnTextColumnsProperties.ui
+    ${THIS_REL_PATH}/src/ColumnTextLinesProperties.ui
+    ${THIS_REL_PATH}/src/ColumnTextSectionsProperties.ui
+    ${THIS_REL_PATH}/src/ColumnTextWidget.ui
+    ${THIS_REL_PATH}/src/ConnectionParam.ui
+    ${THIS_REL_PATH}/src/ExpressionEditor.ui
+    ${THIS_REL_PATH}/src/FindReplaceWidget.ui
+    ${THIS_REL_PATH}/src/MessageBox.ui
+    ${THIS_REL_PATH}/src/SamplingParameterWidget.ui
 )
 
 #
@@ -309,7 +319,7 @@ set(UI_SRCS
 # QT5_WRAP_UI(UI_GENERATED_HEADERS ${UI_SRCS})
 
 # Include header files for compilation
-include_directories(geopsy-src/lib/QGpGuiTools/src)
+include_directories(${THIS_REL_PATH}/src)
 
 #get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
 #foreach(dir ${dirs})
@@ -324,7 +334,7 @@ set (LIBRARY_OUTPUT_PATH ${THIS_LIB_PATH})
 ### 
 
 # Add resources from file
-qt5_add_resources(QRCS geopsy-src/lib/QGpGuiTools/QGpGuiTools.qrc)
+qt5_add_resources(QRCS ${THIS_REL_PATH}/QGpGuiTools.qrc)
 
 # Create shared library
 add_library(${PROJECT_NAME} SHARED ${CPP_SRCS} ${QRCS})

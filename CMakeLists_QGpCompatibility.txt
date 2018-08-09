@@ -30,6 +30,16 @@ endif()
 ###
 
 # General build directory 
+if(CMAKE_MODULAR_BUILD)
+    # Global build
+    set(THIS_REL_PATH ".")
+    #message(STATUS "****** Modular (src: ${THIS_REL_PATH}/src) ******")
+else()
+    set(THIS_REL_PATH "geopsy-src/lib/QGpCompatibility")
+    #message(STATUS "****** Monolithic (src: ${THIS_REL_PATH}/src) ******")
+endif()
+
+# General build directory 
 if(GEOPSY_APP_BUILD_PATH)
     # Global build
     set(THIS_BUILD_PATH ${GEOPSY_APP_BUILD_PATH})
@@ -151,72 +161,72 @@ set(QT5_LIBRARIES Qt5::Core Qt5::Qml Qt5::Network)
 set(TARGET ${CMAKE_PROJECT_NAME})
 
 set(CPP_SRCS
-    geopsy-src/lib/QGpCompatibility/src/CompatAutocorrCurves.cpp
-    geopsy-src/lib/QGpCompatibility/src/CompatAutocorrData.cpp
-    geopsy-src/lib/QGpCompatibility/src/CompatAutocorrReport.cpp
-    geopsy-src/lib/QGpCompatibility/src/CompatDataPoint.cpp
-    geopsy-src/lib/QGpCompatibility/src/CompatDispersion.cpp
-    geopsy-src/lib/QGpCompatibility/src/CompatDispersionData.cpp
-    geopsy-src/lib/QGpCompatibility/src/CompatEllipticityData.cpp
-    geopsy-src/lib/QGpCompatibility/src/CompatFunction.cpp
-    geopsy-src/lib/QGpCompatibility/src/CompatFunctionList.cpp
-    geopsy-src/lib/QGpCompatibility/src/CompatHodoChrone.cpp
-    geopsy-src/lib/QGpCompatibility/src/CompatHodoChroneData.cpp
-    geopsy-src/lib/QGpCompatibility/src/CompatInversionReport.cpp
-    geopsy-src/lib/QGpCompatibility/src/CompatModalCurves.cpp
-    geopsy-src/lib/QGpCompatibility/src/CompatModalDispersion.cpp
-    geopsy-src/lib/QGpCompatibility/src/CompatModalEllipticity.cpp
-    geopsy-src/lib/QGpCompatibility/src/CompatModalFrequency.cpp
-    geopsy-src/lib/QGpCompatibility/src/CompatModalRefine.cpp
-    geopsy-src/lib/QGpCompatibility/src/CompatModalRefinedCurves.cpp
-    geopsy-src/lib/QGpCompatibility/src/CompatMultiModalCurves.cpp
-    geopsy-src/lib/QGpCompatibility/src/CompatMultiModalData.cpp
-    geopsy-src/lib/QGpCompatibility/src/CompatMultiModalFrequency.cpp
-    geopsy-src/lib/QGpCompatibility/src/CompatRefractionSurvey.cpp
-    geopsy-src/lib/QGpCompatibility/src/CompatRefraReport.cpp
-    geopsy-src/lib/QGpCompatibility/src/CompatReportFactory.cpp
-    geopsy-src/lib/QGpCompatibility/src/CompatSrcHodochrone.cpp
-    geopsy-src/lib/QGpCompatibility/src/QGpCompatibility.cpp
+    ${THIS_REL_PATH}/src/CompatAutocorrCurves.cpp
+    ${THIS_REL_PATH}/src/CompatAutocorrData.cpp
+    ${THIS_REL_PATH}/src/CompatAutocorrReport.cpp
+    ${THIS_REL_PATH}/src/CompatDataPoint.cpp
+    ${THIS_REL_PATH}/src/CompatDispersion.cpp
+    ${THIS_REL_PATH}/src/CompatDispersionData.cpp
+    ${THIS_REL_PATH}/src/CompatEllipticityData.cpp
+    ${THIS_REL_PATH}/src/CompatFunction.cpp
+    ${THIS_REL_PATH}/src/CompatFunctionList.cpp
+    ${THIS_REL_PATH}/src/CompatHodoChrone.cpp
+    ${THIS_REL_PATH}/src/CompatHodoChroneData.cpp
+    ${THIS_REL_PATH}/src/CompatInversionReport.cpp
+    ${THIS_REL_PATH}/src/CompatModalCurves.cpp
+    ${THIS_REL_PATH}/src/CompatModalDispersion.cpp
+    ${THIS_REL_PATH}/src/CompatModalEllipticity.cpp
+    ${THIS_REL_PATH}/src/CompatModalFrequency.cpp
+    ${THIS_REL_PATH}/src/CompatModalRefine.cpp
+    ${THIS_REL_PATH}/src/CompatModalRefinedCurves.cpp
+    ${THIS_REL_PATH}/src/CompatMultiModalCurves.cpp
+    ${THIS_REL_PATH}/src/CompatMultiModalData.cpp
+    ${THIS_REL_PATH}/src/CompatMultiModalFrequency.cpp
+    ${THIS_REL_PATH}/src/CompatRefractionSurvey.cpp
+    ${THIS_REL_PATH}/src/CompatRefraReport.cpp
+    ${THIS_REL_PATH}/src/CompatReportFactory.cpp
+    ${THIS_REL_PATH}/src/CompatSrcHodochrone.cpp
+    ${THIS_REL_PATH}/src/QGpCompatibility.cpp
 )
 
 # Headers got to include/*
 set(HEA_INC
-    geopsy-src/lib/QGpCompatibility/src/QGpCompatibility.h
+    ${THIS_REL_PATH}/src/QGpCompatibility.h
 )
 
 # Headers got to include/GpCoreTools/*
 set(HEA_SRCS
-    geopsy-src/lib/QGpCompatibility/src/CompatAutocorrCurves.h
-    geopsy-src/lib/QGpCompatibility/src/CompatAutocorrData.h
-    geopsy-src/lib/QGpCompatibility/src/CompatAutocorrReport.h
-    geopsy-src/lib/QGpCompatibility/src/CompatDataPoint.h
-    geopsy-src/lib/QGpCompatibility/src/CompatDispersionData.h
-    geopsy-src/lib/QGpCompatibility/src/CompatDispersion.h
-    geopsy-src/lib/QGpCompatibility/src/CompatEllipticityData.h
-    geopsy-src/lib/QGpCompatibility/src/CompatFunction.h
-    geopsy-src/lib/QGpCompatibility/src/CompatFunctionList.h
-    geopsy-src/lib/QGpCompatibility/src/CompatHodoChroneData.h
-    geopsy-src/lib/QGpCompatibility/src/CompatHodoChrone.h
-    geopsy-src/lib/QGpCompatibility/src/CompatInversionReport.h
-    geopsy-src/lib/QGpCompatibility/src/CompatModalCurves.h
-    geopsy-src/lib/QGpCompatibility/src/CompatModalDispersion.h
-    geopsy-src/lib/QGpCompatibility/src/CompatModalEllipticity.h
-    geopsy-src/lib/QGpCompatibility/src/CompatModalFrequency.h
-    geopsy-src/lib/QGpCompatibility/src/CompatModalRefinedCurves.h
-    geopsy-src/lib/QGpCompatibility/src/CompatModalRefine.h
-    geopsy-src/lib/QGpCompatibility/src/CompatMultiModalCurves.h
-    geopsy-src/lib/QGpCompatibility/src/CompatMultiModalData.h
-    geopsy-src/lib/QGpCompatibility/src/CompatMultiModalFrequency.h
-    geopsy-src/lib/QGpCompatibility/src/CompatRefractionSurvey.h
-    geopsy-src/lib/QGpCompatibility/src/CompatRefraReport.h
-    geopsy-src/lib/QGpCompatibility/src/CompatReportFactory.h
-    geopsy-src/lib/QGpCompatibility/src/CompatSrcHodochrone.h
-    geopsy-src/lib/QGpCompatibility/src/QGpCompatibilityDLLExport.h
-    geopsy-src/lib/QGpCompatibility/src/QGpCompatibility.h
-    geopsy-src/lib/QGpCompatibility/src/QGpCompatibilityInstallPath.h
-    geopsy-src/lib/QGpCompatibility/src/QGpCompatibilityStatic.h
-    geopsy-src/lib/QGpCompatibility/src/QGpCompatibilityVersion.h
-    geopsy-src/lib/QGpCompatibility/src/qtbcompatdispersion_impl.h
+    ${THIS_REL_PATH}/src/CompatAutocorrCurves.h
+    ${THIS_REL_PATH}/src/CompatAutocorrData.h
+    ${THIS_REL_PATH}/src/CompatAutocorrReport.h
+    ${THIS_REL_PATH}/src/CompatDataPoint.h
+    ${THIS_REL_PATH}/src/CompatDispersionData.h
+    ${THIS_REL_PATH}/src/CompatDispersion.h
+    ${THIS_REL_PATH}/src/CompatEllipticityData.h
+    ${THIS_REL_PATH}/src/CompatFunction.h
+    ${THIS_REL_PATH}/src/CompatFunctionList.h
+    ${THIS_REL_PATH}/src/CompatHodoChroneData.h
+    ${THIS_REL_PATH}/src/CompatHodoChrone.h
+    ${THIS_REL_PATH}/src/CompatInversionReport.h
+    ${THIS_REL_PATH}/src/CompatModalCurves.h
+    ${THIS_REL_PATH}/src/CompatModalDispersion.h
+    ${THIS_REL_PATH}/src/CompatModalEllipticity.h
+    ${THIS_REL_PATH}/src/CompatModalFrequency.h
+    ${THIS_REL_PATH}/src/CompatModalRefinedCurves.h
+    ${THIS_REL_PATH}/src/CompatModalRefine.h
+    ${THIS_REL_PATH}/src/CompatMultiModalCurves.h
+    ${THIS_REL_PATH}/src/CompatMultiModalData.h
+    ${THIS_REL_PATH}/src/CompatMultiModalFrequency.h
+    ${THIS_REL_PATH}/src/CompatRefractionSurvey.h
+    ${THIS_REL_PATH}/src/CompatRefraReport.h
+    ${THIS_REL_PATH}/src/CompatReportFactory.h
+    ${THIS_REL_PATH}/src/CompatSrcHodochrone.h
+    ${THIS_REL_PATH}/src/QGpCompatibilityDLLExport.h
+    ${THIS_REL_PATH}/src/QGpCompatibility.h
+    ${THIS_REL_PATH}/src/QGpCompatibilityInstallPath.h
+    ${THIS_REL_PATH}/src/QGpCompatibilityStatic.h
+    ${THIS_REL_PATH}/src/QGpCompatibilityVersion.h
+    ${THIS_REL_PATH}/src/qtbcompatdispersion_impl.h
 )
 
 # Headers got to include/*
@@ -231,7 +241,7 @@ set(UI_SRCS
 # QT5_WRAP_UI(UI_GENERATED_HEADERS ${UI_SRCS})
 
 # Include header files for compilation
-include_directories(geopsy-src/lib/QGpCompatibility/src)
+include_directories(${THIS_REL_PATH}/src)
 
 #get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
 #foreach(dir ${dirs})

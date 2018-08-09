@@ -30,6 +30,16 @@ endif()
 ###
 
 # General build directory 
+if(CMAKE_MODULAR_BUILD)
+    # Global build
+    set(THIS_REL_PATH ".")
+    #message(STATUS "****** Modular (src: ${THIS_REL_PATH}/src) ******")
+else()
+    set(THIS_REL_PATH "geopsy-src/lib/QGpGuiMath")
+    #message(STATUS "****** Monolithic (src: ${THIS_REL_PATH}/src) ******")
+endif()
+
+# General build directory 
 if(GEOPSY_APP_BUILD_PATH)
     # Global build
     set(THIS_BUILD_PATH ${GEOPSY_APP_BUILD_PATH})
@@ -145,81 +155,81 @@ set(QT5_LIBRARIES Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Qml Qt5::Network Qt5::Pri
 set(TARGET ${CMAKE_PROJECT_NAME})
 
 set(CPP_SRCS
-    geopsy-src/lib/QGpGuiMath/src/ComplexStatisticalPlotProxy.cpp
-    geopsy-src/lib/QGpGuiMath/src/CoordinateConvert.cpp
-    geopsy-src/lib/QGpGuiMath/src/CoordinateFileWidget.cpp
-    geopsy-src/lib/QGpGuiMath/src/CurveBrowser.cpp
-    geopsy-src/lib/QGpGuiMath/src/CurveBrowserCut.cpp
-    geopsy-src/lib/QGpGuiMath/src/CurveBrowserDelegate.cpp
-    geopsy-src/lib/QGpGuiMath/src/CurveBrowserItem.cpp
-    geopsy-src/lib/QGpGuiMath/src/CurveBrowserResample.cpp
-    geopsy-src/lib/QGpGuiMath/src/CurveBrowserSmooth.cpp
-    geopsy-src/lib/QGpGuiMath/src/CurveBrowserValidate.cpp
-    geopsy-src/lib/QGpGuiMath/src/CurvePlotProxy.cpp
-    geopsy-src/lib/QGpGuiMath/src/CurveProperties.cpp
-    geopsy-src/lib/QGpGuiMath/src/CurveSelector.cpp
-    geopsy-src/lib/QGpGuiMath/src/CurveSelectorItem.cpp
-    geopsy-src/lib/QGpGuiMath/src/GeographicalReference.cpp
-    geopsy-src/lib/QGpGuiMath/src/GuiMathGlobal.cpp
-    geopsy-src/lib/QGpGuiMath/src/ImageLayer.cpp
-    geopsy-src/lib/QGpGuiMath/src/ImageLayerProperties.cpp
-    geopsy-src/lib/QGpGuiMath/src/ImageScalingPoint.cpp
-    geopsy-src/lib/QGpGuiMath/src/QGpGuiMath.cpp
-    geopsy-src/lib/QGpGuiMath/src/RealStatisticalPlotProxy.cpp
-    geopsy-src/lib/QGpGuiMath/src/SmoothingParameterWidget.cpp
+    ${THIS_REL_PATH}/src/ComplexStatisticalPlotProxy.cpp
+    ${THIS_REL_PATH}/src/CoordinateConvert.cpp
+    ${THIS_REL_PATH}/src/CoordinateFileWidget.cpp
+    ${THIS_REL_PATH}/src/CurveBrowser.cpp
+    ${THIS_REL_PATH}/src/CurveBrowserCut.cpp
+    ${THIS_REL_PATH}/src/CurveBrowserDelegate.cpp
+    ${THIS_REL_PATH}/src/CurveBrowserItem.cpp
+    ${THIS_REL_PATH}/src/CurveBrowserResample.cpp
+    ${THIS_REL_PATH}/src/CurveBrowserSmooth.cpp
+    ${THIS_REL_PATH}/src/CurveBrowserValidate.cpp
+    ${THIS_REL_PATH}/src/CurvePlotProxy.cpp
+    ${THIS_REL_PATH}/src/CurveProperties.cpp
+    ${THIS_REL_PATH}/src/CurveSelector.cpp
+    ${THIS_REL_PATH}/src/CurveSelectorItem.cpp
+    ${THIS_REL_PATH}/src/GeographicalReference.cpp
+    ${THIS_REL_PATH}/src/GuiMathGlobal.cpp
+    ${THIS_REL_PATH}/src/ImageLayer.cpp
+    ${THIS_REL_PATH}/src/ImageLayerProperties.cpp
+    ${THIS_REL_PATH}/src/ImageScalingPoint.cpp
+    ${THIS_REL_PATH}/src/QGpGuiMath.cpp
+    ${THIS_REL_PATH}/src/RealStatisticalPlotProxy.cpp
+    ${THIS_REL_PATH}/src/SmoothingParameterWidget.cpp
 )
 
 # Headers got to include/*
 set(HEA_INC
-    geopsy-src/lib/QGpGuiMath/src/QGpGuiMath.h
+    ${THIS_REL_PATH}/src/QGpGuiMath.h
 )
 
 # Headers got to include/GpCoreTools/*
 set(HEA_SRCS
-    geopsy-src/lib/QGpGuiMath/src/ComplexStatisticalPlotProxy.h
-    geopsy-src/lib/QGpGuiMath/src/CoordinateConvert.h
-    geopsy-src/lib/QGpGuiMath/src/CoordinateFileWidget.h
-    geopsy-src/lib/QGpGuiMath/src/CurveBrowserCut.h
-    geopsy-src/lib/QGpGuiMath/src/CurveBrowserDelegate.h
-    geopsy-src/lib/QGpGuiMath/src/CurveBrowser.h
-    geopsy-src/lib/QGpGuiMath/src/CurveBrowserItem.h
-    geopsy-src/lib/QGpGuiMath/src/CurveBrowserResample.h
-    geopsy-src/lib/QGpGuiMath/src/CurveBrowserSmooth.h
-    geopsy-src/lib/QGpGuiMath/src/CurveBrowserValidate.h
-    geopsy-src/lib/QGpGuiMath/src/CurvePlotProxy.h
-    geopsy-src/lib/QGpGuiMath/src/CurveProperties.h
-    geopsy-src/lib/QGpGuiMath/src/CurveSelector.h
-    geopsy-src/lib/QGpGuiMath/src/CurveSelectorItem.h
-    geopsy-src/lib/QGpGuiMath/src/GeographicalReference.h
-    geopsy-src/lib/QGpGuiMath/src/GuiMathGlobal.h
-    geopsy-src/lib/QGpGuiMath/src/ImageLayer.h
-    geopsy-src/lib/QGpGuiMath/src/ImageLayerProperties.h
-    geopsy-src/lib/QGpGuiMath/src/ImageScalingPoint.h
-    geopsy-src/lib/QGpGuiMath/src/QGpGuiMathDLLExport.h
-    geopsy-src/lib/QGpGuiMath/src/QGpGuiMath.h
-    geopsy-src/lib/QGpGuiMath/src/QGpGuiMathInstallPath.h
-    geopsy-src/lib/QGpGuiMath/src/QGpGuiMathStatic.h
-    geopsy-src/lib/QGpGuiMath/src/QGpGuiMathVersion.h
-    geopsy-src/lib/QGpGuiMath/src/RealStatisticalPlotProxy.h
-    geopsy-src/lib/QGpGuiMath/src/SmoothingParameterWidget.h
+    ${THIS_REL_PATH}/src/ComplexStatisticalPlotProxy.h
+    ${THIS_REL_PATH}/src/CoordinateConvert.h
+    ${THIS_REL_PATH}/src/CoordinateFileWidget.h
+    ${THIS_REL_PATH}/src/CurveBrowserCut.h
+    ${THIS_REL_PATH}/src/CurveBrowserDelegate.h
+    ${THIS_REL_PATH}/src/CurveBrowser.h
+    ${THIS_REL_PATH}/src/CurveBrowserItem.h
+    ${THIS_REL_PATH}/src/CurveBrowserResample.h
+    ${THIS_REL_PATH}/src/CurveBrowserSmooth.h
+    ${THIS_REL_PATH}/src/CurveBrowserValidate.h
+    ${THIS_REL_PATH}/src/CurvePlotProxy.h
+    ${THIS_REL_PATH}/src/CurveProperties.h
+    ${THIS_REL_PATH}/src/CurveSelector.h
+    ${THIS_REL_PATH}/src/CurveSelectorItem.h
+    ${THIS_REL_PATH}/src/GeographicalReference.h
+    ${THIS_REL_PATH}/src/GuiMathGlobal.h
+    ${THIS_REL_PATH}/src/ImageLayer.h
+    ${THIS_REL_PATH}/src/ImageLayerProperties.h
+    ${THIS_REL_PATH}/src/ImageScalingPoint.h
+    ${THIS_REL_PATH}/src/QGpGuiMathDLLExport.h
+    ${THIS_REL_PATH}/src/QGpGuiMath.h
+    ${THIS_REL_PATH}/src/QGpGuiMathInstallPath.h
+    ${THIS_REL_PATH}/src/QGpGuiMathStatic.h
+    ${THIS_REL_PATH}/src/QGpGuiMathVersion.h
+    ${THIS_REL_PATH}/src/RealStatisticalPlotProxy.h
+    ${THIS_REL_PATH}/src/SmoothingParameterWidget.h
 
 )
 
 # Headers got to include/*
 set(UI_SRCS
-    geopsy-src/lib/QGpGuiMath/src/CoordinateConvert.ui
-    geopsy-src/lib/QGpGuiMath/src/CoordinateFileWidget.ui
-    geopsy-src/lib/QGpGuiMath/src/CurveBrowserCut.ui
-    geopsy-src/lib/QGpGuiMath/src/CurveBrowserResample.ui
-    geopsy-src/lib/QGpGuiMath/src/CurveBrowserSmooth.ui
-    geopsy-src/lib/QGpGuiMath/src/CurveBrowser.ui
-    geopsy-src/lib/QGpGuiMath/src/CurveBrowserValidate.ui
-    geopsy-src/lib/QGpGuiMath/src/CurveProperties.ui
-    geopsy-src/lib/QGpGuiMath/src/CurveSelector.ui
-    geopsy-src/lib/QGpGuiMath/src/GeographicalReference.ui
-    geopsy-src/lib/QGpGuiMath/src/ImageLayerProperties.ui
-    geopsy-src/lib/QGpGuiMath/src/ImageScalingPoint.ui
-    geopsy-src/lib/QGpGuiMath/src/SmoothingParameterWidget.ui
+    ${THIS_REL_PATH}/src/CoordinateConvert.ui
+    ${THIS_REL_PATH}/src/CoordinateFileWidget.ui
+    ${THIS_REL_PATH}/src/CurveBrowserCut.ui
+    ${THIS_REL_PATH}/src/CurveBrowserResample.ui
+    ${THIS_REL_PATH}/src/CurveBrowserSmooth.ui
+    ${THIS_REL_PATH}/src/CurveBrowser.ui
+    ${THIS_REL_PATH}/src/CurveBrowserValidate.ui
+    ${THIS_REL_PATH}/src/CurveProperties.ui
+    ${THIS_REL_PATH}/src/CurveSelector.ui
+    ${THIS_REL_PATH}/src/GeographicalReference.ui
+    ${THIS_REL_PATH}/src/ImageLayerProperties.ui
+    ${THIS_REL_PATH}/src/ImageScalingPoint.ui
+    ${THIS_REL_PATH}/src/SmoothingParameterWidget.ui
 )
 
 #
@@ -229,7 +239,7 @@ set(UI_SRCS
 # QT5_WRAP_UI(UI_GENERATED_HEADERS ${UI_SRCS})
 
 # Include header files for compilation
-include_directories(geopsy-src/lib/QGpGuiMath/src)
+include_directories(${THIS_REL_PATH}/src)
 
 #get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
 #foreach(dir ${dirs})

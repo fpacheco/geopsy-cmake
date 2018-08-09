@@ -30,6 +30,16 @@ endif()
 ###
 
 # General build directory 
+if(CMAKE_MODULAR_BUILD)
+    # Global build
+    set(THIS_REL_PATH ".")
+    #message(STATUS "****** Modular (src: ${THIS_REL_PATH}/src) ******")
+else()
+    set(THIS_REL_PATH "geopsy-src/lib/QGpCoreWave")
+    #message(STATUS "****** Monolithic (src: ${THIS_REL_PATH}/src) ******")
+endif()
+
+# General build directory 
 if(GEOPSY_APP_BUILD_PATH)
     # Global build
     set(THIS_BUILD_PATH ${GEOPSY_APP_BUILD_PATH})
@@ -145,110 +155,110 @@ set(QT5_LIBRARIES Qt5::Core Qt5::Qml Qt5::Network)
 set(TARGET ${CMAKE_PROJECT_NAME})
 
 set(CPP_SRCS
-    geopsy-src/lib/QGpCoreWave/src/ArrivalTime.cpp
-    geopsy-src/lib/QGpCoreWave/src/AutocorrCurves.cpp
-    geopsy-src/lib/QGpCoreWave/src/AutocorrDispersion.cpp
-    geopsy-src/lib/QGpCoreWave/src/AutocorrEngine.cpp
-    geopsy-src/lib/QGpCoreWave/src/AutocorrFactory.cpp
-    geopsy-src/lib/QGpCoreWave/src/AutocorrProxy.cpp
-    geopsy-src/lib/QGpCoreWave/src/AutocorrRing.cpp
-    geopsy-src/lib/QGpCoreWave/src/Dispersion.cpp
-    geopsy-src/lib/QGpCoreWave/src/DispersionFactory.cpp
-    geopsy-src/lib/QGpCoreWave/src/DispersionProxy.cpp
-    geopsy-src/lib/QGpCoreWave/src/Ellipticity.cpp
-    geopsy-src/lib/QGpCoreWave/src/EllipticityFactory.cpp
-    geopsy-src/lib/QGpCoreWave/src/EllipticityProxy.cpp
-    geopsy-src/lib/QGpCoreWave/src/FactoryPoint.cpp
-    geopsy-src/lib/QGpCoreWave/src/FortranInterface.cpp
-    geopsy-src/lib/QGpCoreWave/src/GeophysicalModel.cpp
-    geopsy-src/lib/QGpCoreWave/src/Love.cpp
-    geopsy-src/lib/QGpCoreWave/src/LoveFunction.cpp
-    geopsy-src/lib/QGpCoreWave/src/MagnetoTelluricCurve.cpp
-    geopsy-src/lib/QGpCoreWave/src/MagnetoTelluricFactory.cpp
-    geopsy-src/lib/QGpCoreWave/src/MagnetoTelluricPoint.cpp
-    geopsy-src/lib/QGpCoreWave/src/MagnetoTelluricPointOptions.cpp
-    geopsy-src/lib/QGpCoreWave/src/MagnetoTelluricProxy.cpp
-    geopsy-src/lib/QGpCoreWave/src/ModalCurve.cpp
-    geopsy-src/lib/QGpCoreWave/src/ModalFactory.cpp
-    geopsy-src/lib/QGpCoreWave/src/ModalProxy.cpp
-    geopsy-src/lib/QGpCoreWave/src/ModalRefine.cpp
-    geopsy-src/lib/QGpCoreWave/src/ModalStorage.cpp
-    geopsy-src/lib/QGpCoreWave/src/Mode.cpp
-    geopsy-src/lib/QGpCoreWave/src/Podvin2D.cpp
-    geopsy-src/lib/QGpCoreWave/src/Podvin3D.cpp
-    geopsy-src/lib/QGpCoreWave/src/Profile.cpp
-    geopsy-src/lib/QGpCoreWave/src/QGpCoreWave.cpp
-    geopsy-src/lib/QGpCoreWave/src/Rayleigh.cpp
-    geopsy-src/lib/QGpCoreWave/src/RayleighFunction.cpp
-    geopsy-src/lib/QGpCoreWave/src/RefractionCurve.cpp
-    geopsy-src/lib/QGpCoreWave/src/RefractionDippingModel.cpp
-    geopsy-src/lib/QGpCoreWave/src/RefractionFactory.cpp
-    geopsy-src/lib/QGpCoreWave/src/RefractionProxy.cpp
-    geopsy-src/lib/QGpCoreWave/src/Resistivity1DModel.cpp
-    geopsy-src/lib/QGpCoreWave/src/Seismic1DModel.cpp
-    geopsy-src/lib/QGpCoreWave/src/ShAmplification.cpp
-    geopsy-src/lib/QGpCoreWave/src/TheoreticalFK.cpp
-    geopsy-src/lib/QGpCoreWave/src/TheoreticalLinearFK.cpp
-    geopsy-src/lib/QGpCoreWave/src/TiltNode.cpp
-    geopsy-src/lib/QGpCoreWave/src/TiltPath.cpp
+    ${THIS_REL_PATH}/src/ArrivalTime.cpp
+    ${THIS_REL_PATH}/src/AutocorrCurves.cpp
+    ${THIS_REL_PATH}/src/AutocorrDispersion.cpp
+    ${THIS_REL_PATH}/src/AutocorrEngine.cpp
+    ${THIS_REL_PATH}/src/AutocorrFactory.cpp
+    ${THIS_REL_PATH}/src/AutocorrProxy.cpp
+    ${THIS_REL_PATH}/src/AutocorrRing.cpp
+    ${THIS_REL_PATH}/src/Dispersion.cpp
+    ${THIS_REL_PATH}/src/DispersionFactory.cpp
+    ${THIS_REL_PATH}/src/DispersionProxy.cpp
+    ${THIS_REL_PATH}/src/Ellipticity.cpp
+    ${THIS_REL_PATH}/src/EllipticityFactory.cpp
+    ${THIS_REL_PATH}/src/EllipticityProxy.cpp
+    ${THIS_REL_PATH}/src/FactoryPoint.cpp
+    ${THIS_REL_PATH}/src/FortranInterface.cpp
+    ${THIS_REL_PATH}/src/GeophysicalModel.cpp
+    ${THIS_REL_PATH}/src/Love.cpp
+    ${THIS_REL_PATH}/src/LoveFunction.cpp
+    ${THIS_REL_PATH}/src/MagnetoTelluricCurve.cpp
+    ${THIS_REL_PATH}/src/MagnetoTelluricFactory.cpp
+    ${THIS_REL_PATH}/src/MagnetoTelluricPoint.cpp
+    ${THIS_REL_PATH}/src/MagnetoTelluricPointOptions.cpp
+    ${THIS_REL_PATH}/src/MagnetoTelluricProxy.cpp
+    ${THIS_REL_PATH}/src/ModalCurve.cpp
+    ${THIS_REL_PATH}/src/ModalFactory.cpp
+    ${THIS_REL_PATH}/src/ModalProxy.cpp
+    ${THIS_REL_PATH}/src/ModalRefine.cpp
+    ${THIS_REL_PATH}/src/ModalStorage.cpp
+    ${THIS_REL_PATH}/src/Mode.cpp
+    ${THIS_REL_PATH}/src/Podvin2D.cpp
+    ${THIS_REL_PATH}/src/Podvin3D.cpp
+    ${THIS_REL_PATH}/src/Profile.cpp
+    ${THIS_REL_PATH}/src/QGpCoreWave.cpp
+    ${THIS_REL_PATH}/src/Rayleigh.cpp
+    ${THIS_REL_PATH}/src/RayleighFunction.cpp
+    ${THIS_REL_PATH}/src/RefractionCurve.cpp
+    ${THIS_REL_PATH}/src/RefractionDippingModel.cpp
+    ${THIS_REL_PATH}/src/RefractionFactory.cpp
+    ${THIS_REL_PATH}/src/RefractionProxy.cpp
+    ${THIS_REL_PATH}/src/Resistivity1DModel.cpp
+    ${THIS_REL_PATH}/src/Seismic1DModel.cpp
+    ${THIS_REL_PATH}/src/ShAmplification.cpp
+    ${THIS_REL_PATH}/src/TheoreticalFK.cpp
+    ${THIS_REL_PATH}/src/TheoreticalLinearFK.cpp
+    ${THIS_REL_PATH}/src/TiltNode.cpp
+    ${THIS_REL_PATH}/src/TiltPath.cpp
 )
 
 # Headers got to include/*
 set(HEA_INC
-    geopsy-src/lib/QGpCoreWave/src/QGpCoreWave.h
+    ${THIS_REL_PATH}/src/QGpCoreWave.h
 )
 
 # Headers got to include/GpCoreTools/*
 set(HEA_SRCS
-    geopsy-src/lib/QGpCoreWave/src/ArrivalTime.h
-    geopsy-src/lib/QGpCoreWave/src/AutocorrCurves.h
-    geopsy-src/lib/QGpCoreWave/src/AutocorrDispersion.h
-    geopsy-src/lib/QGpCoreWave/src/AutocorrEngine.h
-    geopsy-src/lib/QGpCoreWave/src/AutocorrFactory.h
-    geopsy-src/lib/QGpCoreWave/src/AutocorrProxy.h
-    geopsy-src/lib/QGpCoreWave/src/AutocorrRing.h
-    geopsy-src/lib/QGpCoreWave/src/DispersionFactory.h
-    geopsy-src/lib/QGpCoreWave/src/Dispersion.h
-    geopsy-src/lib/QGpCoreWave/src/DispersionProxy.h
-    geopsy-src/lib/QGpCoreWave/src/EllipticityFactory.h
-    geopsy-src/lib/QGpCoreWave/src/Ellipticity.h
-    geopsy-src/lib/QGpCoreWave/src/EllipticityProxy.h
-    geopsy-src/lib/QGpCoreWave/src/FactoryPoint.h
-    geopsy-src/lib/QGpCoreWave/src/FortranInterface.h
-    geopsy-src/lib/QGpCoreWave/src/GeophysicalModel.h
-    geopsy-src/lib/QGpCoreWave/src/LoveFunction.h
-    geopsy-src/lib/QGpCoreWave/src/Love.h
-    geopsy-src/lib/QGpCoreWave/src/MagnetoTelluricCurve.h
-    geopsy-src/lib/QGpCoreWave/src/MagnetoTelluricFactory.h
-    geopsy-src/lib/QGpCoreWave/src/MagnetoTelluricPoint.h
-    geopsy-src/lib/QGpCoreWave/src/MagnetoTelluricPointOptions.h
-    geopsy-src/lib/QGpCoreWave/src/MagnetoTelluricProxy.h
-    geopsy-src/lib/QGpCoreWave/src/ModalCurve.h
-    geopsy-src/lib/QGpCoreWave/src/ModalFactory.h
-    geopsy-src/lib/QGpCoreWave/src/ModalProxy.h
-    geopsy-src/lib/QGpCoreWave/src/ModalRefine.h
-    geopsy-src/lib/QGpCoreWave/src/ModalStorage.h
-    geopsy-src/lib/QGpCoreWave/src/Mode.h
-    geopsy-src/lib/QGpCoreWave/src/Podvin2D.h
-    geopsy-src/lib/QGpCoreWave/src/Podvin3D.h
-    geopsy-src/lib/QGpCoreWave/src/Profile.h
-    geopsy-src/lib/QGpCoreWave/src/QGpCoreWaveDLLExport.h
-    geopsy-src/lib/QGpCoreWave/src/QGpCoreWaveInstallPath.h
-    geopsy-src/lib/QGpCoreWave/src/QGpCoreWaveStatic.h
-    geopsy-src/lib/QGpCoreWave/src/QGpCoreWaveVersion.h
-    geopsy-src/lib/QGpCoreWave/src/RayleighFunction.h
-    geopsy-src/lib/QGpCoreWave/src/Rayleigh.h
-    geopsy-src/lib/QGpCoreWave/src/RefractionCurve.h
-    geopsy-src/lib/QGpCoreWave/src/RefractionDippingModel.h
-    geopsy-src/lib/QGpCoreWave/src/RefractionFactory.h
-    geopsy-src/lib/QGpCoreWave/src/RefractionProxy.h
-    geopsy-src/lib/QGpCoreWave/src/Resistivity1DModel.h
-    geopsy-src/lib/QGpCoreWave/src/Seismic1DModel.h
-    geopsy-src/lib/QGpCoreWave/src/ShAmplification.h
-    geopsy-src/lib/QGpCoreWave/src/TheoreticalFK.h
-    geopsy-src/lib/QGpCoreWave/src/TheoreticalLinearFK.h
-    geopsy-src/lib/QGpCoreWave/src/TiltNode.h
-    geopsy-src/lib/QGpCoreWave/src/TiltPath.h
+    ${THIS_REL_PATH}/src/ArrivalTime.h
+    ${THIS_REL_PATH}/src/AutocorrCurves.h
+    ${THIS_REL_PATH}/src/AutocorrDispersion.h
+    ${THIS_REL_PATH}/src/AutocorrEngine.h
+    ${THIS_REL_PATH}/src/AutocorrFactory.h
+    ${THIS_REL_PATH}/src/AutocorrProxy.h
+    ${THIS_REL_PATH}/src/AutocorrRing.h
+    ${THIS_REL_PATH}/src/DispersionFactory.h
+    ${THIS_REL_PATH}/src/Dispersion.h
+    ${THIS_REL_PATH}/src/DispersionProxy.h
+    ${THIS_REL_PATH}/src/EllipticityFactory.h
+    ${THIS_REL_PATH}/src/Ellipticity.h
+    ${THIS_REL_PATH}/src/EllipticityProxy.h
+    ${THIS_REL_PATH}/src/FactoryPoint.h
+    ${THIS_REL_PATH}/src/FortranInterface.h
+    ${THIS_REL_PATH}/src/GeophysicalModel.h
+    ${THIS_REL_PATH}/src/LoveFunction.h
+    ${THIS_REL_PATH}/src/Love.h
+    ${THIS_REL_PATH}/src/MagnetoTelluricCurve.h
+    ${THIS_REL_PATH}/src/MagnetoTelluricFactory.h
+    ${THIS_REL_PATH}/src/MagnetoTelluricPoint.h
+    ${THIS_REL_PATH}/src/MagnetoTelluricPointOptions.h
+    ${THIS_REL_PATH}/src/MagnetoTelluricProxy.h
+    ${THIS_REL_PATH}/src/ModalCurve.h
+    ${THIS_REL_PATH}/src/ModalFactory.h
+    ${THIS_REL_PATH}/src/ModalProxy.h
+    ${THIS_REL_PATH}/src/ModalRefine.h
+    ${THIS_REL_PATH}/src/ModalStorage.h
+    ${THIS_REL_PATH}/src/Mode.h
+    ${THIS_REL_PATH}/src/Podvin2D.h
+    ${THIS_REL_PATH}/src/Podvin3D.h
+    ${THIS_REL_PATH}/src/Profile.h
+    ${THIS_REL_PATH}/src/QGpCoreWaveDLLExport.h
+    ${THIS_REL_PATH}/src/QGpCoreWaveInstallPath.h
+    ${THIS_REL_PATH}/src/QGpCoreWaveStatic.h
+    ${THIS_REL_PATH}/src/QGpCoreWaveVersion.h
+    ${THIS_REL_PATH}/src/RayleighFunction.h
+    ${THIS_REL_PATH}/src/Rayleigh.h
+    ${THIS_REL_PATH}/src/RefractionCurve.h
+    ${THIS_REL_PATH}/src/RefractionDippingModel.h
+    ${THIS_REL_PATH}/src/RefractionFactory.h
+    ${THIS_REL_PATH}/src/RefractionProxy.h
+    ${THIS_REL_PATH}/src/Resistivity1DModel.h
+    ${THIS_REL_PATH}/src/Seismic1DModel.h
+    ${THIS_REL_PATH}/src/ShAmplification.h
+    ${THIS_REL_PATH}/src/TheoreticalFK.h
+    ${THIS_REL_PATH}/src/TheoreticalLinearFK.h
+    ${THIS_REL_PATH}/src/TiltNode.h
+    ${THIS_REL_PATH}/src/TiltPath.h
 )
 
 # Headers got to include/*
@@ -263,7 +273,7 @@ set(UI_SRCS
 # QT5_WRAP_UI(UI_GENERATED_HEADERS ${UI_SRCS})
 
 # Include header files for compilation
-include_directories(geopsy-src/lib/QGpCoreWave/src)
+include_directories(${THIS_REL_PATH}/src)
 
 #get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
 #foreach(dir ${dirs})

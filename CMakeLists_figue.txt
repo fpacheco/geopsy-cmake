@@ -30,6 +30,16 @@ endif()
 ###
 
 # General build directory 
+if(CMAKE_MODULAR_BUILD)
+    # Global build
+    set(THIS_REL_PATH ".")
+    #message(STATUS "****** Modular (src: ${THIS_REL_PATH}/src) ******")
+else()
+    set(THIS_REL_PATH "geopsy-src/figue")
+    #message(STATUS "****** Monolithic (src: ${THIS_REL_PATH}/src) ******")
+endif()
+
+# General build directory 
 if(GEOPSY_APP_BUILD_PATH)
     # Global build
     set(THIS_BUILD_PATH ${GEOPSY_APP_BUILD_PATH})
@@ -163,8 +173,8 @@ set(QT5_LIBRARIES Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Qml Qt5::Network Qt5::Pri
 set(TARGET ${CMAKE_PROJECT_NAME})
 
 set(CPP_SRCS
-    geopsy-src/figue/src/main.cpp
-    geopsy-src/figue/src/MainWindow.cpp
+    ${THIS_REL_PATH}/src/main.cpp
+    ${THIS_REL_PATH}/src/MainWindow.cpp
 )
 
 # Headers got to include/*
@@ -174,10 +184,10 @@ set(HEA_INC
 
 # Headers got to include/GpCoreTools/*
 set(HEA_SRCS
-    geopsy-src/figue/src/figueInstallPath.h
-    geopsy-src/figue/src/figueVersion.h
-    geopsy-src/figue/src/MainWindow.h
-    geopsy-src/figue/src/stable.h
+    ${THIS_REL_PATH}/src/figueInstallPath.h
+    ${THIS_REL_PATH}/src/figueVersion.h
+    ${THIS_REL_PATH}/src/MainWindow.h
+    ${THIS_REL_PATH}/src/stable.h
 )
 
 # Headers got to include/*
@@ -192,7 +202,7 @@ set(UI_SRCS
 # QT5_WRAP_UI(UI_GENERATED_HEADERS ${UI_SRCS})
 
 # Include header files for compilation
-include_directories(geopsy-src/figue/src)
+include_directories(${THIS_REL_PATH}/src)
 
 #get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
 #foreach(dir ${dirs})
@@ -207,7 +217,7 @@ set (LIBRARY_OUTPUT_PATH ${THIS_LIB_PATH})
 ### 
 
 # Add resources from file
-qt5_add_resources(QRCS geopsy-src/figue/figue.qrc)
+qt5_add_resources(QRCS ${THIS_REL_PATH}/figue.qrc)
 
 # Create executable
 add_executable(${PROJECT_NAME} ${CPP_SRCS} ${UI_HEADERS} ${QRCS})

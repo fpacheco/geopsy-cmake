@@ -30,6 +30,16 @@ endif()
 ###
 
 # General build directory 
+if(CMAKE_MODULAR_BUILD)
+    # Global build
+    set(THIS_REL_PATH ".")
+    #message(STATUS "****** Modular (src: ${THIS_REL_PATH}/src) ******")
+else()
+    set(THIS_REL_PATH "geopsy-src/lib/QGpCoreMath")
+    #message(STATUS "****** Monolithic (src: ${THIS_REL_PATH}/src) ******")
+endif()
+
+# General build directory 
 if(GEOPSY_APP_BUILD_PATH)
     # Global build
     set(THIS_BUILD_PATH ${GEOPSY_APP_BUILD_PATH})
@@ -139,165 +149,165 @@ set(QT5_LIBRARIES Qt5::Core Qt5::Qml Qt5::Network)
 set(TARGET ${CMAKE_PROJECT_NAME})
 
 set(CPP_SRCS
-    geopsy-src/lib/QGpCoreMath/src/AbstractColorPalette.cpp
-    geopsy-src/lib/QGpCoreMath/src/AbstractComplexPointOptions.cpp
-    geopsy-src/lib/QGpCoreMath/src/AbstractFunction.cpp
-    geopsy-src/lib/QGpCoreMath/src/AbstractNumericalCache.cpp
-    geopsy-src/lib/QGpCoreMath/src/AbstractNumericalKey.cpp
-    geopsy-src/lib/QGpCoreMath/src/Angle.cpp
-    geopsy-src/lib/QGpCoreMath/src/AngleSearch.cpp
-    geopsy-src/lib/QGpCoreMath/src/AverageAngle.cpp
-    geopsy-src/lib/QGpCoreMath/src/BasicCurveProxy.cpp
-    geopsy-src/lib/QGpCoreMath/src/Circle.cpp
-    geopsy-src/lib/QGpCoreMath/src/ColorMap.cpp
-    geopsy-src/lib/QGpCoreMath/src/ColorMapData.cpp
-    geopsy-src/lib/QGpCoreMath/src/ColorPalette.cpp
-    geopsy-src/lib/QGpCoreMath/src/ComplexExponential.cpp
-    geopsy-src/lib/QGpCoreMath/src/ComplexMatrix.cpp
-    geopsy-src/lib/QGpCoreMath/src/ComplexPointOptions.cpp
-    geopsy-src/lib/QGpCoreMath/src/ComplexStatisticalProxy.cpp
-    geopsy-src/lib/QGpCoreMath/src/ConcentricSearch.cpp
-    geopsy-src/lib/QGpCoreMath/src/CoordinateFile.cpp
-    geopsy-src/lib/QGpCoreMath/src/Covariance.cpp
-    geopsy-src/lib/QGpCoreMath/src/Curve.cpp
-    geopsy-src/lib/QGpCoreMath/src/CurvePointOptions.cpp
-    geopsy-src/lib/QGpCoreMath/src/CurveProxy.cpp
-    geopsy-src/lib/QGpCoreMath/src/CurveSplitter.cpp
-    geopsy-src/lib/QGpCoreMath/src/DirectionalSearch.cpp
-    geopsy-src/lib/QGpCoreMath/src/DoubleMatrix.cpp
-    geopsy-src/lib/QGpCoreMath/src/Ellipse.cpp
-    geopsy-src/lib/QGpCoreMath/src/FunctionSearch.cpp
-    geopsy-src/lib/QGpCoreMath/src/GaussDistribution.cpp
-    geopsy-src/lib/QGpCoreMath/src/GoogleEarthKML.cpp
-    geopsy-src/lib/QGpCoreMath/src/Grid2D.cpp
-    geopsy-src/lib/QGpCoreMath/src/Grid3D.cpp
-    geopsy-src/lib/QGpCoreMath/src/GridSearch.cpp
-    geopsy-src/lib/QGpCoreMath/src/GridSearchTest.cpp
-    geopsy-src/lib/QGpCoreMath/src/Histogram2D.cpp
-    geopsy-src/lib/QGpCoreMath/src/Histogram.cpp
-    geopsy-src/lib/QGpCoreMath/src/IrregularGrid2D.cpp
-    geopsy-src/lib/QGpCoreMath/src/IrregularGrid2DData.cpp
-    geopsy-src/lib/QGpCoreMath/src/Line2D.cpp
-    geopsy-src/lib/QGpCoreMath/src/LinearRegression.cpp
-    geopsy-src/lib/QGpCoreMath/src/Matrix.cpp
-    geopsy-src/lib/QGpCoreMath/src/MatrixData.cpp
-    geopsy-src/lib/QGpCoreMath/src/MatrixIterator.cpp
-    geopsy-src/lib/QGpCoreMath/src/MatrixMultiply.cpp
-    geopsy-src/lib/QGpCoreMath/src/NamedPoint.cpp
-    geopsy-src/lib/QGpCoreMath/src/Parallelepiped.cpp
-    geopsy-src/lib/QGpCoreMath/src/PermutationVector.cpp
-    geopsy-src/lib/QGpCoreMath/src/Plane.cpp
-    geopsy-src/lib/QGpCoreMath/src/Point1D.cpp
-    geopsy-src/lib/QGpCoreMath/src/Point2D.cpp
-    geopsy-src/lib/QGpCoreMath/src/Point.cpp
-    geopsy-src/lib/QGpCoreMath/src/PointLocate.cpp
-    geopsy-src/lib/QGpCoreMath/src/PointND.cpp
-    geopsy-src/lib/QGpCoreMath/src/PointNDOptions.cpp
-    geopsy-src/lib/QGpCoreMath/src/ProcessStatistics.cpp
-    geopsy-src/lib/QGpCoreMath/src/QGpCoreMath.cpp
-    geopsy-src/lib/QGpCoreMath/src/Random.cpp
-    geopsy-src/lib/QGpCoreMath/src/RealStatisticalProxy.cpp
-    geopsy-src/lib/QGpCoreMath/src/Rect.cpp
-    geopsy-src/lib/QGpCoreMath/src/RootSolver.cpp
-    geopsy-src/lib/QGpCoreMath/src/Segment2D.cpp
-    geopsy-src/lib/QGpCoreMath/src/Segment.cpp
-    geopsy-src/lib/QGpCoreMath/src/Simplex.cpp
-    geopsy-src/lib/QGpCoreMath/src/SmoothingParameters.cpp
-    geopsy-src/lib/QGpCoreMath/src/SparseMatrix.cpp
-    geopsy-src/lib/QGpCoreMath/src/StatComparator.cpp
-    geopsy-src/lib/QGpCoreMath/src/Stationarity.cpp
-    geopsy-src/lib/QGpCoreMath/src/StatisticalPoint.cpp
-    geopsy-src/lib/QGpCoreMath/src/StatisticalValue.cpp
-    geopsy-src/lib/QGpCoreMath/src/Statistics.cpp
-    geopsy-src/lib/QGpCoreMath/src/UtmZone.cpp
-    geopsy-src/lib/QGpCoreMath/src/Value.cpp
+    ${THIS_REL_PATH}/src/AbstractColorPalette.cpp
+    ${THIS_REL_PATH}/src/AbstractComplexPointOptions.cpp
+    ${THIS_REL_PATH}/src/AbstractFunction.cpp
+    ${THIS_REL_PATH}/src/AbstractNumericalCache.cpp
+    ${THIS_REL_PATH}/src/AbstractNumericalKey.cpp
+    ${THIS_REL_PATH}/src/Angle.cpp
+    ${THIS_REL_PATH}/src/AngleSearch.cpp
+    ${THIS_REL_PATH}/src/AverageAngle.cpp
+    ${THIS_REL_PATH}/src/BasicCurveProxy.cpp
+    ${THIS_REL_PATH}/src/Circle.cpp
+    ${THIS_REL_PATH}/src/ColorMap.cpp
+    ${THIS_REL_PATH}/src/ColorMapData.cpp
+    ${THIS_REL_PATH}/src/ColorPalette.cpp
+    ${THIS_REL_PATH}/src/ComplexExponential.cpp
+    ${THIS_REL_PATH}/src/ComplexMatrix.cpp
+    ${THIS_REL_PATH}/src/ComplexPointOptions.cpp
+    ${THIS_REL_PATH}/src/ComplexStatisticalProxy.cpp
+    ${THIS_REL_PATH}/src/ConcentricSearch.cpp
+    ${THIS_REL_PATH}/src/CoordinateFile.cpp
+    ${THIS_REL_PATH}/src/Covariance.cpp
+    ${THIS_REL_PATH}/src/Curve.cpp
+    ${THIS_REL_PATH}/src/CurvePointOptions.cpp
+    ${THIS_REL_PATH}/src/CurveProxy.cpp
+    ${THIS_REL_PATH}/src/CurveSplitter.cpp
+    ${THIS_REL_PATH}/src/DirectionalSearch.cpp
+    ${THIS_REL_PATH}/src/DoubleMatrix.cpp
+    ${THIS_REL_PATH}/src/Ellipse.cpp
+    ${THIS_REL_PATH}/src/FunctionSearch.cpp
+    ${THIS_REL_PATH}/src/GaussDistribution.cpp
+    ${THIS_REL_PATH}/src/GoogleEarthKML.cpp
+    ${THIS_REL_PATH}/src/Grid2D.cpp
+    ${THIS_REL_PATH}/src/Grid3D.cpp
+    ${THIS_REL_PATH}/src/GridSearch.cpp
+    ${THIS_REL_PATH}/src/GridSearchTest.cpp
+    ${THIS_REL_PATH}/src/Histogram2D.cpp
+    ${THIS_REL_PATH}/src/Histogram.cpp
+    ${THIS_REL_PATH}/src/IrregularGrid2D.cpp
+    ${THIS_REL_PATH}/src/IrregularGrid2DData.cpp
+    ${THIS_REL_PATH}/src/Line2D.cpp
+    ${THIS_REL_PATH}/src/LinearRegression.cpp
+    ${THIS_REL_PATH}/src/Matrix.cpp
+    ${THIS_REL_PATH}/src/MatrixData.cpp
+    ${THIS_REL_PATH}/src/MatrixIterator.cpp
+    ${THIS_REL_PATH}/src/MatrixMultiply.cpp
+    ${THIS_REL_PATH}/src/NamedPoint.cpp
+    ${THIS_REL_PATH}/src/Parallelepiped.cpp
+    ${THIS_REL_PATH}/src/PermutationVector.cpp
+    ${THIS_REL_PATH}/src/Plane.cpp
+    ${THIS_REL_PATH}/src/Point1D.cpp
+    ${THIS_REL_PATH}/src/Point2D.cpp
+    ${THIS_REL_PATH}/src/Point.cpp
+    ${THIS_REL_PATH}/src/PointLocate.cpp
+    ${THIS_REL_PATH}/src/PointND.cpp
+    ${THIS_REL_PATH}/src/PointNDOptions.cpp
+    ${THIS_REL_PATH}/src/ProcessStatistics.cpp
+    ${THIS_REL_PATH}/src/QGpCoreMath.cpp
+    ${THIS_REL_PATH}/src/Random.cpp
+    ${THIS_REL_PATH}/src/RealStatisticalProxy.cpp
+    ${THIS_REL_PATH}/src/Rect.cpp
+    ${THIS_REL_PATH}/src/RootSolver.cpp
+    ${THIS_REL_PATH}/src/Segment2D.cpp
+    ${THIS_REL_PATH}/src/Segment.cpp
+    ${THIS_REL_PATH}/src/Simplex.cpp
+    ${THIS_REL_PATH}/src/SmoothingParameters.cpp
+    ${THIS_REL_PATH}/src/SparseMatrix.cpp
+    ${THIS_REL_PATH}/src/StatComparator.cpp
+    ${THIS_REL_PATH}/src/Stationarity.cpp
+    ${THIS_REL_PATH}/src/StatisticalPoint.cpp
+    ${THIS_REL_PATH}/src/StatisticalValue.cpp
+    ${THIS_REL_PATH}/src/Statistics.cpp
+    ${THIS_REL_PATH}/src/UtmZone.cpp
+    ${THIS_REL_PATH}/src/Value.cpp
 )
 
 # Headers got to include/*
 set(HEA_INC
-    geopsy-src/lib/QGpCoreMath/src/QGpCoreMath.h
+    ${THIS_REL_PATH}/src/QGpCoreMath.h
 )
 
 # Headers got to include/GpCoreTools/*
 set(HEA_SRCS
-    geopsy-src/lib/QGpCoreMath/src/AbstractColorPalette.h
-    geopsy-src/lib/QGpCoreMath/src/AbstractComplexPointOptions.h
-    geopsy-src/lib/QGpCoreMath/src/AbstractFunction.h
-    geopsy-src/lib/QGpCoreMath/src/AbstractNumericalCache.h
-    geopsy-src/lib/QGpCoreMath/src/AbstractNumericalKey.h
-    geopsy-src/lib/QGpCoreMath/src/Angle.h
-    geopsy-src/lib/QGpCoreMath/src/AngleSearch.h
-    geopsy-src/lib/QGpCoreMath/src/AverageAngle.h
-    geopsy-src/lib/QGpCoreMath/src/BasicCurveProxy.h
-    geopsy-src/lib/QGpCoreMath/src/Circle.h
-    geopsy-src/lib/QGpCoreMath/src/ColorMapData.h
-    geopsy-src/lib/QGpCoreMath/src/ColorMap.h
-    geopsy-src/lib/QGpCoreMath/src/ColorPalette.h
-    geopsy-src/lib/QGpCoreMath/src/ComplexExponential.h
-    geopsy-src/lib/QGpCoreMath/src/ComplexMatrix.h
-    geopsy-src/lib/QGpCoreMath/src/ComplexPointOptions.h
-    geopsy-src/lib/QGpCoreMath/src/ComplexStatisticalProxy.h
-    geopsy-src/lib/QGpCoreMath/src/ConcentricSearch.h
-    geopsy-src/lib/QGpCoreMath/src/CoordinateFile.h
-    geopsy-src/lib/QGpCoreMath/src/Covariance.h
-    geopsy-src/lib/QGpCoreMath/src/Curve.h
-    geopsy-src/lib/QGpCoreMath/src/CurvePointOptions.h
-    geopsy-src/lib/QGpCoreMath/src/CurveProxy.h
-    geopsy-src/lib/QGpCoreMath/src/CurveSplitter.h
-    geopsy-src/lib/QGpCoreMath/src/DirectionalSearch.h
-    geopsy-src/lib/QGpCoreMath/src/DoubleMatrix.h
-    geopsy-src/lib/QGpCoreMath/src/Ellipse.h
-    geopsy-src/lib/QGpCoreMath/src/FunctionSearch.h
-    geopsy-src/lib/QGpCoreMath/src/GaussDistribution.h
-    geopsy-src/lib/QGpCoreMath/src/GoogleEarthKML.h
-    geopsy-src/lib/QGpCoreMath/src/Grid2D.h
-    geopsy-src/lib/QGpCoreMath/src/Grid3D.h
-    geopsy-src/lib/QGpCoreMath/src/GridSearch.h
-    geopsy-src/lib/QGpCoreMath/src/GridSearchTest.h
-    geopsy-src/lib/QGpCoreMath/src/Histogram2D.h
-    geopsy-src/lib/QGpCoreMath/src/Histogram.h
-    geopsy-src/lib/QGpCoreMath/src/IrregularGrid2DData.h
-    geopsy-src/lib/QGpCoreMath/src/IrregularGrid2D.h
-    geopsy-src/lib/QGpCoreMath/src/Line2D.h
-    geopsy-src/lib/QGpCoreMath/src/LinearRegression.h
-    geopsy-src/lib/QGpCoreMath/src/MatrixData.h
-    geopsy-src/lib/QGpCoreMath/src/Matrix.h
-    geopsy-src/lib/QGpCoreMath/src/MatrixIterator.h
-    geopsy-src/lib/QGpCoreMath/src/MatrixMultiply.h
-    geopsy-src/lib/QGpCoreMath/src/NamedPoint.h
-    geopsy-src/lib/QGpCoreMath/src/Parallelepiped.h
-    geopsy-src/lib/QGpCoreMath/src/PermutationVector.h
-    geopsy-src/lib/QGpCoreMath/src/Plane.h
-    geopsy-src/lib/QGpCoreMath/src/Point1D.h
-    geopsy-src/lib/QGpCoreMath/src/Point2D.h
-    geopsy-src/lib/QGpCoreMath/src/Point.h
-    geopsy-src/lib/QGpCoreMath/src/PointLocate.h
-    geopsy-src/lib/QGpCoreMath/src/PointND.h
-    geopsy-src/lib/QGpCoreMath/src/PointNDOptions.h
-    geopsy-src/lib/QGpCoreMath/src/ProcessStatistics.h
-    geopsy-src/lib/QGpCoreMath/src/QGpCoreMathDLLExport.h
-    geopsy-src/lib/QGpCoreMath/src/QGpCoreMath.h
-    geopsy-src/lib/QGpCoreMath/src/QGpCoreMathInstallPath.h
-    geopsy-src/lib/QGpCoreMath/src/QGpCoreMathStatic.h
-    geopsy-src/lib/QGpCoreMath/src/QGpCoreMathVersion.h
-    geopsy-src/lib/QGpCoreMath/src/Random.h
-    geopsy-src/lib/QGpCoreMath/src/RealStatisticalProxy.h
-    geopsy-src/lib/QGpCoreMath/src/Rect.h
-    geopsy-src/lib/QGpCoreMath/src/RootSolver.h
-    geopsy-src/lib/QGpCoreMath/src/Segment2D.h
-    geopsy-src/lib/QGpCoreMath/src/Segment.h
-    geopsy-src/lib/QGpCoreMath/src/Simplex.h
-    geopsy-src/lib/QGpCoreMath/src/SmoothingParameters.h
-    geopsy-src/lib/QGpCoreMath/src/SparseMatrix.h
+    ${THIS_REL_PATH}/src/AbstractColorPalette.h
+    ${THIS_REL_PATH}/src/AbstractComplexPointOptions.h
+    ${THIS_REL_PATH}/src/AbstractFunction.h
+    ${THIS_REL_PATH}/src/AbstractNumericalCache.h
+    ${THIS_REL_PATH}/src/AbstractNumericalKey.h
+    ${THIS_REL_PATH}/src/Angle.h
+    ${THIS_REL_PATH}/src/AngleSearch.h
+    ${THIS_REL_PATH}/src/AverageAngle.h
+    ${THIS_REL_PATH}/src/BasicCurveProxy.h
+    ${THIS_REL_PATH}/src/Circle.h
+    ${THIS_REL_PATH}/src/ColorMapData.h
+    ${THIS_REL_PATH}/src/ColorMap.h
+    ${THIS_REL_PATH}/src/ColorPalette.h
+    ${THIS_REL_PATH}/src/ComplexExponential.h
+    ${THIS_REL_PATH}/src/ComplexMatrix.h
+    ${THIS_REL_PATH}/src/ComplexPointOptions.h
+    ${THIS_REL_PATH}/src/ComplexStatisticalProxy.h
+    ${THIS_REL_PATH}/src/ConcentricSearch.h
+    ${THIS_REL_PATH}/src/CoordinateFile.h
+    ${THIS_REL_PATH}/src/Covariance.h
+    ${THIS_REL_PATH}/src/Curve.h
+    ${THIS_REL_PATH}/src/CurvePointOptions.h
+    ${THIS_REL_PATH}/src/CurveProxy.h
+    ${THIS_REL_PATH}/src/CurveSplitter.h
+    ${THIS_REL_PATH}/src/DirectionalSearch.h
+    ${THIS_REL_PATH}/src/DoubleMatrix.h
+    ${THIS_REL_PATH}/src/Ellipse.h
+    ${THIS_REL_PATH}/src/FunctionSearch.h
+    ${THIS_REL_PATH}/src/GaussDistribution.h
+    ${THIS_REL_PATH}/src/GoogleEarthKML.h
+    ${THIS_REL_PATH}/src/Grid2D.h
+    ${THIS_REL_PATH}/src/Grid3D.h
+    ${THIS_REL_PATH}/src/GridSearch.h
+    ${THIS_REL_PATH}/src/GridSearchTest.h
+    ${THIS_REL_PATH}/src/Histogram2D.h
+    ${THIS_REL_PATH}/src/Histogram.h
+    ${THIS_REL_PATH}/src/IrregularGrid2DData.h
+    ${THIS_REL_PATH}/src/IrregularGrid2D.h
+    ${THIS_REL_PATH}/src/Line2D.h
+    ${THIS_REL_PATH}/src/LinearRegression.h
+    ${THIS_REL_PATH}/src/MatrixData.h
+    ${THIS_REL_PATH}/src/Matrix.h
+    ${THIS_REL_PATH}/src/MatrixIterator.h
+    ${THIS_REL_PATH}/src/MatrixMultiply.h
+    ${THIS_REL_PATH}/src/NamedPoint.h
+    ${THIS_REL_PATH}/src/Parallelepiped.h
+    ${THIS_REL_PATH}/src/PermutationVector.h
+    ${THIS_REL_PATH}/src/Plane.h
+    ${THIS_REL_PATH}/src/Point1D.h
+    ${THIS_REL_PATH}/src/Point2D.h
+    ${THIS_REL_PATH}/src/Point.h
+    ${THIS_REL_PATH}/src/PointLocate.h
+    ${THIS_REL_PATH}/src/PointND.h
+    ${THIS_REL_PATH}/src/PointNDOptions.h
+    ${THIS_REL_PATH}/src/ProcessStatistics.h
+    ${THIS_REL_PATH}/src/QGpCoreMathDLLExport.h
+    ${THIS_REL_PATH}/src/QGpCoreMath.h
+    ${THIS_REL_PATH}/src/QGpCoreMathInstallPath.h
+    ${THIS_REL_PATH}/src/QGpCoreMathStatic.h
+    ${THIS_REL_PATH}/src/QGpCoreMathVersion.h
+    ${THIS_REL_PATH}/src/Random.h
+    ${THIS_REL_PATH}/src/RealStatisticalProxy.h
+    ${THIS_REL_PATH}/src/Rect.h
+    ${THIS_REL_PATH}/src/RootSolver.h
+    ${THIS_REL_PATH}/src/Segment2D.h
+    ${THIS_REL_PATH}/src/Segment.h
+    ${THIS_REL_PATH}/src/Simplex.h
+    ${THIS_REL_PATH}/src/SmoothingParameters.h
+    ${THIS_REL_PATH}/src/SparseMatrix.h
     # Old, non used!
-    # geopsy-src/lib/QGpCoreMath/src/stable.h
-    geopsy-src/lib/QGpCoreMath/src/StatComparator.h
-    geopsy-src/lib/QGpCoreMath/src/Stationarity.h
-    geopsy-src/lib/QGpCoreMath/src/StatisticalPoint.h
-    geopsy-src/lib/QGpCoreMath/src/StatisticalValue.h
-    geopsy-src/lib/QGpCoreMath/src/Statistics.h
-    geopsy-src/lib/QGpCoreMath/src/UtmZone.h
-    geopsy-src/lib/QGpCoreMath/src/Value.h
+    # ${THIS_REL_PATH}/src/stable.h
+    ${THIS_REL_PATH}/src/StatComparator.h
+    ${THIS_REL_PATH}/src/Stationarity.h
+    ${THIS_REL_PATH}/src/StatisticalPoint.h
+    ${THIS_REL_PATH}/src/StatisticalValue.h
+    ${THIS_REL_PATH}/src/Statistics.h
+    ${THIS_REL_PATH}/src/UtmZone.h
+    ${THIS_REL_PATH}/src/Value.h
 )
 
 # Headers got to include/*
@@ -312,7 +322,7 @@ set(UI_SRCS
 # QT5_WRAP_UI(UI_GENERATED_HEADERS ${UI_SRCS})
 
 # Include header files for compilation
-include_directories(geopsy-src/lib/QGpCoreMath/src)
+include_directories(${THIS_REL_PATH}/src)
 
 #get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
 #foreach(dir ${dirs})

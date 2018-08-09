@@ -30,6 +30,16 @@ endif()
 ###
 
 # General build directory 
+if(CMAKE_MODULAR_BUILD)
+    # Global build
+    set(THIS_REL_PATH ".")
+    #message(STATUS "****** Modular (src: ${THIS_REL_PATH}/src) ******")
+else()
+    set(THIS_REL_PATH "geopsy-src/lib/QGpGuiWave")
+    #message(STATUS "****** Monolithic (src: ${THIS_REL_PATH}/src) ******")
+endif()
+
+# General build directory 
 if(GEOPSY_APP_BUILD_PATH)
     # Global build
     set(THIS_BUILD_PATH ${GEOPSY_APP_BUILD_PATH})
@@ -169,52 +179,52 @@ set(QT5_LIBRARIES Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Qml Qt5::Network Qt5::Pri
 set(TARGET ${CMAKE_PROJECT_NAME})
 
 set(CPP_SRCS
-    geopsy-src/lib/QGpGuiWave/src/DispersionLimitLayer.cpp
-    geopsy-src/lib/QGpGuiWave/src/EllipticityPlotProxy.cpp
-    geopsy-src/lib/QGpGuiWave/src/MagnetoTelluricLine.cpp
-    geopsy-src/lib/QGpGuiWave/src/MagnetoTelluricPlotProxy.cpp
-    geopsy-src/lib/QGpGuiWave/src/ModalCurveBrowser.cpp
-    geopsy-src/lib/QGpGuiWave/src/ModalCurveProperties.cpp
-    geopsy-src/lib/QGpGuiWave/src/ModalLine.cpp
-    geopsy-src/lib/QGpGuiWave/src/ModalPlotProxy.cpp
-    geopsy-src/lib/QGpGuiWave/src/ModeDelegate.cpp
-    geopsy-src/lib/QGpGuiWave/src/ModeItem.cpp
-    geopsy-src/lib/QGpGuiWave/src/ModeSelector.cpp
-    geopsy-src/lib/QGpGuiWave/src/QGpGuiWave.cpp
-    geopsy-src/lib/QGpGuiWave/src/RefractionLine.cpp
-    geopsy-src/lib/QGpGuiWave/src/RefractionPlotProxy.cpp
+    ${THIS_REL_PATH}/src/DispersionLimitLayer.cpp
+    ${THIS_REL_PATH}/src/EllipticityPlotProxy.cpp
+    ${THIS_REL_PATH}/src/MagnetoTelluricLine.cpp
+    ${THIS_REL_PATH}/src/MagnetoTelluricPlotProxy.cpp
+    ${THIS_REL_PATH}/src/ModalCurveBrowser.cpp
+    ${THIS_REL_PATH}/src/ModalCurveProperties.cpp
+    ${THIS_REL_PATH}/src/ModalLine.cpp
+    ${THIS_REL_PATH}/src/ModalPlotProxy.cpp
+    ${THIS_REL_PATH}/src/ModeDelegate.cpp
+    ${THIS_REL_PATH}/src/ModeItem.cpp
+    ${THIS_REL_PATH}/src/ModeSelector.cpp
+    ${THIS_REL_PATH}/src/QGpGuiWave.cpp
+    ${THIS_REL_PATH}/src/RefractionLine.cpp
+    ${THIS_REL_PATH}/src/RefractionPlotProxy.cpp
 )
 
 # Headers got to include/*
 set(HEA_INC
-    geopsy-src/lib/QGpGuiWave/src/QGpGuiWave.h
+    ${THIS_REL_PATH}/src/QGpGuiWave.h
 )
 
 # Headers got to include/GpCoreTools/*
 set(HEA_SRCS
-    geopsy-src/lib/QGpGuiWave/src/DispersionLimitLayer.h
-    geopsy-src/lib/QGpGuiWave/src/EllipticityPlotProxy.h
-    geopsy-src/lib/QGpGuiWave/src/MagnetoTelluricLine.h
-    geopsy-src/lib/QGpGuiWave/src/MagnetoTelluricPlotProxy.h
-    geopsy-src/lib/QGpGuiWave/src/ModalCurveBrowser.h
-    geopsy-src/lib/QGpGuiWave/src/ModalCurveProperties.h
-    geopsy-src/lib/QGpGuiWave/src/ModalLine.h
-    geopsy-src/lib/QGpGuiWave/src/ModalPlotProxy.h
-    geopsy-src/lib/QGpGuiWave/src/ModeDelegate.h
-    geopsy-src/lib/QGpGuiWave/src/ModeItem.h
-    geopsy-src/lib/QGpGuiWave/src/ModeSelector.h
-    geopsy-src/lib/QGpGuiWave/src/QGpGuiWaveDLLExport.h
-    geopsy-src/lib/QGpGuiWave/src/QGpGuiWave.h
-    geopsy-src/lib/QGpGuiWave/src/QGpGuiWaveInstallPath.h
-    geopsy-src/lib/QGpGuiWave/src/QGpGuiWaveStatic.h
-    geopsy-src/lib/QGpGuiWave/src/QGpGuiWaveVersion.h
-    geopsy-src/lib/QGpGuiWave/src/RefractionLine.h
-    geopsy-src/lib/QGpGuiWave/src/RefractionPlotProxy.h
+    ${THIS_REL_PATH}/src/DispersionLimitLayer.h
+    ${THIS_REL_PATH}/src/EllipticityPlotProxy.h
+    ${THIS_REL_PATH}/src/MagnetoTelluricLine.h
+    ${THIS_REL_PATH}/src/MagnetoTelluricPlotProxy.h
+    ${THIS_REL_PATH}/src/ModalCurveBrowser.h
+    ${THIS_REL_PATH}/src/ModalCurveProperties.h
+    ${THIS_REL_PATH}/src/ModalLine.h
+    ${THIS_REL_PATH}/src/ModalPlotProxy.h
+    ${THIS_REL_PATH}/src/ModeDelegate.h
+    ${THIS_REL_PATH}/src/ModeItem.h
+    ${THIS_REL_PATH}/src/ModeSelector.h
+    ${THIS_REL_PATH}/src/QGpGuiWaveDLLExport.h
+    ${THIS_REL_PATH}/src/QGpGuiWave.h
+    ${THIS_REL_PATH}/src/QGpGuiWaveInstallPath.h
+    ${THIS_REL_PATH}/src/QGpGuiWaveStatic.h
+    ${THIS_REL_PATH}/src/QGpGuiWaveVersion.h
+    ${THIS_REL_PATH}/src/RefractionLine.h
+    ${THIS_REL_PATH}/src/RefractionPlotProxy.h
 )
 
 # Headers got to include/*
 set(UI_SRCS
-    geopsy-src/lib/QGpGuiWave/src/ModeSelector.ui
+    ${THIS_REL_PATH}/src/ModeSelector.ui
 )
 
 #
@@ -224,7 +234,7 @@ set(UI_SRCS
 # QT5_WRAP_UI(UI_GENERATED_HEADERS ${UI_SRCS})
 
 # Include header files for compilation
-include_directories(geopsy-src/lib/QGpGuiWave/src)
+include_directories(${THIS_REL_PATH}/src)
 
 #get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
 #foreach(dir ${dirs})
