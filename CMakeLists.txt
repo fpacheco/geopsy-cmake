@@ -162,14 +162,40 @@ if (CMAKE_MODULAR_BUILD)
         ${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/matfiles CMakeLists.txt
     )
     copy_and_rename(
+        ${CMAKE_CURRENT_SOURCE_DIR} CMakeLists_geopsyarray.txt
+        ${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsyarray CMakeLists.txt
+    )
+    copy_and_rename(
+        ${CMAKE_CURRENT_SOURCE_DIR} CMakeLists_geopsydamping.txt
+        ${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsydamping CMakeLists.txt
+    )
+    # Waran
+    
+    # geopsy tools
+    copy_and_rename(
+        ${CMAKE_CURRENT_SOURCE_DIR} CMakeLists_geopsynr.txt
+        ${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsynr CMakeLists.txt
+    )
+    copy_and_rename(
         ${CMAKE_CURRENT_SOURCE_DIR} CMakeLists_geopsyhv.txt
         ${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsyhv CMakeLists.txt
+    )
+    copy_and_rename(
+        ${CMAKE_CURRENT_SOURCE_DIR} CMakeLists_geopsymotion.txt
+        ${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsymotion CMakeLists.txt
+    )
+    copy_and_rename(
+        ${CMAKE_CURRENT_SOURCE_DIR} CMakeLists_geopsyrefra.txt
+        ${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsyrefra CMakeLists.txt
     )
     copy_and_rename(
         ${CMAKE_CURRENT_SOURCE_DIR} CMakeLists_geopsytfa.txt
         ${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsytfa CMakeLists.txt
     )
-
+    copy_and_rename(
+        ${CMAKE_CURRENT_SOURCE_DIR} CMakeLists_hvtfa.txt
+        ${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/hvtfa CMakeLists.txt
+    )    
     # Add subprojects
     add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/lib/GpCoreTools)
     add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/lib/QGpCoreTools)
@@ -188,6 +214,7 @@ if (CMAKE_MODULAR_BUILD)
     add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/GeopsySLinkGui)
 
     add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/dinver/DinverCore)
+    add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/lib/QGpCoreStat)
     add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/dinver/DinverGui)
     add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/dinver/DinverDCCore)
     add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/dinver/DinverDCGui)
@@ -195,8 +222,7 @@ if (CMAKE_MODULAR_BUILD)
     add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/dinver/dinverdc)
     add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/dinver/dinverext)
     add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/dinver/dinvermatlab)
-
-    add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/lib/QGpCoreStat)
+    
     add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/ArrayCore)
     add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/ArrayGui)
     add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/MonoStation)
@@ -204,15 +230,19 @@ if (CMAKE_MODULAR_BUILD)
     add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/geopsy)
     add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/vslarray)
     add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/matfiles)
+    # waran
+    #add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/waran/WaranCore)
+    #add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/waran/waran)
+    #add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/waran/warangps)            
     # geopsy tools
-    #add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsyarray)
-    #add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsydamping)
+    add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsyarray)
+    add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsydamping)
     add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsyhv)
-    #add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsynr)
-    #add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsymotion)
-    #add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsyrefra)
+    add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsynr)
+    add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsymotion)
+    add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsyrefra)
     add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsytfa)
-    #add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/hvtfa)
+    add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/hvtfa)
     ###
 else()
     set(CUR_PROJ_REL_SRC )
@@ -251,7 +281,11 @@ else()
     include(CMakeLists_geopsy.txt)
     include(CMakeLists_vslarray.txt)
     include(CMakeLists_matfiles.txt)
-
+    
+    # waran
+    #add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/waran/WaranCore)
+    #add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/waran/waran)
+    #add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/waran/warangps)
     # geopsy tools
     include(CMakeLists_geopsyarray.txt)
     include(CMakeLists_geopsydamping.txt)
