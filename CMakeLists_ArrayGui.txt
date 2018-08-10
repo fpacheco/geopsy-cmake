@@ -30,6 +30,16 @@ endif()
 ###
 
 # General build directory 
+if(CMAKE_MODULAR_BUILD)
+    # Global build
+    set(THIS_REL_PATH ".")
+    #message(STATUS "****** Modular (src: ${THIS_REL_PATH}/src) ******")
+else()
+    set(THIS_REL_PATH "geopsy-src/geopsy/ArrayGui")
+    #message(STATUS "****** Monolithic (src: ${THIS_REL_PATH}/src) ******")
+endif()
+
+# General build directory 
 if(GEOPSY_APP_BUILD_PATH)
     # Global build
     set(THIS_BUILD_PATH ${GEOPSY_APP_BUILD_PATH})
@@ -141,34 +151,34 @@ message(STATUS "Autogen goes to: ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_aut
 set(TARGET ${CMAKE_PROJECT_NAME})
 
 set(CPP_SRCS
-geopsy-src/geopsy/ArrayGui/src/ArrayGui.cpp
-geopsy-src/geopsy/ArrayGui/src/ArrayResponse.cpp
-geopsy-src/geopsy/ArrayGui/src/BlockAveragingParameterWidget.cpp
-geopsy-src/geopsy/ArrayGui/src/WaveNumAnimate.cpp
+${THIS_REL_PATH}/src/ArrayGui.cpp
+${THIS_REL_PATH}/src/ArrayResponse.cpp
+${THIS_REL_PATH}/src/BlockAveragingParameterWidget.cpp
+${THIS_REL_PATH}/src/WaveNumAnimate.cpp
 )
 
 # Headers got to include/*
 set(HEA_INC
-geopsy-src/geopsy/ArrayGui/src/ArrayGui.h
+${THIS_REL_PATH}/src/ArrayGui.h
 )
 
 # Headers got to include/GpCoreTools/*
 set(HEA_SRCS
-geopsy-src/geopsy/ArrayGui/src/ArrayGuiDLLExport.h
-geopsy-src/geopsy/ArrayGui/src/ArrayGui.h
-geopsy-src/geopsy/ArrayGui/src/ArrayGuiInstallPath.h
-geopsy-src/geopsy/ArrayGui/src/ArrayGuiStatic.h
-geopsy-src/geopsy/ArrayGui/src/ArrayGuiVersion.h
-geopsy-src/geopsy/ArrayGui/src/ArrayResponse.h
-geopsy-src/geopsy/ArrayGui/src/BlockAveragingParameterWidget.h
-geopsy-src/geopsy/ArrayGui/src/stable.h
-geopsy-src/geopsy/ArrayGui/src/WaveNumAnimate.h
+${THIS_REL_PATH}/src/ArrayGuiDLLExport.h
+${THIS_REL_PATH}/src/ArrayGui.h
+${THIS_REL_PATH}/src/ArrayGuiInstallPath.h
+${THIS_REL_PATH}/src/ArrayGuiStatic.h
+${THIS_REL_PATH}/src/ArrayGuiVersion.h
+${THIS_REL_PATH}/src/ArrayResponse.h
+${THIS_REL_PATH}/src/BlockAveragingParameterWidget.h
+${THIS_REL_PATH}/src/stable.h
+${THIS_REL_PATH}/src/WaveNumAnimate.h
 )
 
 # Headers got to include/*
 set(UI_SRCS
-geopsy-src/geopsy/ArrayGui/src/BlockAveragingParameterWidget.ui
-geopsy-src/geopsy/ArrayGui/src/WaveNumAnimate.ui
+${THIS_REL_PATH}/src/BlockAveragingParameterWidget.ui
+${THIS_REL_PATH}/src/WaveNumAnimate.ui
 )
 
 #
@@ -178,7 +188,7 @@ geopsy-src/geopsy/ArrayGui/src/WaveNumAnimate.ui
 # QT5_WRAP_UI(UI_GENERATED_HEADERS ${UI_SRCS})
 
 # Include header files for compilation
-include_directories(geopsy-src/geopsy/ArrayGui/src)
+include_directories(${THIS_REL_PATH}/src)
 
 #get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
 #foreach(dir ${dirs})

@@ -30,6 +30,16 @@ endif()
 ###
 
 # General build directory 
+if(CMAKE_MODULAR_BUILD)
+    # Global build
+    set(THIS_REL_PATH ".")
+    #message(STATUS "****** Modular (src: ${THIS_REL_PATH}/src) ******")
+else()
+    set(THIS_REL_PATH "geopsy-src/dinver/DinverCore")
+    #message(STATUS "****** Monolithic (src: ${THIS_REL_PATH}/src) ******")
+endif()
+
+# General build directory 
 if(GEOPSY_APP_BUILD_PATH)
     # Global build
     set(THIS_BUILD_PATH ${GEOPSY_APP_BUILD_PATH})
@@ -146,95 +156,95 @@ set(QT5_LIBRARIES Qt5::Core)
 set(TARGET ${CMAKE_PROJECT_NAME})
 
 set(CPP_SRCS
-    geopsy-src/dinver/DinverCore/src/AbstractCondition.cpp
-    geopsy-src/dinver/DinverCore/src/AbstractForward.cpp
-    geopsy-src/dinver/DinverCore/src/ActiveModel.cpp
-    geopsy-src/dinver/DinverCore/src/ActiveModels.cpp
-    geopsy-src/dinver/DinverCore/src/BatchRun.cpp
-    geopsy-src/dinver/DinverCore/src/BestModels.cpp
-    geopsy-src/dinver/DinverCore/src/DinverC.cpp
-    geopsy-src/dinver/DinverCore/src/DinverCore.cpp
-    geopsy-src/dinver/DinverCore/src/DinverCoreEngine.cpp
-    geopsy-src/dinver/DinverCore/src/DinverFortran.cpp
-    geopsy-src/dinver/DinverCore/src/DinverInterface.cpp
-    geopsy-src/dinver/DinverCore/src/Generator.cpp
-    geopsy-src/dinver/DinverCore/src/GeneratorModels.cpp
-    geopsy-src/dinver/DinverCore/src/ImportanceSampling.cpp
-    geopsy-src/dinver/DinverCore/src/Model.cpp
-    geopsy-src/dinver/DinverCore/src/ModelRepository.cpp
-    geopsy-src/dinver/DinverCore/src/ModelSet.cpp
-    geopsy-src/dinver/DinverCore/src/NewModel.cpp
-    geopsy-src/dinver/DinverCore/src/ParamCondition.cpp
-    geopsy-src/dinver/DinverCore/src/ParamSpaceScript.cpp
-    geopsy-src/dinver/DinverCore/src/Parameter.cpp
-    geopsy-src/dinver/DinverCore/src/ParameterGrid.cpp
-    geopsy-src/dinver/DinverCore/src/ParentIndex.cpp
-    geopsy-src/dinver/DinverCore/src/PdfCurve.cpp
-    geopsy-src/dinver/DinverCore/src/QuadraticCondition.cpp
-    geopsy-src/dinver/DinverCore/src/RealSpace.cpp
-    geopsy-src/dinver/DinverCore/src/ReportReader.cpp
-    geopsy-src/dinver/DinverCore/src/ReportWriter.cpp
-    geopsy-src/dinver/DinverCore/src/ScaledModels.cpp
-    geopsy-src/dinver/DinverCore/src/SimpleCondition.cpp
-    geopsy-src/dinver/DinverCore/src/Simplex.cpp
-    geopsy-src/dinver/DinverCore/src/SumCondition.cpp
-    geopsy-src/dinver/DinverCore/src/TemporaryDirectory.cpp
-    geopsy-src/dinver/DinverCore/src/VoronoiNavigator.cpp
-    geopsy-src/dinver/DinverCore/src/XMLDinver.cpp
-    geopsy-src/dinver/DinverCore/src/XMLDinverContext.cpp
-    geopsy-src/dinver/DinverCore/src/XMLDinverHeader.cpp
-    geopsy-src/dinver/DinverCore/src/XMLVirtualPlugin.cpp
+    ${THIS_REL_PATH}/src/AbstractCondition.cpp
+    ${THIS_REL_PATH}/src/AbstractForward.cpp
+    ${THIS_REL_PATH}/src/ActiveModel.cpp
+    ${THIS_REL_PATH}/src/ActiveModels.cpp
+    ${THIS_REL_PATH}/src/BatchRun.cpp
+    ${THIS_REL_PATH}/src/BestModels.cpp
+    ${THIS_REL_PATH}/src/DinverC.cpp
+    ${THIS_REL_PATH}/src/DinverCore.cpp
+    ${THIS_REL_PATH}/src/DinverCoreEngine.cpp
+    ${THIS_REL_PATH}/src/DinverFortran.cpp
+    ${THIS_REL_PATH}/src/DinverInterface.cpp
+    ${THIS_REL_PATH}/src/Generator.cpp
+    ${THIS_REL_PATH}/src/GeneratorModels.cpp
+    ${THIS_REL_PATH}/src/ImportanceSampling.cpp
+    ${THIS_REL_PATH}/src/Model.cpp
+    ${THIS_REL_PATH}/src/ModelRepository.cpp
+    ${THIS_REL_PATH}/src/ModelSet.cpp
+    ${THIS_REL_PATH}/src/NewModel.cpp
+    ${THIS_REL_PATH}/src/ParamCondition.cpp
+    ${THIS_REL_PATH}/src/ParamSpaceScript.cpp
+    ${THIS_REL_PATH}/src/Parameter.cpp
+    ${THIS_REL_PATH}/src/ParameterGrid.cpp
+    ${THIS_REL_PATH}/src/ParentIndex.cpp
+    ${THIS_REL_PATH}/src/PdfCurve.cpp
+    ${THIS_REL_PATH}/src/QuadraticCondition.cpp
+    ${THIS_REL_PATH}/src/RealSpace.cpp
+    ${THIS_REL_PATH}/src/ReportReader.cpp
+    ${THIS_REL_PATH}/src/ReportWriter.cpp
+    ${THIS_REL_PATH}/src/ScaledModels.cpp
+    ${THIS_REL_PATH}/src/SimpleCondition.cpp
+    ${THIS_REL_PATH}/src/Simplex.cpp
+    ${THIS_REL_PATH}/src/SumCondition.cpp
+    ${THIS_REL_PATH}/src/TemporaryDirectory.cpp
+    ${THIS_REL_PATH}/src/VoronoiNavigator.cpp
+    ${THIS_REL_PATH}/src/XMLDinver.cpp
+    ${THIS_REL_PATH}/src/XMLDinverContext.cpp
+    ${THIS_REL_PATH}/src/XMLDinverHeader.cpp
+    ${THIS_REL_PATH}/src/XMLVirtualPlugin.cpp
 )
 
 # Headers got to include/*
 set(HEA_INC
-    geopsy-src/dinver/DinverCore/src/DinverCore.h
+    ${THIS_REL_PATH}/src/DinverCore.h
 )
 
 # Headers got to include/GpCoreTools/*
 set(HEA_SRCS
-    geopsy-src/dinver/DinverCore/src/AbstractCondition.h
-    geopsy-src/dinver/DinverCore/src/AbstractForward.h
-    geopsy-src/dinver/DinverCore/src/ActiveModel.h
-    geopsy-src/dinver/DinverCore/src/ActiveModels.h
-    geopsy-src/dinver/DinverCore/src/BatchRun.h
-    geopsy-src/dinver/DinverCore/src/BestModels.h
-    geopsy-src/dinver/DinverCore/src/DinverC.h
-    geopsy-src/dinver/DinverCore/src/DinverCore.h
-    geopsy-src/dinver/DinverCore/src/DinverCoreDLLExport.h
-    geopsy-src/dinver/DinverCore/src/DinverCoreEngine.h
-    geopsy-src/dinver/DinverCore/src/DinverCoreInstallPath.h
-    geopsy-src/dinver/DinverCore/src/DinverCoreStatic.h
-    geopsy-src/dinver/DinverCore/src/DinverCoreVersion.h
-    geopsy-src/dinver/DinverCore/src/DinverFortran.h
-    geopsy-src/dinver/DinverCore/src/DinverInterface.h
-    geopsy-src/dinver/DinverCore/src/Generator.h
-    geopsy-src/dinver/DinverCore/src/GeneratorModels.h
-    geopsy-src/dinver/DinverCore/src/ImportanceSampling.h
-    geopsy-src/dinver/DinverCore/src/Model.h
-    geopsy-src/dinver/DinverCore/src/ModelRepository.h
-    geopsy-src/dinver/DinverCore/src/ModelSet.h
-    geopsy-src/dinver/DinverCore/src/NewModel.h
-    geopsy-src/dinver/DinverCore/src/ParamCondition.h
-    geopsy-src/dinver/DinverCore/src/ParamSpaceScript.h
-    geopsy-src/dinver/DinverCore/src/Parameter.h
-    geopsy-src/dinver/DinverCore/src/ParameterGrid.h
-    geopsy-src/dinver/DinverCore/src/ParentIndex.h
-    geopsy-src/dinver/DinverCore/src/PdfCurve.h
-    geopsy-src/dinver/DinverCore/src/QuadraticCondition.h
-    geopsy-src/dinver/DinverCore/src/RealSpace.h
-    geopsy-src/dinver/DinverCore/src/ReportReader.h
-    geopsy-src/dinver/DinverCore/src/ReportWriter.h
-    geopsy-src/dinver/DinverCore/src/ScaledModels.h
-    geopsy-src/dinver/DinverCore/src/SimpleCondition.h
-    geopsy-src/dinver/DinverCore/src/Simplex.h
-    geopsy-src/dinver/DinverCore/src/SumCondition.h
-    geopsy-src/dinver/DinverCore/src/TemporaryDirectory.h
-    geopsy-src/dinver/DinverCore/src/VoronoiNavigator.h
-    geopsy-src/dinver/DinverCore/src/XMLDinver.h
-    geopsy-src/dinver/DinverCore/src/XMLDinverContext.h
-    geopsy-src/dinver/DinverCore/src/XMLDinverHeader.h
-    geopsy-src/dinver/DinverCore/src/XMLVirtualPlugin.h
+    ${THIS_REL_PATH}/src/AbstractCondition.h
+    ${THIS_REL_PATH}/src/AbstractForward.h
+    ${THIS_REL_PATH}/src/ActiveModel.h
+    ${THIS_REL_PATH}/src/ActiveModels.h
+    ${THIS_REL_PATH}/src/BatchRun.h
+    ${THIS_REL_PATH}/src/BestModels.h
+    ${THIS_REL_PATH}/src/DinverC.h
+    ${THIS_REL_PATH}/src/DinverCore.h
+    ${THIS_REL_PATH}/src/DinverCoreDLLExport.h
+    ${THIS_REL_PATH}/src/DinverCoreEngine.h
+    ${THIS_REL_PATH}/src/DinverCoreInstallPath.h
+    ${THIS_REL_PATH}/src/DinverCoreStatic.h
+    ${THIS_REL_PATH}/src/DinverCoreVersion.h
+    ${THIS_REL_PATH}/src/DinverFortran.h
+    ${THIS_REL_PATH}/src/DinverInterface.h
+    ${THIS_REL_PATH}/src/Generator.h
+    ${THIS_REL_PATH}/src/GeneratorModels.h
+    ${THIS_REL_PATH}/src/ImportanceSampling.h
+    ${THIS_REL_PATH}/src/Model.h
+    ${THIS_REL_PATH}/src/ModelRepository.h
+    ${THIS_REL_PATH}/src/ModelSet.h
+    ${THIS_REL_PATH}/src/NewModel.h
+    ${THIS_REL_PATH}/src/ParamCondition.h
+    ${THIS_REL_PATH}/src/ParamSpaceScript.h
+    ${THIS_REL_PATH}/src/Parameter.h
+    ${THIS_REL_PATH}/src/ParameterGrid.h
+    ${THIS_REL_PATH}/src/ParentIndex.h
+    ${THIS_REL_PATH}/src/PdfCurve.h
+    ${THIS_REL_PATH}/src/QuadraticCondition.h
+    ${THIS_REL_PATH}/src/RealSpace.h
+    ${THIS_REL_PATH}/src/ReportReader.h
+    ${THIS_REL_PATH}/src/ReportWriter.h
+    ${THIS_REL_PATH}/src/ScaledModels.h
+    ${THIS_REL_PATH}/src/SimpleCondition.h
+    ${THIS_REL_PATH}/src/Simplex.h
+    ${THIS_REL_PATH}/src/SumCondition.h
+    ${THIS_REL_PATH}/src/TemporaryDirectory.h
+    ${THIS_REL_PATH}/src/VoronoiNavigator.h
+    ${THIS_REL_PATH}/src/XMLDinver.h
+    ${THIS_REL_PATH}/src/XMLDinverContext.h
+    ${THIS_REL_PATH}/src/XMLDinverHeader.h
+    ${THIS_REL_PATH}/src/XMLVirtualPlugin.h
 )
 
 # Headers got to include/*
@@ -249,7 +259,7 @@ set(UI_SRCS
 # QT5_WRAP_UI(UI_GENERATED_HEADERS ${UI_SRCS})
 
 # Include header files for compilation
-include_directories(geopsy-src/dinver/DinverCore/src)
+include_directories(${THIS_REL_PATH}/src)
 
 #get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
 #foreach(dir ${dirs})

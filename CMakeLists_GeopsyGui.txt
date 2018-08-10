@@ -30,6 +30,16 @@ endif()
 ###
 
 # General build directory 
+if(CMAKE_MODULAR_BUILD)
+    # Global build
+    set(THIS_REL_PATH ".")
+    #message(STATUS "****** Modular (src: ${THIS_REL_PATH}/src) ******")
+else()
+    set(THIS_REL_PATH "geopsy-src/geopsy/geopsyfigs")
+    #message(STATUS "****** Monolithic (src: ${THIS_REL_PATH}/src) ******")
+endif()
+
+# General build directory 
 if(GEOPSY_APP_BUILD_PATH)
     # Global build
     set(THIS_BUILD_PATH ${GEOPSY_APP_BUILD_PATH})
@@ -135,134 +145,134 @@ set(QT5_LIBRARIES Qt5::Core Qt5::Gui Qt5::Widgets)
 set(TARGET ${PROJECT_NAME})
 
 set(CPP_SRCS
-geopsy-src/geopsy/GeopsyGui/src/AbstractGraphicWindow.cpp
-    geopsy-src/geopsy/GeopsyGui/src/AbstractToolWidget.cpp
-    geopsy-src/geopsy/GeopsyGui/src/ArrayDefinition.cpp
-    geopsy-src/geopsy/GeopsyGui/src/ArrayMap.cpp
-    geopsy-src/geopsy/GeopsyGui/src/AsciiSignalComponentsWidget.cpp
-    geopsy-src/geopsy/GeopsyGui/src/AsciiSignalFormatEditor.cpp
-    geopsy-src/geopsy/GeopsyGui/src/AsciiSignalRulesWidget.cpp
-    geopsy-src/geopsy/GeopsyGui/src/ChronogramLayer.cpp
-    geopsy-src/geopsy/GeopsyGui/src/ChronogramProperties.cpp
-    geopsy-src/geopsy/GeopsyGui/src/CityLoader.cpp
-    geopsy-src/geopsy/GeopsyGui/src/CitySignalItem.cpp
-    geopsy-src/geopsy/GeopsyGui/src/DirectoryMonitor.cpp
-    geopsy-src/geopsy/GeopsyGui/src/FilterParameterWidget.cpp
-    geopsy-src/geopsy/GeopsyGui/src/GeopsyGui.cpp
-    geopsy-src/geopsy/GeopsyGui/src/GeopsyGuiEngine.cpp
-    geopsy-src/geopsy/GeopsyGui/src/GeopsyGuiInterface.cpp
-    geopsy-src/geopsy/GeopsyGui/src/HeaderWidget.cpp
-    geopsy-src/geopsy/GeopsyGui/src/LoadFormat.cpp
-    geopsy-src/geopsy/GeopsyGui/src/MorletParameterWidget.cpp
-    geopsy-src/geopsy/GeopsyGui/src/NormalizationParameterWidget.cpp
-    geopsy-src/geopsy/GeopsyGui/src/PickFormat.cpp
-    geopsy-src/geopsy/GeopsyGui/src/PickItem.cpp
-    geopsy-src/geopsy/GeopsyGui/src/PickLayer.cpp
-    geopsy-src/geopsy/GeopsyGui/src/PickToPick.cpp
-    geopsy-src/geopsy/GeopsyGui/src/PicksProperties.cpp
-    geopsy-src/geopsy/GeopsyGui/src/RD3LogParameter.cpp
-    geopsy-src/geopsy/GeopsyGui/src/RelativePositions.cpp
-    geopsy-src/geopsy/GeopsyGui/src/RingEditor.cpp
-    geopsy-src/geopsy/GeopsyGui/src/SignalFileItem.cpp
-    geopsy-src/geopsy/GeopsyGui/src/SignalGroupItem.cpp
-    geopsy-src/geopsy/GeopsyGui/src/SignalLayer.cpp
-    geopsy-src/geopsy/GeopsyGui/src/SignalLayerControls.cpp
-    geopsy-src/geopsy/GeopsyGui/src/SignalsProperties.cpp
-    geopsy-src/geopsy/GeopsyGui/src/SparseTimeRangeModel.cpp
-    geopsy-src/geopsy/GeopsyGui/src/StationCoordinatesItem.cpp
-    geopsy-src/geopsy/GeopsyGui/src/SubPoolWindow.cpp
-    geopsy-src/geopsy/GeopsyGui/src/TaperParameterWidget.cpp
-    geopsy-src/geopsy/GeopsyGui/src/TimeRangeParameterWidget.cpp
-    geopsy-src/geopsy/GeopsyGui/src/TimeReference.cpp
-    geopsy-src/geopsy/GeopsyGui/src/TimeWindowLayer.cpp
-    geopsy-src/geopsy/GeopsyGui/src/WindowingParameterWidget.cpp
+${THIS_REL_PATH}/src/AbstractGraphicWindow.cpp
+    ${THIS_REL_PATH}/src/AbstractToolWidget.cpp
+    ${THIS_REL_PATH}/src/ArrayDefinition.cpp
+    ${THIS_REL_PATH}/src/ArrayMap.cpp
+    ${THIS_REL_PATH}/src/AsciiSignalComponentsWidget.cpp
+    ${THIS_REL_PATH}/src/AsciiSignalFormatEditor.cpp
+    ${THIS_REL_PATH}/src/AsciiSignalRulesWidget.cpp
+    ${THIS_REL_PATH}/src/ChronogramLayer.cpp
+    ${THIS_REL_PATH}/src/ChronogramProperties.cpp
+    ${THIS_REL_PATH}/src/CityLoader.cpp
+    ${THIS_REL_PATH}/src/CitySignalItem.cpp
+    ${THIS_REL_PATH}/src/DirectoryMonitor.cpp
+    ${THIS_REL_PATH}/src/FilterParameterWidget.cpp
+    ${THIS_REL_PATH}/src/GeopsyGui.cpp
+    ${THIS_REL_PATH}/src/GeopsyGuiEngine.cpp
+    ${THIS_REL_PATH}/src/GeopsyGuiInterface.cpp
+    ${THIS_REL_PATH}/src/HeaderWidget.cpp
+    ${THIS_REL_PATH}/src/LoadFormat.cpp
+    ${THIS_REL_PATH}/src/MorletParameterWidget.cpp
+    ${THIS_REL_PATH}/src/NormalizationParameterWidget.cpp
+    ${THIS_REL_PATH}/src/PickFormat.cpp
+    ${THIS_REL_PATH}/src/PickItem.cpp
+    ${THIS_REL_PATH}/src/PickLayer.cpp
+    ${THIS_REL_PATH}/src/PickToPick.cpp
+    ${THIS_REL_PATH}/src/PicksProperties.cpp
+    ${THIS_REL_PATH}/src/RD3LogParameter.cpp
+    ${THIS_REL_PATH}/src/RelativePositions.cpp
+    ${THIS_REL_PATH}/src/RingEditor.cpp
+    ${THIS_REL_PATH}/src/SignalFileItem.cpp
+    ${THIS_REL_PATH}/src/SignalGroupItem.cpp
+    ${THIS_REL_PATH}/src/SignalLayer.cpp
+    ${THIS_REL_PATH}/src/SignalLayerControls.cpp
+    ${THIS_REL_PATH}/src/SignalsProperties.cpp
+    ${THIS_REL_PATH}/src/SparseTimeRangeModel.cpp
+    ${THIS_REL_PATH}/src/StationCoordinatesItem.cpp
+    ${THIS_REL_PATH}/src/SubPoolWindow.cpp
+    ${THIS_REL_PATH}/src/TaperParameterWidget.cpp
+    ${THIS_REL_PATH}/src/TimeRangeParameterWidget.cpp
+    ${THIS_REL_PATH}/src/TimeReference.cpp
+    ${THIS_REL_PATH}/src/TimeWindowLayer.cpp
+    ${THIS_REL_PATH}/src/WindowingParameterWidget.cpp
 )
 
 # Headers got to include/*
 set(HEA_INC
-    geopsy-src/geopsy/GeopsyGui/src/GeopsyGui.h
+    ${THIS_REL_PATH}/src/GeopsyGui.h
 )
 
 # Headers got to include/GpCoreTools/*
 set(HEA_SRCS
-    geopsy-src/geopsy/GeopsyGui/src/AbstractGraphicWindow.h
-    geopsy-src/geopsy/GeopsyGui/src/AbstractToolWidget.h
-    geopsy-src/geopsy/GeopsyGui/src/ArrayDefinition.h
-    geopsy-src/geopsy/GeopsyGui/src/ArrayMap.h
-    geopsy-src/geopsy/GeopsyGui/src/AsciiSignalComponentsWidget.h
-    geopsy-src/geopsy/GeopsyGui/src/AsciiSignalFormatEditor.h
-    geopsy-src/geopsy/GeopsyGui/src/AsciiSignalRulesWidget.h
-    geopsy-src/geopsy/GeopsyGui/src/ChronogramLayer.h
-    geopsy-src/geopsy/GeopsyGui/src/ChronogramProperties.h
-    geopsy-src/geopsy/GeopsyGui/src/CityLoader.h
-    geopsy-src/geopsy/GeopsyGui/src/CitySignalItem.h
-    geopsy-src/geopsy/GeopsyGui/src/DirectoryMonitor.h
-    geopsy-src/geopsy/GeopsyGui/src/FilterParameterWidget.h
-    geopsy-src/geopsy/GeopsyGui/src/GeopsyGui.h
-    geopsy-src/geopsy/GeopsyGui/src/GeopsyGuiDLLExport.h
-    geopsy-src/geopsy/GeopsyGui/src/GeopsyGuiEngine.h
-    geopsy-src/geopsy/GeopsyGui/src/GeopsyGuiInstallPath.h
-    geopsy-src/geopsy/GeopsyGui/src/GeopsyGuiInterface.h
-    geopsy-src/geopsy/GeopsyGui/src/GeopsyGuiStatic.h
-    geopsy-src/geopsy/GeopsyGui/src/GeopsyGuiVersion.h
-    geopsy-src/geopsy/GeopsyGui/src/HeaderWidget.h
-    geopsy-src/geopsy/GeopsyGui/src/LoadFormat.h
-    geopsy-src/geopsy/GeopsyGui/src/MorletParameterWidget.h
-    geopsy-src/geopsy/GeopsyGui/src/NormalizationParameterWidget.h
-    geopsy-src/geopsy/GeopsyGui/src/PickFormat.h
-    geopsy-src/geopsy/GeopsyGui/src/PickItem.h
-    geopsy-src/geopsy/GeopsyGui/src/PickLayer.h
-    geopsy-src/geopsy/GeopsyGui/src/PickToPick.h
-    geopsy-src/geopsy/GeopsyGui/src/PicksProperties.h
-    geopsy-src/geopsy/GeopsyGui/src/RD3LogParameter.h
-    geopsy-src/geopsy/GeopsyGui/src/RelativePositions.h
-    geopsy-src/geopsy/GeopsyGui/src/RingEditor.h
-    geopsy-src/geopsy/GeopsyGui/src/SignalFileItem.h
-    geopsy-src/geopsy/GeopsyGui/src/SignalGroupItem.h
-    geopsy-src/geopsy/GeopsyGui/src/SignalLayer.h
-    geopsy-src/geopsy/GeopsyGui/src/SignalLayerControls.h
-    geopsy-src/geopsy/GeopsyGui/src/SignalsProperties.h
-    geopsy-src/geopsy/GeopsyGui/src/SparseTimeRangeModel.h
-    geopsy-src/geopsy/GeopsyGui/src/StationCoordinatesItem.h
-    geopsy-src/geopsy/GeopsyGui/src/SubPoolWindow.h
-    geopsy-src/geopsy/GeopsyGui/src/TaperParameterWidget.h
-    geopsy-src/geopsy/GeopsyGui/src/TimeRangeParameterWidget.h
-    geopsy-src/geopsy/GeopsyGui/src/TimeReference.h
-    geopsy-src/geopsy/GeopsyGui/src/TimeWindowLayer.h
-    geopsy-src/geopsy/GeopsyGui/src/WindowingParameterWidget.h
-    geopsy-src/geopsy/GeopsyGui/src/stable.h
+    ${THIS_REL_PATH}/src/AbstractGraphicWindow.h
+    ${THIS_REL_PATH}/src/AbstractToolWidget.h
+    ${THIS_REL_PATH}/src/ArrayDefinition.h
+    ${THIS_REL_PATH}/src/ArrayMap.h
+    ${THIS_REL_PATH}/src/AsciiSignalComponentsWidget.h
+    ${THIS_REL_PATH}/src/AsciiSignalFormatEditor.h
+    ${THIS_REL_PATH}/src/AsciiSignalRulesWidget.h
+    ${THIS_REL_PATH}/src/ChronogramLayer.h
+    ${THIS_REL_PATH}/src/ChronogramProperties.h
+    ${THIS_REL_PATH}/src/CityLoader.h
+    ${THIS_REL_PATH}/src/CitySignalItem.h
+    ${THIS_REL_PATH}/src/DirectoryMonitor.h
+    ${THIS_REL_PATH}/src/FilterParameterWidget.h
+    ${THIS_REL_PATH}/src/GeopsyGui.h
+    ${THIS_REL_PATH}/src/GeopsyGuiDLLExport.h
+    ${THIS_REL_PATH}/src/GeopsyGuiEngine.h
+    ${THIS_REL_PATH}/src/GeopsyGuiInstallPath.h
+    ${THIS_REL_PATH}/src/GeopsyGuiInterface.h
+    ${THIS_REL_PATH}/src/GeopsyGuiStatic.h
+    ${THIS_REL_PATH}/src/GeopsyGuiVersion.h
+    ${THIS_REL_PATH}/src/HeaderWidget.h
+    ${THIS_REL_PATH}/src/LoadFormat.h
+    ${THIS_REL_PATH}/src/MorletParameterWidget.h
+    ${THIS_REL_PATH}/src/NormalizationParameterWidget.h
+    ${THIS_REL_PATH}/src/PickFormat.h
+    ${THIS_REL_PATH}/src/PickItem.h
+    ${THIS_REL_PATH}/src/PickLayer.h
+    ${THIS_REL_PATH}/src/PickToPick.h
+    ${THIS_REL_PATH}/src/PicksProperties.h
+    ${THIS_REL_PATH}/src/RD3LogParameter.h
+    ${THIS_REL_PATH}/src/RelativePositions.h
+    ${THIS_REL_PATH}/src/RingEditor.h
+    ${THIS_REL_PATH}/src/SignalFileItem.h
+    ${THIS_REL_PATH}/src/SignalGroupItem.h
+    ${THIS_REL_PATH}/src/SignalLayer.h
+    ${THIS_REL_PATH}/src/SignalLayerControls.h
+    ${THIS_REL_PATH}/src/SignalsProperties.h
+    ${THIS_REL_PATH}/src/SparseTimeRangeModel.h
+    ${THIS_REL_PATH}/src/StationCoordinatesItem.h
+    ${THIS_REL_PATH}/src/SubPoolWindow.h
+    ${THIS_REL_PATH}/src/TaperParameterWidget.h
+    ${THIS_REL_PATH}/src/TimeRangeParameterWidget.h
+    ${THIS_REL_PATH}/src/TimeReference.h
+    ${THIS_REL_PATH}/src/TimeWindowLayer.h
+    ${THIS_REL_PATH}/src/WindowingParameterWidget.h
+    ${THIS_REL_PATH}/src/stable.h
 )
 
 # Headers got to include/*
 set(UI_SRCS
-    geopsy-src/geopsy/GeopsyGui/src/TaperParameterWidget.ui
-    geopsy-src/geopsy/GeopsyGui/src/TimeRangeParameterWidget.ui    
-    geopsy-src/geopsy/GeopsyGui/src/ArrayDefinition.ui
-    geopsy-src/geopsy/GeopsyGui/src/AsciiSignalComponentsWidget.ui
-    geopsy-src/geopsy/GeopsyGui/src/AsciiSignalFormatEditor.ui
-    geopsy-src/geopsy/GeopsyGui/src/AsciiSignalRulesWidget.ui
-    geopsy-src/geopsy/GeopsyGui/src/ChronogramProperties.ui
-    geopsy-src/geopsy/GeopsyGui/src/CityLoader.ui
-    geopsy-src/geopsy/GeopsyGui/src/DirectoryMonitor.ui
-    geopsy-src/geopsy/GeopsyGui/src/FilterParameterWidget.ui
-    geopsy-src/geopsy/GeopsyGui/src/HeaderWidget.ui
-    geopsy-src/geopsy/GeopsyGui/src/LoadFormat.ui
-    geopsy-src/geopsy/GeopsyGui/src/MorletParameterWidget.ui
-    geopsy-src/geopsy/GeopsyGui/src/NormalizationParameterWidget.ui
-    geopsy-src/geopsy/GeopsyGui/src/PickToPick.ui
-    geopsy-src/geopsy/GeopsyGui/src/PicksProperties.ui
-    geopsy-src/geopsy/GeopsyGui/src/RD3LogParameter.ui
-    geopsy-src/geopsy/GeopsyGui/src/RelativePositions.ui
-    geopsy-src/geopsy/GeopsyGui/src/RingEditor.ui
-    geopsy-src/geopsy/GeopsyGui/src/SignalLayerControls.ui
-    geopsy-src/geopsy/GeopsyGui/src/SignalsProperties.ui    
-    geopsy-src/geopsy/GeopsyGui/src/TimeReference.ui
-    geopsy-src/geopsy/GeopsyGui/src/WindowingParameterWidget.ui
+    ${THIS_REL_PATH}/src/TaperParameterWidget.ui
+    ${THIS_REL_PATH}/src/TimeRangeParameterWidget.ui    
+    ${THIS_REL_PATH}/src/ArrayDefinition.ui
+    ${THIS_REL_PATH}/src/AsciiSignalComponentsWidget.ui
+    ${THIS_REL_PATH}/src/AsciiSignalFormatEditor.ui
+    ${THIS_REL_PATH}/src/AsciiSignalRulesWidget.ui
+    ${THIS_REL_PATH}/src/ChronogramProperties.ui
+    ${THIS_REL_PATH}/src/CityLoader.ui
+    ${THIS_REL_PATH}/src/DirectoryMonitor.ui
+    ${THIS_REL_PATH}/src/FilterParameterWidget.ui
+    ${THIS_REL_PATH}/src/HeaderWidget.ui
+    ${THIS_REL_PATH}/src/LoadFormat.ui
+    ${THIS_REL_PATH}/src/MorletParameterWidget.ui
+    ${THIS_REL_PATH}/src/NormalizationParameterWidget.ui
+    ${THIS_REL_PATH}/src/PickToPick.ui
+    ${THIS_REL_PATH}/src/PicksProperties.ui
+    ${THIS_REL_PATH}/src/RD3LogParameter.ui
+    ${THIS_REL_PATH}/src/RelativePositions.ui
+    ${THIS_REL_PATH}/src/RingEditor.ui
+    ${THIS_REL_PATH}/src/SignalLayerControls.ui
+    ${THIS_REL_PATH}/src/SignalsProperties.ui    
+    ${THIS_REL_PATH}/src/TimeReference.ui
+    ${THIS_REL_PATH}/src/WindowingParameterWidget.ui
 )
 
 
 # Include header files for compilation
-include_directories(geopsy-src/geopsy/GeopsyGui/src)
+include_directories(${THIS_REL_PATH}/src)
 
 #
 # Generate necessary headers from .ui files. (qmake lets `uic` do this job.)
@@ -293,7 +303,7 @@ set (LIBRARY_OUTPUT_PATH ${THIS_LIB_PATH})
 ### 
 
 # Add resources from file
-qt5_add_resources(QRCS geopsy-src/geopsy/GeopsyGui/GeopsyGui.qrc)
+qt5_add_resources(QRCS ${THIS_REL_PATH}/GeopsyGui.qrc)
 
 # Create shared library
 add_library(${PROJECT_NAME} SHARED ${CPP_SRCS})

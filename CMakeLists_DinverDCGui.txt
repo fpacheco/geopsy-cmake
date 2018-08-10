@@ -30,6 +30,16 @@ endif()
 ###
 
 # General build directory 
+if(CMAKE_MODULAR_BUILD)
+    # Global build
+    set(THIS_REL_PATH ".")
+    #message(STATUS "****** Modular (src: ${THIS_REL_PATH}/src) ******")
+else()
+    set(THIS_REL_PATH "geopsy-src/dinver/DinverDCGui")
+    #message(STATUS "****** Monolithic (src: ${THIS_REL_PATH}/src) ******")
+endif()
+
+# General build directory 
 if(GEOPSY_APP_BUILD_PATH)
     # Global build
     set(THIS_BUILD_PATH ${GEOPSY_APP_BUILD_PATH})
@@ -146,41 +156,41 @@ set(QT5_LIBRARIES Qt5::Core Qt5::Widgets)
 set(TARGET ${CMAKE_PROJECT_NAME})
 
 set(CPP_SRCS
-    geopsy-src/dinver/DinverDCGui/src/DCModelViewer.cpp
-    geopsy-src/dinver/DinverDCGui/src/DinverDCGui.cpp
-    geopsy-src/dinver/DinverDCGui/src/DispersionViewer.cpp
-    geopsy-src/dinver/DinverDCGui/src/EllipticityViewer.cpp
-    geopsy-src/dinver/DinverDCGui/src/GroundModelViewer.cpp
-    geopsy-src/dinver/DinverDCGui/src/MagnetoTelluricViewer.cpp
-    geopsy-src/dinver/DinverDCGui/src/RefractionViewer.cpp
-    geopsy-src/dinver/DinverDCGui/src/ViewerParam.cpp
+    ${THIS_REL_PATH}/src/DCModelViewer.cpp
+    ${THIS_REL_PATH}/src/DinverDCGui.cpp
+    ${THIS_REL_PATH}/src/DispersionViewer.cpp
+    ${THIS_REL_PATH}/src/EllipticityViewer.cpp
+    ${THIS_REL_PATH}/src/GroundModelViewer.cpp
+    ${THIS_REL_PATH}/src/MagnetoTelluricViewer.cpp
+    ${THIS_REL_PATH}/src/RefractionViewer.cpp
+    ${THIS_REL_PATH}/src/ViewerParam.cpp
 )
 
 # Headers got to include/*
 set(HEA_INC
-    geopsy-src/dinver/DinverDCGui/src/DinverDCGui.h
+    ${THIS_REL_PATH}/src/DinverDCGui.h
 )
 
 # Headers got to include/GpCoreTools/*
 set(HEA_SRCS
-    geopsy-src/dinver/DinverDCGui/src/AutocorrViewer.h
-    geopsy-src/dinver/DinverDCGui/src/DCModelViewer.h
-    geopsy-src/dinver/DinverDCGui/src/DinverDCGui.h
-    geopsy-src/dinver/DinverDCGui/src/DinverDCGuiDLLExport.h
-    geopsy-src/dinver/DinverDCGui/src/DinverDCGuiInstallPath.h
-    geopsy-src/dinver/DinverDCGui/src/DinverDCGuiStatic.h
-    geopsy-src/dinver/DinverDCGui/src/DinverDCGuiVersion.h
-    geopsy-src/dinver/DinverDCGui/src/DispersionViewer.h
-    geopsy-src/dinver/DinverDCGui/src/EllipticityViewer.h
-    geopsy-src/dinver/DinverDCGui/src/GroundModelViewer.h
-    geopsy-src/dinver/DinverDCGui/src/MagnetoTelluricViewer.h
-    geopsy-src/dinver/DinverDCGui/src/RefractionViewer.h
-    geopsy-src/dinver/DinverDCGui/src/ViewerParam.h
+    ${THIS_REL_PATH}/src/AutocorrViewer.h
+    ${THIS_REL_PATH}/src/DCModelViewer.h
+    ${THIS_REL_PATH}/src/DinverDCGui.h
+    ${THIS_REL_PATH}/src/DinverDCGuiDLLExport.h
+    ${THIS_REL_PATH}/src/DinverDCGuiInstallPath.h
+    ${THIS_REL_PATH}/src/DinverDCGuiStatic.h
+    ${THIS_REL_PATH}/src/DinverDCGuiVersion.h
+    ${THIS_REL_PATH}/src/DispersionViewer.h
+    ${THIS_REL_PATH}/src/EllipticityViewer.h
+    ${THIS_REL_PATH}/src/GroundModelViewer.h
+    ${THIS_REL_PATH}/src/MagnetoTelluricViewer.h
+    ${THIS_REL_PATH}/src/RefractionViewer.h
+    ${THIS_REL_PATH}/src/ViewerParam.h
 )
 
 # Headers got to include/*
 set(UI_SRCS
-    geopsy-src/dinver/DinverDCGui/src/ViewerParam.ui
+    ${THIS_REL_PATH}/src/ViewerParam.ui
 )
 
 #
@@ -190,7 +200,7 @@ set(UI_SRCS
 # QT5_WRAP_UI(UI_GENERATED_HEADERS ${UI_SRCS})
 
 # Include header files for compilation
-include_directories(geopsy-src/dinver/DinverDCGui/src)
+include_directories(${THIS_REL_PATH}/src)
 
 #get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
 #foreach(dir ${dirs})

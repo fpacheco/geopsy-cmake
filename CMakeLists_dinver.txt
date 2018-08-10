@@ -30,6 +30,16 @@ endif()
 ###
 
 # General build directory 
+if(CMAKE_MODULAR_BUILD)
+    # Global build
+    set(THIS_REL_PATH ".")
+    #message(STATUS "****** Modular (src: ${THIS_REL_PATH}/src) ******")
+else()
+    set(THIS_REL_PATH "geopsy-src/dinver/dinver")
+    #message(STATUS "****** Monolithic (src: ${THIS_REL_PATH}/src) ******")
+endif()
+
+# General build directory 
 if(GEOPSY_APP_BUILD_PATH)
     # Global build
     set(THIS_BUILD_PATH ${GEOPSY_APP_BUILD_PATH})
@@ -135,27 +145,27 @@ message(STATUS "Autogen goes to: ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_aut
 set(TARGET ${CMAKE_PROJECT_NAME})
 
 set(CPP_SRCS
-    geopsy-src/dinver/dinver/src/AddPlotParam.cpp
-    geopsy-src/dinver/dinver/src/Engine.cpp
-    geopsy-src/dinver/dinver/src/InversionThread.cpp
-    geopsy-src/dinver/dinver/src/LaunchThreadDelegate.cpp
-    geopsy-src/dinver/dinver/src/LaunchThreadItem.cpp
-    geopsy-src/dinver/dinver/src/LaunchThreadTable.cpp
-    geopsy-src/dinver/dinver/src/MainWindow.cpp
-    geopsy-src/dinver/dinver/src/MaxNumProcess.cpp
-    geopsy-src/dinver/dinver/src/ModelThreadInfo.cpp
-    geopsy-src/dinver/dinver/src/NAModelsPlot.cpp
-    geopsy-src/dinver/dinver/src/NAModelsPlotProperties.cpp
-    geopsy-src/dinver/dinver/src/PSViewer.cpp
-    geopsy-src/dinver/dinver/src/ParamEditor.cpp
-    geopsy-src/dinver/dinver/src/PluginPaths.cpp
-    geopsy-src/dinver/dinver/src/PluginSelector.cpp
-    geopsy-src/dinver/dinver/src/ProcessStatus.cpp
-    geopsy-src/dinver/dinver/src/SelectPSViewer.cpp
-    geopsy-src/dinver/dinver/src/ThreadLauncher.cpp
-    geopsy-src/dinver/dinver/src/WindowEnvironment.cpp
-    geopsy-src/dinver/dinver/src/XMLDinverGui.cpp
-    geopsy-src/dinver/dinver/src/main.cpp
+    ${THIS_REL_PATH}/src/AddPlotParam.cpp
+    ${THIS_REL_PATH}/src/Engine.cpp
+    ${THIS_REL_PATH}/src/InversionThread.cpp
+    ${THIS_REL_PATH}/src/LaunchThreadDelegate.cpp
+    ${THIS_REL_PATH}/src/LaunchThreadItem.cpp
+    ${THIS_REL_PATH}/src/LaunchThreadTable.cpp
+    ${THIS_REL_PATH}/src/MainWindow.cpp
+    ${THIS_REL_PATH}/src/MaxNumProcess.cpp
+    ${THIS_REL_PATH}/src/ModelThreadInfo.cpp
+    ${THIS_REL_PATH}/src/NAModelsPlot.cpp
+    ${THIS_REL_PATH}/src/NAModelsPlotProperties.cpp
+    ${THIS_REL_PATH}/src/PSViewer.cpp
+    ${THIS_REL_PATH}/src/ParamEditor.cpp
+    ${THIS_REL_PATH}/src/PluginPaths.cpp
+    ${THIS_REL_PATH}/src/PluginSelector.cpp
+    ${THIS_REL_PATH}/src/ProcessStatus.cpp
+    ${THIS_REL_PATH}/src/SelectPSViewer.cpp
+    ${THIS_REL_PATH}/src/ThreadLauncher.cpp
+    ${THIS_REL_PATH}/src/WindowEnvironment.cpp
+    ${THIS_REL_PATH}/src/XMLDinverGui.cpp
+    ${THIS_REL_PATH}/src/main.cpp
 )
 
 # Headers got to include/*
@@ -165,41 +175,41 @@ set(HEA_INC
 
 # Headers got to include/GpCoreTools/*
 set(HEA_SRCS
-    geopsy-src/dinver/dinver/src/AddPlotParam.h
-    geopsy-src/dinver/dinver/src/Engine.h
-    geopsy-src/dinver/dinver/src/InversionThread.h
-    geopsy-src/dinver/dinver/src/LaunchThreadDelegate.h
-    geopsy-src/dinver/dinver/src/LaunchThreadItem.h
-    geopsy-src/dinver/dinver/src/LaunchThreadTable.h
-    geopsy-src/dinver/dinver/src/MainWindow.h
-    geopsy-src/dinver/dinver/src/MaxNumProcess.h
-    geopsy-src/dinver/dinver/src/ModelThreadInfo.h
-    geopsy-src/dinver/dinver/src/NAModelsPlot.h
-    geopsy-src/dinver/dinver/src/NAModelsPlotProperties.h
-    geopsy-src/dinver/dinver/src/PSViewer.h
-    geopsy-src/dinver/dinver/src/ParamEditor.h
-    geopsy-src/dinver/dinver/src/PluginPaths.h
-    geopsy-src/dinver/dinver/src/PluginSelector.h
-    geopsy-src/dinver/dinver/src/ProcessStatus.h
-    geopsy-src/dinver/dinver/src/SelectPSViewer.h
-    geopsy-src/dinver/dinver/src/ThreadLauncher.h
-    geopsy-src/dinver/dinver/src/WindowEnvironment.h
-    geopsy-src/dinver/dinver/src/XMLDinverGui.h
-    geopsy-src/dinver/dinver/src/dinverInstallPath.h
-    geopsy-src/dinver/dinver/src/dinverVersion.h
+    ${THIS_REL_PATH}/src/AddPlotParam.h
+    ${THIS_REL_PATH}/src/Engine.h
+    ${THIS_REL_PATH}/src/InversionThread.h
+    ${THIS_REL_PATH}/src/LaunchThreadDelegate.h
+    ${THIS_REL_PATH}/src/LaunchThreadItem.h
+    ${THIS_REL_PATH}/src/LaunchThreadTable.h
+    ${THIS_REL_PATH}/src/MainWindow.h
+    ${THIS_REL_PATH}/src/MaxNumProcess.h
+    ${THIS_REL_PATH}/src/ModelThreadInfo.h
+    ${THIS_REL_PATH}/src/NAModelsPlot.h
+    ${THIS_REL_PATH}/src/NAModelsPlotProperties.h
+    ${THIS_REL_PATH}/src/PSViewer.h
+    ${THIS_REL_PATH}/src/ParamEditor.h
+    ${THIS_REL_PATH}/src/PluginPaths.h
+    ${THIS_REL_PATH}/src/PluginSelector.h
+    ${THIS_REL_PATH}/src/ProcessStatus.h
+    ${THIS_REL_PATH}/src/SelectPSViewer.h
+    ${THIS_REL_PATH}/src/ThreadLauncher.h
+    ${THIS_REL_PATH}/src/WindowEnvironment.h
+    ${THIS_REL_PATH}/src/XMLDinverGui.h
+    ${THIS_REL_PATH}/src/dinverInstallPath.h
+    ${THIS_REL_PATH}/src/dinverVersion.h
 )
 
 # Headers got to include/*
 set(UI_SRCS
-    geopsy-src/dinver/dinver/src/AddPlotParam.ui
-    geopsy-src/dinver/dinver/src/MaxNumProcess.ui
-    geopsy-src/dinver/dinver/src/NAModelsPlotProperties.ui
-    geopsy-src/dinver/dinver/src/ParamEditor.ui
-    geopsy-src/dinver/dinver/src/PluginPaths.ui
-    geopsy-src/dinver/dinver/src/PluginSelector.ui
-    geopsy-src/dinver/dinver/src/ProcessStatus.ui
-    geopsy-src/dinver/dinver/src/SelectPSViewer.ui
-    geopsy-src/dinver/dinver/src/ThreadLauncher.ui
+    ${THIS_REL_PATH}/src/AddPlotParam.ui
+    ${THIS_REL_PATH}/src/MaxNumProcess.ui
+    ${THIS_REL_PATH}/src/NAModelsPlotProperties.ui
+    ${THIS_REL_PATH}/src/ParamEditor.ui
+    ${THIS_REL_PATH}/src/PluginPaths.ui
+    ${THIS_REL_PATH}/src/PluginSelector.ui
+    ${THIS_REL_PATH}/src/ProcessStatus.ui
+    ${THIS_REL_PATH}/src/SelectPSViewer.ui
+    ${THIS_REL_PATH}/src/ThreadLauncher.ui
 )
 
 #
@@ -209,7 +219,7 @@ set(UI_SRCS
 # QT5_WRAP_UI(UI_GENERATED_HEADERS ${UI_SRCS})
 
 # Include header files for compilation
-include_directories(geopsy-src/dinver/dinver/src/)
+include_directories(${THIS_REL_PATH}/src)
 
 #get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
 #foreach(dir ${dirs})
@@ -224,7 +234,7 @@ set (LIBRARY_OUTPUT_PATH ${THIS_LIB_PATH})
 ### 
 
 # Add resources from file
-qt5_add_resources(QRCS geopsy-src/dinver/dinver/dinver.qrc)
+qt5_add_resources(QRCS ${THIS_REL_PATH}/dinver.qrc)
 
 # Create shared library
 add_executable(${PROJECT_NAME} ${CPP_SRCS} ${UI_HEADERS} ${QRCS})

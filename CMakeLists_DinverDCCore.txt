@@ -30,6 +30,16 @@ endif()
 ###
 
 # General build directory 
+if(CMAKE_MODULAR_BUILD)
+    # Global build
+    set(THIS_REL_PATH ".")
+    #message(STATUS "****** Modular (src: ${THIS_REL_PATH}/src) ******")
+else()
+    set(THIS_REL_PATH "geopsy-src/dinver/DinverDCCore")
+    #message(STATUS "****** Monolithic (src: ${THIS_REL_PATH}/src) ******")
+endif()
+
+# General build directory 
 if(GEOPSY_APP_BUILD_PATH)
     # Global build
     set(THIS_BUILD_PATH ${GEOPSY_APP_BUILD_PATH})
@@ -146,60 +156,60 @@ set(QT5_LIBRARIES Qt5::Core)
 set(TARGET ${CMAKE_PROJECT_NAME})
 
 set(CPP_SRCS
-    geopsy-src/dinver/DinverDCCore/src/AutocorrTarget.cpp
-    geopsy-src/dinver/DinverDCCore/src/BottomValueCondition.cpp
-    geopsy-src/dinver/DinverDCCore/src/DCModelInfo.cpp
-    geopsy-src/dinver/DinverDCCore/src/DCReportBlock.cpp
-    geopsy-src/dinver/DinverDCCore/src/DinverDCCore.cpp
-    geopsy-src/dinver/DinverDCCore/src/Forward.cpp
-    geopsy-src/dinver/DinverDCCore/src/GroundParameter.cpp
-    geopsy-src/dinver/DinverDCCore/src/MagnetoTelluricTarget.cpp
-    geopsy-src/dinver/DinverDCCore/src/ModalCurveTarget.cpp
-    geopsy-src/dinver/DinverDCCore/src/ModalStorageReader.cpp
-    geopsy-src/dinver/DinverDCCore/src/Param3DGroundModel.cpp
-    geopsy-src/dinver/DinverDCCore/src/ParamGroundModel.cpp
-    geopsy-src/dinver/DinverDCCore/src/ParamLayer.cpp
-    geopsy-src/dinver/DinverDCCore/src/ParamProfile.cpp
-    geopsy-src/dinver/DinverDCCore/src/PoissonCondition.cpp
-    geopsy-src/dinver/DinverDCCore/src/RefractionTarget.cpp
-    geopsy-src/dinver/DinverDCCore/src/Target.cpp
-    geopsy-src/dinver/DinverDCCore/src/TargetList.cpp
-    geopsy-src/dinver/DinverDCCore/src/TargetList2D.cpp
-    geopsy-src/dinver/DinverDCCore/src/ValueTarget.cpp
+    ${THIS_REL_PATH}/src/AutocorrTarget.cpp
+    ${THIS_REL_PATH}/src/BottomValueCondition.cpp
+    ${THIS_REL_PATH}/src/DCModelInfo.cpp
+    ${THIS_REL_PATH}/src/DCReportBlock.cpp
+    ${THIS_REL_PATH}/src/DinverDCCore.cpp
+    ${THIS_REL_PATH}/src/Forward.cpp
+    ${THIS_REL_PATH}/src/GroundParameter.cpp
+    ${THIS_REL_PATH}/src/MagnetoTelluricTarget.cpp
+    ${THIS_REL_PATH}/src/ModalCurveTarget.cpp
+    ${THIS_REL_PATH}/src/ModalStorageReader.cpp
+    ${THIS_REL_PATH}/src/Param3DGroundModel.cpp
+    ${THIS_REL_PATH}/src/ParamGroundModel.cpp
+    ${THIS_REL_PATH}/src/ParamLayer.cpp
+    ${THIS_REL_PATH}/src/ParamProfile.cpp
+    ${THIS_REL_PATH}/src/PoissonCondition.cpp
+    ${THIS_REL_PATH}/src/RefractionTarget.cpp
+    ${THIS_REL_PATH}/src/Target.cpp
+    ${THIS_REL_PATH}/src/TargetList.cpp
+    ${THIS_REL_PATH}/src/TargetList2D.cpp
+    ${THIS_REL_PATH}/src/ValueTarget.cpp
 )
 
 # Headers got to include/*
 set(HEA_INC
-    geopsy-src/dinver/DinverDCCore/src/DinverDCCore.h
+    ${THIS_REL_PATH}/src/DinverDCCore.h
 )
 
 # Headers got to include/GpCoreTools/*
 set(HEA_SRCS
-    geopsy-src/dinver/DinverDCCore/src/AutocorrTarget.h
-    geopsy-src/dinver/DinverDCCore/src/BottomValueCondition.h
-    geopsy-src/dinver/DinverDCCore/src/DCModelInfo.h
-    geopsy-src/dinver/DinverDCCore/src/DCReportBlock.h
-    geopsy-src/dinver/DinverDCCore/src/DinverDCCore.h
-    geopsy-src/dinver/DinverDCCore/src/DinverDCCoreDLLExport.h
-    geopsy-src/dinver/DinverDCCore/src/DinverDCCoreInstallPath.h
-    geopsy-src/dinver/DinverDCCore/src/DinverDCCoreStatic.h
-    geopsy-src/dinver/DinverDCCore/src/DinverDCCoreVersion.h
-    geopsy-src/dinver/DinverDCCore/src/Forward.h
-    geopsy-src/dinver/DinverDCCore/src/GroundParameter.h
-    geopsy-src/dinver/DinverDCCore/src/MagnetoTelluricTarget.h
-    geopsy-src/dinver/DinverDCCore/src/ModalCurveTarget.h
-    geopsy-src/dinver/DinverDCCore/src/ModalStorageReader.h
-    geopsy-src/dinver/DinverDCCore/src/Param3DGroundModel.h
-    geopsy-src/dinver/DinverDCCore/src/ParamGroundModel.h
-    geopsy-src/dinver/DinverDCCore/src/ParamLayer.h
-    geopsy-src/dinver/DinverDCCore/src/ParamProfile.h
-    geopsy-src/dinver/DinverDCCore/src/PoissonCondition.h
-    geopsy-src/dinver/DinverDCCore/src/RefractionTarget.h
-    geopsy-src/dinver/DinverDCCore/src/Target.h
-    geopsy-src/dinver/DinverDCCore/src/TargetList.h
-    geopsy-src/dinver/DinverDCCore/src/TargetList2D.h
-    geopsy-src/dinver/DinverDCCore/src/ValueTarget.h
-    geopsy-src/dinver/DinverDCCore/src/stable.h
+    ${THIS_REL_PATH}/src/AutocorrTarget.h
+    ${THIS_REL_PATH}/src/BottomValueCondition.h
+    ${THIS_REL_PATH}/src/DCModelInfo.h
+    ${THIS_REL_PATH}/src/DCReportBlock.h
+    ${THIS_REL_PATH}/src/DinverDCCore.h
+    ${THIS_REL_PATH}/src/DinverDCCoreDLLExport.h
+    ${THIS_REL_PATH}/src/DinverDCCoreInstallPath.h
+    ${THIS_REL_PATH}/src/DinverDCCoreStatic.h
+    ${THIS_REL_PATH}/src/DinverDCCoreVersion.h
+    ${THIS_REL_PATH}/src/Forward.h
+    ${THIS_REL_PATH}/src/GroundParameter.h
+    ${THIS_REL_PATH}/src/MagnetoTelluricTarget.h
+    ${THIS_REL_PATH}/src/ModalCurveTarget.h
+    ${THIS_REL_PATH}/src/ModalStorageReader.h
+    ${THIS_REL_PATH}/src/Param3DGroundModel.h
+    ${THIS_REL_PATH}/src/ParamGroundModel.h
+    ${THIS_REL_PATH}/src/ParamLayer.h
+    ${THIS_REL_PATH}/src/ParamProfile.h
+    ${THIS_REL_PATH}/src/PoissonCondition.h
+    ${THIS_REL_PATH}/src/RefractionTarget.h
+    ${THIS_REL_PATH}/src/Target.h
+    ${THIS_REL_PATH}/src/TargetList.h
+    ${THIS_REL_PATH}/src/TargetList2D.h
+    ${THIS_REL_PATH}/src/ValueTarget.h
+    ${THIS_REL_PATH}/src/stable.h
 )
 
 # Headers got to include/*
@@ -214,7 +224,7 @@ set(UI_SRCS
 # QT5_WRAP_UI(UI_GENERATED_HEADERS ${UI_SRCS})
 
 # Include header files for compilation
-include_directories(geopsy-src/dinver/DinverDCCore/src)
+include_directories(${THIS_REL_PATH}/src)
 
 #get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
 #foreach(dir ${dirs})

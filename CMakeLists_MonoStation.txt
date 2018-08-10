@@ -30,6 +30,16 @@ endif()
 ###
 
 # General build directory 
+if(CMAKE_MODULAR_BUILD)
+    # Global build
+    set(THIS_REL_PATH ".")
+    #message(STATUS "****** Modular (src: ${THIS_REL_PATH}/src) ******")
+else()
+    set(THIS_REL_PATH "geopsy-src/geopsy/MonoStation")
+    #message(STATUS "****** Monolithic (src: ${THIS_REL_PATH}/src) ******")
+endif()
+
+# General build directory 
 if(GEOPSY_APP_BUILD_PATH)
     # Global build
     set(THIS_BUILD_PATH ${GEOPSY_APP_BUILD_PATH})
@@ -141,30 +151,30 @@ message(STATUS "Autogen goes to: ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_aut
 set(TARGET ${CMAKE_PROJECT_NAME})
 
 set(CPP_SRCS
-geopsy-src/geopsy/MonoStation/src/AbstractMonoTool.cpp
-geopsy-src/geopsy/MonoStation/src/AbstractMonoToolWidget.cpp
-geopsy-src/geopsy/MonoStation/src/AbstractStation.cpp
-geopsy-src/geopsy/MonoStation/src/AbstractSummary.cpp
-geopsy-src/geopsy/MonoStation/src/CategoryGroupItem.cpp
-geopsy-src/geopsy/MonoStation/src/FilterTimeWindows.cpp
-geopsy-src/geopsy/MonoStation/src/LoadWinStatList.cpp
-geopsy-src/geopsy/MonoStation/src/MonoParameters.cpp
-geopsy-src/geopsy/MonoStation/src/MonoStation.cpp
-geopsy-src/geopsy/MonoStation/src/NewNoiseModel.cpp
-geopsy-src/geopsy/MonoStation/src/PeakEditor.cpp
-geopsy-src/geopsy/MonoStation/src/PeakItemModel.cpp
-geopsy-src/geopsy/MonoStation/src/PeakSearchRange.cpp
-geopsy-src/geopsy/MonoStation/src/ReplaceLog.cpp
-geopsy-src/geopsy/MonoStation/src/SetCategory.cpp
-geopsy-src/geopsy/MonoStation/src/SpectrumStationSignals.cpp
-geopsy-src/geopsy/MonoStation/src/StationLine.cpp
-geopsy-src/geopsy/MonoStation/src/StationResults.cpp
-geopsy-src/geopsy/MonoStation/src/StatisticResults.cpp
-geopsy-src/geopsy/MonoStation/src/StudentTest.cpp
-geopsy-src/geopsy/MonoStation/src/StudentTestCurveModel.cpp
-geopsy-src/geopsy/MonoStation/src/SummaryMapOptions.cpp
-geopsy-src/geopsy/MonoStation/src/WinResults.cpp
-geopsy-src/geopsy/MonoStation/src/WinResultsOptions.cpp
+${THIS_REL_PATH}/src/AbstractMonoTool.cpp
+${THIS_REL_PATH}/src/AbstractMonoToolWidget.cpp
+${THIS_REL_PATH}/src/AbstractStation.cpp
+${THIS_REL_PATH}/src/AbstractSummary.cpp
+${THIS_REL_PATH}/src/CategoryGroupItem.cpp
+${THIS_REL_PATH}/src/FilterTimeWindows.cpp
+${THIS_REL_PATH}/src/LoadWinStatList.cpp
+${THIS_REL_PATH}/src/MonoParameters.cpp
+${THIS_REL_PATH}/src/MonoStation.cpp
+${THIS_REL_PATH}/src/NewNoiseModel.cpp
+${THIS_REL_PATH}/src/PeakEditor.cpp
+${THIS_REL_PATH}/src/PeakItemModel.cpp
+${THIS_REL_PATH}/src/PeakSearchRange.cpp
+${THIS_REL_PATH}/src/ReplaceLog.cpp
+${THIS_REL_PATH}/src/SetCategory.cpp
+${THIS_REL_PATH}/src/SpectrumStationSignals.cpp
+${THIS_REL_PATH}/src/StationLine.cpp
+${THIS_REL_PATH}/src/StationResults.cpp
+${THIS_REL_PATH}/src/StatisticResults.cpp
+${THIS_REL_PATH}/src/StudentTest.cpp
+${THIS_REL_PATH}/src/StudentTestCurveModel.cpp
+${THIS_REL_PATH}/src/SummaryMapOptions.cpp
+${THIS_REL_PATH}/src/WinResults.cpp
+${THIS_REL_PATH}/src/WinResultsOptions.cpp
 )
 
 # Headers got to include/*
@@ -174,49 +184,49 @@ set(HEA_INC
 
 # Headers got to include/GpCoreTools/*
 set(HEA_SRCS
-geopsy-src/geopsy/MonoStation/src/AbstractMonoTool.h
-geopsy-src/geopsy/MonoStation/src/AbstractMonoToolWidget.h
-geopsy-src/geopsy/MonoStation/src/AbstractStation.h
-geopsy-src/geopsy/MonoStation/src/AbstractSummary.h
-geopsy-src/geopsy/MonoStation/src/CategoryGroupItem.h
-geopsy-src/geopsy/MonoStation/src/FilterTimeWindows.h
-geopsy-src/geopsy/MonoStation/src/LoadWinStatList.h
-geopsy-src/geopsy/MonoStation/src/MonoParameters.h
-geopsy-src/geopsy/MonoStation/src/MonoStationDLLExport.h
-geopsy-src/geopsy/MonoStation/src/MonoStation.h
-geopsy-src/geopsy/MonoStation/src/MonoStationInstallPath.h
-geopsy-src/geopsy/MonoStation/src/MonoStationStatic.h
-geopsy-src/geopsy/MonoStation/src/MonoStationVersion.h
-geopsy-src/geopsy/MonoStation/src/NewNoiseModel.h
-geopsy-src/geopsy/MonoStation/src/PeakEditor.h
-geopsy-src/geopsy/MonoStation/src/PeakItemModel.h
-geopsy-src/geopsy/MonoStation/src/PeakSearchRange.h
-geopsy-src/geopsy/MonoStation/src/ReplaceLog.h
-geopsy-src/geopsy/MonoStation/src/SetCategory.h
-geopsy-src/geopsy/MonoStation/src/SpectrumStationSignals.h
-geopsy-src/geopsy/MonoStation/src/stable.h
-geopsy-src/geopsy/MonoStation/src/StationLine.h
-geopsy-src/geopsy/MonoStation/src/StationResults.h
-geopsy-src/geopsy/MonoStation/src/StatisticResults.h
-geopsy-src/geopsy/MonoStation/src/StudentTestCurveModel.h
-geopsy-src/geopsy/MonoStation/src/StudentTest.h
-geopsy-src/geopsy/MonoStation/src/SummaryMapOptions.h
-geopsy-src/geopsy/MonoStation/src/WinResults.h
-geopsy-src/geopsy/MonoStation/src/WinResultsOptions.h
+${THIS_REL_PATH}/src/AbstractMonoTool.h
+${THIS_REL_PATH}/src/AbstractMonoToolWidget.h
+${THIS_REL_PATH}/src/AbstractStation.h
+${THIS_REL_PATH}/src/AbstractSummary.h
+${THIS_REL_PATH}/src/CategoryGroupItem.h
+${THIS_REL_PATH}/src/FilterTimeWindows.h
+${THIS_REL_PATH}/src/LoadWinStatList.h
+${THIS_REL_PATH}/src/MonoParameters.h
+${THIS_REL_PATH}/src/MonoStationDLLExport.h
+${THIS_REL_PATH}/src/MonoStation.h
+${THIS_REL_PATH}/src/MonoStationInstallPath.h
+${THIS_REL_PATH}/src/MonoStationStatic.h
+${THIS_REL_PATH}/src/MonoStationVersion.h
+${THIS_REL_PATH}/src/NewNoiseModel.h
+${THIS_REL_PATH}/src/PeakEditor.h
+${THIS_REL_PATH}/src/PeakItemModel.h
+${THIS_REL_PATH}/src/PeakSearchRange.h
+${THIS_REL_PATH}/src/ReplaceLog.h
+${THIS_REL_PATH}/src/SetCategory.h
+${THIS_REL_PATH}/src/SpectrumStationSignals.h
+${THIS_REL_PATH}/src/stable.h
+${THIS_REL_PATH}/src/StationLine.h
+${THIS_REL_PATH}/src/StationResults.h
+${THIS_REL_PATH}/src/StatisticResults.h
+${THIS_REL_PATH}/src/StudentTestCurveModel.h
+${THIS_REL_PATH}/src/StudentTest.h
+${THIS_REL_PATH}/src/SummaryMapOptions.h
+${THIS_REL_PATH}/src/WinResults.h
+${THIS_REL_PATH}/src/WinResultsOptions.h
 )
 
 # Headers got to include/*
 set(UI_SRCS
-geopsy-src/geopsy/MonoStation/src/AbstractMonoToolWidget.ui
-geopsy-src/geopsy/MonoStation/src/FilterTimeWindows.ui
-geopsy-src/geopsy/MonoStation/src/LoadWinStatList.ui
-geopsy-src/geopsy/MonoStation/src/PeakEditor.ui
-geopsy-src/geopsy/MonoStation/src/PeakSearchRange.ui
-geopsy-src/geopsy/MonoStation/src/ReplaceLog.ui
-geopsy-src/geopsy/MonoStation/src/SetCategory.ui
-geopsy-src/geopsy/MonoStation/src/StudentTest.ui
-geopsy-src/geopsy/MonoStation/src/SummaryMapOptions.ui
-geopsy-src/geopsy/MonoStation/src/WinResultsOptions.ui
+${THIS_REL_PATH}/src/AbstractMonoToolWidget.ui
+${THIS_REL_PATH}/src/FilterTimeWindows.ui
+${THIS_REL_PATH}/src/LoadWinStatList.ui
+${THIS_REL_PATH}/src/PeakEditor.ui
+${THIS_REL_PATH}/src/PeakSearchRange.ui
+${THIS_REL_PATH}/src/ReplaceLog.ui
+${THIS_REL_PATH}/src/SetCategory.ui
+${THIS_REL_PATH}/src/StudentTest.ui
+${THIS_REL_PATH}/src/SummaryMapOptions.ui
+${THIS_REL_PATH}/src/WinResultsOptions.ui
 )
 
 #
@@ -226,7 +236,7 @@ geopsy-src/geopsy/MonoStation/src/WinResultsOptions.ui
 # QT5_WRAP_UI(UI_GENERATED_HEADERS ${UI_SRCS})
 
 # Include header files for compilation
-include_directories(geopsy-src/geopsy/MonoStation/src)
+include_directories(${THIS_REL_PATH}/src)
 
 #get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
 #foreach(dir ${dirs})
@@ -241,7 +251,7 @@ set (LIBRARY_OUTPUT_PATH ${THIS_LIB_PATH})
 ### 
 
 # Add resources from file
-qt5_add_resources(QRCS geopsy-src/lib/QGpGuiTools/QGpGuiTools.qrc)
+# qt5_add_resources(QRCS ${THIS_REL_PATH}/QGpGuiTools.qrc)
 
 # Create shared library
 add_library(${PROJECT_NAME} SHARED ${CPP_SRCS} ${QRCS})

@@ -30,6 +30,16 @@ endif()
 ###
 
 # General build directory 
+if(CMAKE_MODULAR_BUILD)
+    # Global build
+    set(THIS_REL_PATH ".")
+    #message(STATUS "****** Modular (src: ${THIS_REL_PATH}/src) ******")
+else()
+    set(THIS_REL_PATH "geopsy-src/geopsy/geopsyfigs")
+    #message(STATUS "****** Monolithic (src: ${THIS_REL_PATH}/src) ******")
+endif()
+
+# General build directory 
 if(GEOPSY_APP_BUILD_PATH)
     # Global build
     set(THIS_BUILD_PATH ${GEOPSY_APP_BUILD_PATH})
@@ -146,7 +156,7 @@ set(QT5_LIBRARIES Qt5::Core Qt5::Widgets)
 set(TARGET ${CMAKE_PROJECT_NAME})
 
 set(CPP_SRCS
-geopsy-src/geopsy/geopsyfigs/src/GeopsyFigs.cpp
+${THIS_REL_PATH}/src/GeopsyFigs.cpp
 )
 
 # Headers got to include/*
@@ -156,10 +166,10 @@ set(HEA_INC
 
 # Headers got to include/GpCoreTools/*
 set(HEA_SRCS
-geopsy-src/geopsy/geopsyfigs/src/GeopsyFigs.h
-    geopsy-src/geopsy/geopsyfigs/src/geopsyfigsInstallPath.h
-    geopsy-src/geopsy/geopsyfigs/src/geopsyfigsVersion.h
-    geopsy-src/geopsy/geopsyfigs/src/stable.h
+${THIS_REL_PATH}/src/GeopsyFigs.h
+    ${THIS_REL_PATH}/src/geopsyfigsInstallPath.h
+    ${THIS_REL_PATH}/src/geopsyfigsVersion.h
+    ${THIS_REL_PATH}/src/stable.h
 )
 
 # Headers got to include/*
@@ -174,7 +184,7 @@ set(UI_SRCS
 # QT5_WRAP_UI(UI_GENERATED_HEADERS ${UI_SRCS})
 
 # Include header files for compilation
-include_directories(geopsy-src/geopsy/geopsyfigs/src)
+include_directories(${THIS_REL_PATH}/src)
 
 ### Set BUILD PATHS
 # Set library build path 

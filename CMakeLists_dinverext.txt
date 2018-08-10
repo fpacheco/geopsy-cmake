@@ -30,6 +30,16 @@ endif()
 ###
 
 # General build directory 
+if(CMAKE_MODULAR_BUILD)
+    # Global build
+    set(THIS_REL_PATH ".")
+    #message(STATUS "****** Modular (src: ${THIS_REL_PATH}/src) ******")
+else()
+    set(THIS_REL_PATH "geopsy-src/dinver/dinverext")
+    #message(STATUS "****** Monolithic (src: ${THIS_REL_PATH}/src) ******")
+endif()
+
+# General build directory 
 if(GEOPSY_APP_BUILD_PATH)
     # Global build
     set(THIS_BUILD_PATH ${GEOPSY_APP_BUILD_PATH})
@@ -135,10 +145,10 @@ message(STATUS "Autogen goes to: ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_aut
 set(TARGET ${CMAKE_PROJECT_NAME})
 
 set(CPP_SRCS
-    geopsy-src/dinver/dinverext/src/ExtPlugin.cpp
-    geopsy-src/dinver/dinverext/src/ExtTarget.cpp
-    geopsy-src/dinver/dinverext/src/ExtTargetWidget.cpp
-    geopsy-src/dinver/dinverext/src/Forward.cpp
+    ${THIS_REL_PATH}/src/ExtPlugin.cpp
+    ${THIS_REL_PATH}/src/ExtTarget.cpp
+    ${THIS_REL_PATH}/src/ExtTargetWidget.cpp
+    ${THIS_REL_PATH}/src/Forward.cpp
 )
 
 # Headers got to include/*
@@ -148,17 +158,17 @@ set(HEA_INC
 
 # Headers got to include/GpCoreTools/*
 set(HEA_SRCS
-    geopsy-src/dinver/dinverext/src/ExtPlugin.h
-    geopsy-src/dinver/dinverext/src/ExtTarget.h
-    geopsy-src/dinver/dinverext/src/ExtTargetWidget.h
-    geopsy-src/dinver/dinverext/src/Forward.h
-    geopsy-src/dinver/dinverext/src/dinverextInstallPath.h
-    geopsy-src/dinver/dinverext/src/dinverextVersion.h
+    ${THIS_REL_PATH}/src/ExtPlugin.h
+    ${THIS_REL_PATH}/src/ExtTarget.h
+    ${THIS_REL_PATH}/src/ExtTargetWidget.h
+    ${THIS_REL_PATH}/src/Forward.h
+    ${THIS_REL_PATH}/src/dinverextInstallPath.h
+    ${THIS_REL_PATH}/src/dinverextVersion.h
 )
 
 # Headers got to include/*
 set(UI_SRCS
-    geopsy-src/dinver/dinverext/src/ExtTargetWidget.ui
+    ${THIS_REL_PATH}/src/ExtTargetWidget.ui
 )
 
 #
@@ -168,7 +178,7 @@ set(UI_SRCS
 # QT5_WRAP_UI(UI_GENERATED_HEADERS ${UI_SRCS})
 
 # Include header files for compilation
-include_directories(geopsy-src/dinver/dinverext/src)
+include_directories(${THIS_REL_PATH}/src)
 
 #get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
 #foreach(dir ${dirs})
@@ -183,7 +193,7 @@ set (LIBRARY_OUTPUT_PATH ${THIS_LIB_PATH})
 ### 
 
 # Add resources from file
-# qt5_add_resources(QRCS dinverdc.qrc)
+# qt5_add_resources(QRCS ${THIS_REL_PATH}/dinverdc.qrc)
 
 # Create shared library
 #add_executable(${PROJECT_NAME} ${CPP_SRCS} ${UI_HEADERS} ${QRCS})

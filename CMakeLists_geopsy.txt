@@ -30,6 +30,16 @@ endif()
 ###
 
 # General build directory 
+if(CMAKE_MODULAR_BUILD)
+    # Global build
+    set(THIS_REL_PATH ".")
+    #message(STATUS "****** Modular (src: ${THIS_REL_PATH}/src) ******")
+else()
+    set(THIS_REL_PATH "geopsy-src/geopsy/geopsy")
+    #message(STATUS "****** Monolithic (src: ${THIS_REL_PATH}/src) ******")
+endif()
+
+# General build directory 
 if(GEOPSY_APP_BUILD_PATH)
     # Global build
     set(THIS_BUILD_PATH ${GEOPSY_APP_BUILD_PATH})
@@ -141,50 +151,50 @@ message(STATUS "Autogen goes to: ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_aut
 set(TARGET ${CMAKE_PROJECT_NAME})
 
 set(CPP_SRCS
-geopsy-src/geopsy/geopsy/src/AGC.cpp
-geopsy-src/geopsy/geopsy/src/ChronogramWindow.cpp
-geopsy-src/geopsy/geopsy/src/Convolution.cpp
-geopsy-src/geopsy/geopsy/src/Correlations.cpp
-geopsy-src/geopsy/geopsy/src/CustomAsciiFormatsEditor.cpp
-geopsy-src/geopsy/geopsy/src/CutSignal.cpp
-geopsy-src/geopsy/geopsy/src/DecimateAmplitude.cpp
-geopsy-src/geopsy/geopsy/src/Engine.cpp
-geopsy-src/geopsy/geopsy/src/ExportFileType.cpp
-geopsy-src/geopsy/geopsy/src/ExportPick.cpp
-geopsy-src/geopsy/geopsy/src/FileView.cpp
-geopsy-src/geopsy/geopsy/src/GeopsyAbout.cpp
-geopsy-src/geopsy/geopsy/src/GeopsyAboutDialog.cpp
-geopsy-src/geopsy/geopsy/src/GraphicWindow.cpp
-geopsy-src/geopsy/geopsy/src/GroupProperties.cpp
-geopsy-src/geopsy/geopsy/src/GroupView.cpp
-geopsy-src/geopsy/geopsy/src/GroupWidget.cpp
-geopsy-src/geopsy/geopsy/src/InstrumentalResponseWidget.cpp
-geopsy-src/geopsy/geopsy/src/LoadFilePattern.cpp
-geopsy-src/geopsy/geopsy/src/MagnifierSignal.cpp
-geopsy-src/geopsy/geopsy/src/main.cpp
-geopsy-src/geopsy/geopsy/src/MainWindow.cpp
-geopsy-src/geopsy/geopsy/src/MapWindow.cpp
-geopsy-src/geopsy/geopsy/src/Preferences.cpp
-geopsy-src/geopsy/geopsy/src/RotateComponents.cpp
-geopsy-src/geopsy/geopsy/src/SetTableFields.cpp
-geopsy-src/geopsy/geopsy/src/SignalDisplay.cpp
-geopsy-src/geopsy/geopsy/src/SignalTableDelegate.cpp
-geopsy-src/geopsy/geopsy/src/SignalTableItem.cpp
-geopsy-src/geopsy/geopsy/src/SignalTableView.cpp
-geopsy-src/geopsy/geopsy/src/SigSelectionDnD.cpp
-geopsy-src/geopsy/geopsy/src/SortKeys.cpp
-geopsy-src/geopsy/geopsy/src/SourceCoordinates.cpp
-geopsy-src/geopsy/geopsy/src/StaLta.cpp
-geopsy-src/geopsy/geopsy/src/StationCoordinates.cpp
-geopsy-src/geopsy/geopsy/src/SubtractGroupItem.cpp
-geopsy-src/geopsy/geopsy/src/SubtractSignals.cpp
-geopsy-src/geopsy/geopsy/src/SubtractValue.cpp
-geopsy-src/geopsy/geopsy/src/TableWindow.cpp
-geopsy-src/geopsy/geopsy/src/Taper.cpp
-geopsy-src/geopsy/geopsy/src/ToolFactory.cpp
-geopsy-src/geopsy/geopsy/src/ViewParamEditor.cpp
-geopsy-src/geopsy/geopsy/src/WaveformConsole.cpp
-geopsy-src/geopsy/geopsy/src/WindowEnvironment.cpp
+${THIS_REL_PATH}/src/AGC.cpp
+${THIS_REL_PATH}/src/ChronogramWindow.cpp
+${THIS_REL_PATH}/src/Convolution.cpp
+${THIS_REL_PATH}/src/Correlations.cpp
+${THIS_REL_PATH}/src/CustomAsciiFormatsEditor.cpp
+${THIS_REL_PATH}/src/CutSignal.cpp
+${THIS_REL_PATH}/src/DecimateAmplitude.cpp
+${THIS_REL_PATH}/src/Engine.cpp
+${THIS_REL_PATH}/src/ExportFileType.cpp
+${THIS_REL_PATH}/src/ExportPick.cpp
+${THIS_REL_PATH}/src/FileView.cpp
+${THIS_REL_PATH}/src/GeopsyAbout.cpp
+${THIS_REL_PATH}/src/GeopsyAboutDialog.cpp
+${THIS_REL_PATH}/src/GraphicWindow.cpp
+${THIS_REL_PATH}/src/GroupProperties.cpp
+${THIS_REL_PATH}/src/GroupView.cpp
+${THIS_REL_PATH}/src/GroupWidget.cpp
+${THIS_REL_PATH}/src/InstrumentalResponseWidget.cpp
+${THIS_REL_PATH}/src/LoadFilePattern.cpp
+${THIS_REL_PATH}/src/MagnifierSignal.cpp
+${THIS_REL_PATH}/src/main.cpp
+${THIS_REL_PATH}/src/MainWindow.cpp
+${THIS_REL_PATH}/src/MapWindow.cpp
+${THIS_REL_PATH}/src/Preferences.cpp
+${THIS_REL_PATH}/src/RotateComponents.cpp
+${THIS_REL_PATH}/src/SetTableFields.cpp
+${THIS_REL_PATH}/src/SignalDisplay.cpp
+${THIS_REL_PATH}/src/SignalTableDelegate.cpp
+${THIS_REL_PATH}/src/SignalTableItem.cpp
+${THIS_REL_PATH}/src/SignalTableView.cpp
+${THIS_REL_PATH}/src/SigSelectionDnD.cpp
+${THIS_REL_PATH}/src/SortKeys.cpp
+${THIS_REL_PATH}/src/SourceCoordinates.cpp
+${THIS_REL_PATH}/src/StaLta.cpp
+${THIS_REL_PATH}/src/StationCoordinates.cpp
+${THIS_REL_PATH}/src/SubtractGroupItem.cpp
+${THIS_REL_PATH}/src/SubtractSignals.cpp
+${THIS_REL_PATH}/src/SubtractValue.cpp
+${THIS_REL_PATH}/src/TableWindow.cpp
+${THIS_REL_PATH}/src/Taper.cpp
+${THIS_REL_PATH}/src/ToolFactory.cpp
+${THIS_REL_PATH}/src/ViewParamEditor.cpp
+${THIS_REL_PATH}/src/WaveformConsole.cpp
+${THIS_REL_PATH}/src/WindowEnvironment.cpp
 )
 
 # Headers got to include/*
@@ -194,80 +204,80 @@ set(HEA_INC
 
 # Headers got to include/GpCoreTools/*
 set(HEA_SRCS
-geopsy-src/geopsy/geopsy/src/AGC.h
-geopsy-src/geopsy/geopsy/src/ChronogramWindow.h
-geopsy-src/geopsy/geopsy/src/Convolution.h
-geopsy-src/geopsy/geopsy/src/Correlations.h
-geopsy-src/geopsy/geopsy/src/CustomAsciiFormatsEditor.h
-geopsy-src/geopsy/geopsy/src/CutSignal.h
-geopsy-src/geopsy/geopsy/src/DecimateAmplitude.h
-geopsy-src/geopsy/geopsy/src/Engine.h
-geopsy-src/geopsy/geopsy/src/ExportFileType.h
-geopsy-src/geopsy/geopsy/src/ExportPick.h
-geopsy-src/geopsy/geopsy/src/FileView.h
-geopsy-src/geopsy/geopsy/src/GeopsyAboutDialog.h
-geopsy-src/geopsy/geopsy/src/GeopsyAbout.h
-geopsy-src/geopsy/geopsy/src/geopsyInstallPath.h
-geopsy-src/geopsy/geopsy/src/geopsyVersion.h
-geopsy-src/geopsy/geopsy/src/GraphicWindow.h
-geopsy-src/geopsy/geopsy/src/GroupProperties.h
-geopsy-src/geopsy/geopsy/src/GroupView.h
-geopsy-src/geopsy/geopsy/src/GroupWidget.h
-geopsy-src/geopsy/geopsy/src/InstrumentalResponseWidget.h
-geopsy-src/geopsy/geopsy/src/LoadFilePattern.h
-geopsy-src/geopsy/geopsy/src/MagnifierSignal.h
-geopsy-src/geopsy/geopsy/src/MainWindow.h
-geopsy-src/geopsy/geopsy/src/MapWindow.h
-geopsy-src/geopsy/geopsy/src/Preferences.h
-geopsy-src/geopsy/geopsy/src/RotateComponents.h
-geopsy-src/geopsy/geopsy/src/SetTableFields.h
-geopsy-src/geopsy/geopsy/src/SignalDisplay.h
-geopsy-src/geopsy/geopsy/src/SignalTableDelegate.h
-geopsy-src/geopsy/geopsy/src/SignalTableItem.h
-geopsy-src/geopsy/geopsy/src/SignalTableView.h
-geopsy-src/geopsy/geopsy/src/SigSelectionDnD.h
-geopsy-src/geopsy/geopsy/src/SortKeys.h
-geopsy-src/geopsy/geopsy/src/SourceCoordinates.h
-geopsy-src/geopsy/geopsy/src/stable.h
-geopsy-src/geopsy/geopsy/src/StaLta.h
-geopsy-src/geopsy/geopsy/src/StationCoordinates.h
-geopsy-src/geopsy/geopsy/src/SubtractGroupItem.h
-geopsy-src/geopsy/geopsy/src/SubtractSignals.h
-geopsy-src/geopsy/geopsy/src/SubtractValue.h
-geopsy-src/geopsy/geopsy/src/TableWindow.h
-geopsy-src/geopsy/geopsy/src/Taper.h
-geopsy-src/geopsy/geopsy/src/ToolFactory.h
-geopsy-src/geopsy/geopsy/src/ViewParamEditor.h
-geopsy-src/geopsy/geopsy/src/WaveformConsole.h
-geopsy-src/geopsy/geopsy/src/WindowEnvironment.h
+${THIS_REL_PATH}/src/AGC.h
+${THIS_REL_PATH}/src/ChronogramWindow.h
+${THIS_REL_PATH}/src/Convolution.h
+${THIS_REL_PATH}/src/Correlations.h
+${THIS_REL_PATH}/src/CustomAsciiFormatsEditor.h
+${THIS_REL_PATH}/src/CutSignal.h
+${THIS_REL_PATH}/src/DecimateAmplitude.h
+${THIS_REL_PATH}/src/Engine.h
+${THIS_REL_PATH}/src/ExportFileType.h
+${THIS_REL_PATH}/src/ExportPick.h
+${THIS_REL_PATH}/src/FileView.h
+${THIS_REL_PATH}/src/GeopsyAboutDialog.h
+${THIS_REL_PATH}/src/GeopsyAbout.h
+${THIS_REL_PATH}/src/geopsyInstallPath.h
+${THIS_REL_PATH}/src/geopsyVersion.h
+${THIS_REL_PATH}/src/GraphicWindow.h
+${THIS_REL_PATH}/src/GroupProperties.h
+${THIS_REL_PATH}/src/GroupView.h
+${THIS_REL_PATH}/src/GroupWidget.h
+${THIS_REL_PATH}/src/InstrumentalResponseWidget.h
+${THIS_REL_PATH}/src/LoadFilePattern.h
+${THIS_REL_PATH}/src/MagnifierSignal.h
+${THIS_REL_PATH}/src/MainWindow.h
+${THIS_REL_PATH}/src/MapWindow.h
+${THIS_REL_PATH}/src/Preferences.h
+${THIS_REL_PATH}/src/RotateComponents.h
+${THIS_REL_PATH}/src/SetTableFields.h
+${THIS_REL_PATH}/src/SignalDisplay.h
+${THIS_REL_PATH}/src/SignalTableDelegate.h
+${THIS_REL_PATH}/src/SignalTableItem.h
+${THIS_REL_PATH}/src/SignalTableView.h
+${THIS_REL_PATH}/src/SigSelectionDnD.h
+${THIS_REL_PATH}/src/SortKeys.h
+${THIS_REL_PATH}/src/SourceCoordinates.h
+${THIS_REL_PATH}/src/stable.h
+${THIS_REL_PATH}/src/StaLta.h
+${THIS_REL_PATH}/src/StationCoordinates.h
+${THIS_REL_PATH}/src/SubtractGroupItem.h
+${THIS_REL_PATH}/src/SubtractSignals.h
+${THIS_REL_PATH}/src/SubtractValue.h
+${THIS_REL_PATH}/src/TableWindow.h
+${THIS_REL_PATH}/src/Taper.h
+${THIS_REL_PATH}/src/ToolFactory.h
+${THIS_REL_PATH}/src/ViewParamEditor.h
+${THIS_REL_PATH}/src/WaveformConsole.h
+${THIS_REL_PATH}/src/WindowEnvironment.h
 )
 
 # Headers got to include/*
 set(UI_SRCS
-geopsy-src/geopsy/geopsy/src/AGC.ui
-geopsy-src/geopsy/geopsy/src/Convolution.ui
-geopsy-src/geopsy/geopsy/src/Correlations.ui
-geopsy-src/geopsy/geopsy/src/CustomAsciiFormatsEditor.ui
-geopsy-src/geopsy/geopsy/src/CutSignal.ui
-geopsy-src/geopsy/geopsy/src/DecimateAmplitude.ui
-geopsy-src/geopsy/geopsy/src/ExportFileType.ui
-geopsy-src/geopsy/geopsy/src/ExportPick.ui
-geopsy-src/geopsy/geopsy/src/GeopsyAbout.ui
-geopsy-src/geopsy/geopsy/src/GroupProperties.ui
-geopsy-src/geopsy/geopsy/src/GroupWidget.ui
-geopsy-src/geopsy/geopsy/src/InstrumentalResponseWidget.ui
-geopsy-src/geopsy/geopsy/src/LoadFilePattern.ui
-geopsy-src/geopsy/geopsy/src/Preferences.ui
-geopsy-src/geopsy/geopsy/src/RotateComponents.ui
-geopsy-src/geopsy/geopsy/src/SetTableFields.ui
-geopsy-src/geopsy/geopsy/src/SortKeys.ui
-geopsy-src/geopsy/geopsy/src/StaLta.ui
-geopsy-src/geopsy/geopsy/src/StationCoordinates.ui
-geopsy-src/geopsy/geopsy/src/SubtractSignals.ui
-geopsy-src/geopsy/geopsy/src/SubtractValue.ui
-geopsy-src/geopsy/geopsy/src/Taper.ui
-geopsy-src/geopsy/geopsy/src/ViewParamEditor.ui
-geopsy-src/geopsy/geopsy/src/WaveformConsole.ui
+${THIS_REL_PATH}/src/AGC.ui
+${THIS_REL_PATH}/src/Convolution.ui
+${THIS_REL_PATH}/src/Correlations.ui
+${THIS_REL_PATH}/src/CustomAsciiFormatsEditor.ui
+${THIS_REL_PATH}/src/CutSignal.ui
+${THIS_REL_PATH}/src/DecimateAmplitude.ui
+${THIS_REL_PATH}/src/ExportFileType.ui
+${THIS_REL_PATH}/src/ExportPick.ui
+${THIS_REL_PATH}/src/GeopsyAbout.ui
+${THIS_REL_PATH}/src/GroupProperties.ui
+${THIS_REL_PATH}/src/GroupWidget.ui
+${THIS_REL_PATH}/src/InstrumentalResponseWidget.ui
+${THIS_REL_PATH}/src/LoadFilePattern.ui
+${THIS_REL_PATH}/src/Preferences.ui
+${THIS_REL_PATH}/src/RotateComponents.ui
+${THIS_REL_PATH}/src/SetTableFields.ui
+${THIS_REL_PATH}/src/SortKeys.ui
+${THIS_REL_PATH}/src/StaLta.ui
+${THIS_REL_PATH}/src/StationCoordinates.ui
+${THIS_REL_PATH}/src/SubtractSignals.ui
+${THIS_REL_PATH}/src/SubtractValue.ui
+${THIS_REL_PATH}/src/Taper.ui
+${THIS_REL_PATH}/src/ViewParamEditor.ui
+${THIS_REL_PATH}/src/WaveformConsole.ui
 )
 
 #
@@ -277,7 +287,7 @@ geopsy-src/geopsy/geopsy/src/WaveformConsole.ui
 # QT5_WRAP_UI(UI_GENERATED_HEADERS ${UI_SRCS})
 
 # Include header files for compilation
-include_directories(geopsy-src/geopsy/geopsy/src)
+include_directories(${THIS_REL_PATH}/src)
 
 #get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
 #foreach(dir ${dirs})
@@ -292,7 +302,7 @@ set (LIBRARY_OUTPUT_PATH ${THIS_LIB_PATH})
 ### 
 
 # Add resources from file
-qt5_add_resources(QRCS geopsy-src/geopsy/geopsy/geopsy.qrc)
+qt5_add_resources(QRCS ${THIS_REL_PATH}/geopsy.qrc)
 
 # Create shared library
 # add_library(${PROJECT_NAME} SHARED ${CPP_SRCS} ${QRCS})

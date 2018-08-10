@@ -30,6 +30,16 @@ endif()
 ###
 
 # General build directory 
+if(CMAKE_MODULAR_BUILD)
+    # Global build
+    set(THIS_REL_PATH ".")
+    #message(STATUS "****** Modular (src: ${THIS_REL_PATH}/src) ******")
+else()
+    set(THIS_REL_PATH "geopsy-src/geopsy/GeopsySLink")
+    #message(STATUS "****** Monolithic (src: ${THIS_REL_PATH}/src) ******")
+endif()
+
+# General build directory 
 if(GEOPSY_APP_BUILD_PATH)
     # Global build
     set(THIS_BUILD_PATH ${GEOPSY_APP_BUILD_PATH})
@@ -146,30 +156,30 @@ set(QT5_LIBRARIES Qt5::Core Qt5::Widgets)
 set(TARGET ${CMAKE_PROJECT_NAME})
 
 set(CPP_SRCS
-geopsy-src/geopsy/GeopsySLink/src/GeopsySLink.cpp
-    geopsy-src/geopsy/GeopsySLink/src/SeedLink.cpp
-    geopsy-src/geopsy/GeopsySLink/src/SeedLinkServer.cpp
-    geopsy-src/geopsy/GeopsySLink/src/SeedLinkStation.cpp
-    geopsy-src/geopsy/GeopsySLink/src/SeedLinkStream.cpp
+    ${THIS_REL_PATH}/src/GeopsySLink.cpp
+    ${THIS_REL_PATH}/src/SeedLink.cpp
+    ${THIS_REL_PATH}/src/SeedLinkServer.cpp
+    ${THIS_REL_PATH}/src/SeedLinkStation.cpp
+    ${THIS_REL_PATH}/src/SeedLinkStream.cpp
 )
 
 # Headers got to include/*
 set(HEA_INC
-  geopsy-src/geopsy/GeopsySLink/src/GeopsySLink.h
+  ${THIS_REL_PATH}/src/GeopsySLink.h
 )
 
 # Headers got to include/GpCoreTools/*
 set(HEA_SRCS
-    geopsy-src/geopsy/GeopsySLink/src/GeopsySLink.h
-    geopsy-src/geopsy/GeopsySLink/src/GeopsySLinkDLLExport.h
-    geopsy-src/geopsy/GeopsySLink/src/GeopsySLinkInstallPath.h
-    geopsy-src/geopsy/GeopsySLink/src/GeopsySLinkStatic.h
-    geopsy-src/geopsy/GeopsySLink/src/GeopsySLinkVersion.h
-    geopsy-src/geopsy/GeopsySLink/src/SeedLink.h
-    geopsy-src/geopsy/GeopsySLink/src/SeedLinkServer.h
-    geopsy-src/geopsy/GeopsySLink/src/SeedLinkStation.h
-    geopsy-src/geopsy/GeopsySLink/src/SeedLinkStream.h
-    geopsy-src/geopsy/GeopsySLink/src/stable.h
+    ${THIS_REL_PATH}/src/GeopsySLink.h
+    ${THIS_REL_PATH}/src/GeopsySLinkDLLExport.h
+    ${THIS_REL_PATH}/src/GeopsySLinkInstallPath.h
+    ${THIS_REL_PATH}/src/GeopsySLinkStatic.h
+    ${THIS_REL_PATH}/src/GeopsySLinkVersion.h
+    ${THIS_REL_PATH}/src/SeedLink.h
+    ${THIS_REL_PATH}/src/SeedLinkServer.h
+    ${THIS_REL_PATH}/src/SeedLinkStation.h
+    ${THIS_REL_PATH}/src/SeedLinkStream.h
+    ${THIS_REL_PATH}/src/stable.h
 )
 
 # Headers got to include/*
@@ -184,7 +194,7 @@ set(UI_SRCS
 # QT5_WRAP_UI(UI_GENERATED_HEADERS ${UI_SRCS})
 
 # Include header files for compilation
-include_directories(geopsy-src/geopsy/GeopsySLink/src)
+include_directories(${THIS_REL_PATH}/src)
 
 ### Set BUILD PATHS
 # Set library build path 

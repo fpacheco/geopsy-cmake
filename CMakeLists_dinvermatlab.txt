@@ -30,6 +30,16 @@ endif()
 ###
 
 # General build directory 
+if(CMAKE_MODULAR_BUILD)
+    # Global build
+    set(THIS_REL_PATH ".")
+    #message(STATUS "****** Modular (src: ${THIS_REL_PATH}/src) ******")
+else()
+    set(THIS_REL_PATH "geopsy-src/dinver/dinvermatlab")
+    #message(STATUS "****** Monolithic (src: ${THIS_REL_PATH}/src) ******")
+endif()
+
+# General build directory 
 if(GEOPSY_APP_BUILD_PATH)
     # Global build
     set(THIS_BUILD_PATH ${GEOPSY_APP_BUILD_PATH})
@@ -135,10 +145,10 @@ message(STATUS "Autogen goes to: ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_aut
 set(TARGET ${CMAKE_PROJECT_NAME})
 
 set(CPP_SRCS
-    geopsy-src/dinver/dinvermatlab/src/Forward.cpp
-    geopsy-src/dinver/dinvermatlab/src/MatlabPlugin.cpp
-    geopsy-src/dinver/dinvermatlab/src/MatlabTarget.cpp
-    geopsy-src/dinver/dinvermatlab/src/MatlabTargetWidget.cpp
+    ${THIS_REL_PATH}/src/Forward.cpp
+    ${THIS_REL_PATH}/src/MatlabPlugin.cpp
+    ${THIS_REL_PATH}/src/MatlabTarget.cpp
+    ${THIS_REL_PATH}/src/MatlabTargetWidget.cpp
 )
 
 # Headers got to include/*
@@ -148,17 +158,17 @@ set(HEA_INC
 
 # Headers got to include/GpCoreTools/*
 set(HEA_SRCS
-    geopsy-src/dinver/dinvermatlab/src/Forward.h
-    geopsy-src/dinver/dinvermatlab/src/MatlabPlugin.h
-    geopsy-src/dinver/dinvermatlab/src/MatlabTarget.h
-    geopsy-src/dinver/dinvermatlab/src/MatlabTargetWidget.h
-    geopsy-src/dinver/dinvermatlab/src/dinvermatlabInstallPath.h
-    geopsy-src/dinver/dinvermatlab/src/dinvermatlabVersion.h
+    ${THIS_REL_PATH}/src/Forward.h
+    ${THIS_REL_PATH}/src/MatlabPlugin.h
+    ${THIS_REL_PATH}/src/MatlabTarget.h
+    ${THIS_REL_PATH}/src/MatlabTargetWidget.h
+    ${THIS_REL_PATH}/src/dinvermatlabInstallPath.h
+    ${THIS_REL_PATH}/src/dinvermatlabVersion.h
 )
 
 # Headers got to include/*
 set(UI_SRCS
-    geopsy-src/dinver/dinvermatlab/src/MatlabTargetWidget.ui
+    ${THIS_REL_PATH}/src/MatlabTargetWidget.ui
 )
 
 #
@@ -168,7 +178,7 @@ set(UI_SRCS
 # QT5_WRAP_UI(UI_GENERATED_HEADERS ${UI_SRCS})
 
 # Include header files for compilation
-include_directories(geopsy-src/dinver/dinvermatlab/src)
+include_directories(${THIS_REL_PATH}/src)
 
 #get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
 #foreach(dir ${dirs})
@@ -183,7 +193,7 @@ set (LIBRARY_OUTPUT_PATH ${THIS_LIB_PATH})
 ### 
 
 # Add resources from file
-# qt5_add_resources(QRCS dinverdc.qrc)
+# qt5_add_resources(QRCS ${THIS_REL_PATH}/dinverdc.qrc)
 
 # Create shared library
 #add_executable(${PROJECT_NAME} ${CPP_SRCS} ${UI_HEADERS} ${QRCS})

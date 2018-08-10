@@ -30,6 +30,16 @@ endif()
 ###
 
 # General build directory 
+if(CMAKE_MODULAR_BUILD)
+    # Global build
+    set(THIS_REL_PATH ".")
+    #message(STATUS "****** Modular (src: ${THIS_REL_PATH}/src) ******")
+else()
+    set(THIS_REL_PATH "geopsy-src/dinver/dinverdc")
+    #message(STATUS "****** Monolithic (src: ${THIS_REL_PATH}/src) ******")
+endif()
+
+# General build directory 
 if(GEOPSY_APP_BUILD_PATH)
     # Global build
     set(THIS_BUILD_PATH ${GEOPSY_APP_BUILD_PATH})
@@ -135,19 +145,19 @@ message(STATUS "Autogen goes to: ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_aut
 set(TARGET ${CMAKE_PROJECT_NAME})
 
 set(CPP_SRCS
-    geopsy-src/dinver/dinverdc/src/AutocorrTargetWidget.cpp
-    geopsy-src/dinver/dinverdc/src/DCPlugin.cpp
-    geopsy-src/dinver/dinverdc/src/DispersionTargetWidget.cpp
-    geopsy-src/dinver/dinverdc/src/EllipticityCurveTargetWidget.cpp
-    geopsy-src/dinver/dinverdc/src/EllipticityPeakTargetWidget.cpp
-    geopsy-src/dinver/dinverdc/src/MagnetoTelluricTargetWidget.cpp
-    geopsy-src/dinver/dinverdc/src/ParamGroundModelWidget.cpp
-    geopsy-src/dinver/dinverdc/src/ParamLayerWidget.cpp
-    geopsy-src/dinver/dinverdc/src/ParamProfileWidget.cpp
-    geopsy-src/dinver/dinverdc/src/RefractionTargetWidget.cpp
-    geopsy-src/dinver/dinverdc/src/RingBrowser.cpp
-    geopsy-src/dinver/dinverdc/src/TargetListFrameWidget.cpp
-    geopsy-src/dinver/dinverdc/src/TargetListWidget.cpp
+    ${THIS_REL_PATH}/src/AutocorrTargetWidget.cpp
+    ${THIS_REL_PATH}/src/DCPlugin.cpp
+    ${THIS_REL_PATH}/src/DispersionTargetWidget.cpp
+    ${THIS_REL_PATH}/src/EllipticityCurveTargetWidget.cpp
+    ${THIS_REL_PATH}/src/EllipticityPeakTargetWidget.cpp
+    ${THIS_REL_PATH}/src/MagnetoTelluricTargetWidget.cpp
+    ${THIS_REL_PATH}/src/ParamGroundModelWidget.cpp
+    ${THIS_REL_PATH}/src/ParamLayerWidget.cpp
+    ${THIS_REL_PATH}/src/ParamProfileWidget.cpp
+    ${THIS_REL_PATH}/src/RefractionTargetWidget.cpp
+    ${THIS_REL_PATH}/src/RingBrowser.cpp
+    ${THIS_REL_PATH}/src/TargetListFrameWidget.cpp
+    ${THIS_REL_PATH}/src/TargetListWidget.cpp
 )
 
 # Headers got to include/*
@@ -157,31 +167,31 @@ set(HEA_INC
 
 # Headers got to include/GpCoreTools/*
 set(HEA_SRCS
-    geopsy-src/dinver/dinverdc/src/AutocorrTargetWidget.h
-    geopsy-src/dinver/dinverdc/src/DCPlugin.h
-    geopsy-src/dinver/dinverdc/src/DispersionTargetWidget.h
-    geopsy-src/dinver/dinverdc/src/EllipticityCurveTargetWidget.h
-    geopsy-src/dinver/dinverdc/src/EllipticityPeakTargetWidget.h
-    geopsy-src/dinver/dinverdc/src/MagnetoTelluricTargetWidget.h
-    geopsy-src/dinver/dinverdc/src/ParamGroundModelWidget.h
-    geopsy-src/dinver/dinverdc/src/ParamLayerWidget.h
-    geopsy-src/dinver/dinverdc/src/ParamProfileWidget.h
-    geopsy-src/dinver/dinverdc/src/RefractionTargetWidget.h
-    geopsy-src/dinver/dinverdc/src/RingBrowser.h
-    geopsy-src/dinver/dinverdc/src/TargetListFrameWidget.h
-    geopsy-src/dinver/dinverdc/src/TargetListWidget.h
-    geopsy-src/dinver/dinverdc/src/dinverdcInstallPath.h
-    geopsy-src/dinver/dinverdc/src/dinverdcVersion.h
+    ${THIS_REL_PATH}/src/AutocorrTargetWidget.h
+    ${THIS_REL_PATH}/src/DCPlugin.h
+    ${THIS_REL_PATH}/src/DispersionTargetWidget.h
+    ${THIS_REL_PATH}/src/EllipticityCurveTargetWidget.h
+    ${THIS_REL_PATH}/src/EllipticityPeakTargetWidget.h
+    ${THIS_REL_PATH}/src/MagnetoTelluricTargetWidget.h
+    ${THIS_REL_PATH}/src/ParamGroundModelWidget.h
+    ${THIS_REL_PATH}/src/ParamLayerWidget.h
+    ${THIS_REL_PATH}/src/ParamProfileWidget.h
+    ${THIS_REL_PATH}/src/RefractionTargetWidget.h
+    ${THIS_REL_PATH}/src/RingBrowser.h
+    ${THIS_REL_PATH}/src/TargetListFrameWidget.h
+    ${THIS_REL_PATH}/src/TargetListWidget.h
+    ${THIS_REL_PATH}/src/dinverdcInstallPath.h
+    ${THIS_REL_PATH}/src/dinverdcVersion.h
 )
 
 # Headers got to include/*
 set(UI_SRCS
-    geopsy-src/dinver/dinverdc/src/EllipticityPeakTargetWidget.ui
-    geopsy-src/dinver/dinverdc/src/ParamLayerWidget.ui
-    geopsy-src/dinver/dinverdc/src/ParamProfileWidget.ui
-    geopsy-src/dinver/dinverdc/src/RingBrowser.ui
-    geopsy-src/dinver/dinverdc/src/TargetListFrameWidget.ui
-    geopsy-src/dinver/dinverdc/src/TargetListWidget.ui
+    ${THIS_REL_PATH}/src/EllipticityPeakTargetWidget.ui
+    ${THIS_REL_PATH}/src/ParamLayerWidget.ui
+    ${THIS_REL_PATH}/src/ParamProfileWidget.ui
+    ${THIS_REL_PATH}/src/RingBrowser.ui
+    ${THIS_REL_PATH}/src/TargetListFrameWidget.ui
+    ${THIS_REL_PATH}/src/TargetListWidget.ui
 )
 
 #
@@ -191,7 +201,7 @@ set(UI_SRCS
 # QT5_WRAP_UI(UI_GENERATED_HEADERS ${UI_SRCS})
 
 # Include header files for compilation
-include_directories(geopsy-src/dinver/dinverdc/src)
+include_directories(${THIS_REL_PATH}/src)
 
 #get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
 #foreach(dir ${dirs})
@@ -206,7 +216,7 @@ set (LIBRARY_OUTPUT_PATH ${THIS_LIB_PATH})
 ### 
 
 # Add resources from file
-qt5_add_resources(QRCS geopsy-src/dinver/dinverdc/dinverdc.qrc)
+qt5_add_resources(QRCS ${THIS_REL_PATH}/dinverdc.qrc)
 
 # Create shared library
 #add_executable(${PROJECT_NAME} ${CPP_SRCS} ${UI_HEADERS} ${QRCS})
