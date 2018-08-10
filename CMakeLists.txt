@@ -153,7 +153,23 @@ if (CMAKE_MODULAR_BUILD)
         ${CMAKE_CURRENT_SOURCE_DIR} CMakeLists_geopsy.txt
         ${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/geopsy CMakeLists.txt
     )
-    
+    copy_and_rename(
+        ${CMAKE_CURRENT_SOURCE_DIR} CMakeLists_vslarray.txt
+        ${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/vslarray CMakeLists.txt
+    )    
+    copy_and_rename(
+        ${CMAKE_CURRENT_SOURCE_DIR} CMakeLists_matfiles.txt
+        ${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/matfiles CMakeLists.txt
+    )
+    copy_and_rename(
+        ${CMAKE_CURRENT_SOURCE_DIR} CMakeLists_geopsyhv.txt
+        ${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsyhv CMakeLists.txt
+    )
+    copy_and_rename(
+        ${CMAKE_CURRENT_SOURCE_DIR} CMakeLists_geopsytfa.txt
+        ${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsytfa CMakeLists.txt
+    )
+
     # Add subprojects
     add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/lib/GpCoreTools)
     add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/lib/QGpCoreTools)
@@ -186,7 +202,17 @@ if (CMAKE_MODULAR_BUILD)
     add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/MonoStation)
     add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/geopsy-fk)
     add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/geopsy)
-
+    add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/vslarray)
+    add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/matfiles)
+    # geopsy tools
+    #add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsyarray)
+    #add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsydamping)
+    add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsyhv)
+    #add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsynr)
+    #add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsymotion)
+    #add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsyrefra)
+    add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsytfa)
+    #add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/hvtfa)
     ###
 else()
     set(CUR_PROJ_REL_SRC )
@@ -223,7 +249,19 @@ else()
     include(CMakeLists_MonoStation.txt)
     include(CMakeLists_geopsy-fk.txt)
     include(CMakeLists_geopsy.txt)
-    #include(CMakeLists_vslarray.txt)
+    include(CMakeLists_vslarray.txt)
+    include(CMakeLists_matfiles.txt)
+
+    # geopsy tools
+    include(CMakeLists_geopsyarray.txt)
+    include(CMakeLists_geopsydamping.txt)
+    include(CMakeLists_geopsyhv.txt)
+    include(CMakeLists_geopsynr.txt)
+    include(CMakeLists_geopsymotion.txt)
+    include(CMakeLists_geopsyrefra.txt)
+    include(CMakeLists_geopsytfa.txt)
+    include(CMakeLists_hvtfa.txt)
+    
 endif()
 
 

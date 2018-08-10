@@ -5,7 +5,7 @@
 
 cmake_minimum_required(VERSION 3.9)
 
-project(MonoStation VERSION 1.0.0 DESCRIPTION "MonoStation description")
+project(vslarray VERSION 1.0.0 DESCRIPTION "vslarray description")
 
 ### Modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
@@ -35,7 +35,7 @@ if(CMAKE_MODULAR_BUILD)
     set(THIS_REL_PATH ".")
     #message(STATUS "****** Modular (src: ${THIS_REL_PATH}/src) ******")
 else()
-    set(THIS_REL_PATH "geopsy-src/geopsy/MonoStation")
+    set(THIS_REL_PATH "geopsy-src/geopsy/vslarray")
     #message(STATUS "****** Monolithic (src: ${THIS_REL_PATH}/src) ******")
 endif()
 
@@ -125,6 +125,30 @@ find_package(BLAS REQUIRED)
     #HINTS ${THIS_LIB_PATH}
 #)
 #message(STATUS "QGPCORETOOLS_LIBRARY: ${QGPCORETOOLS_LIBRARY}")
+## Find QGpGuiTools
+#find_library(QGPGUITOOLS_LIBRARY
+    #NAMES QGpGuiTools
+    #HINTS ${THIS_LIB_PATH}
+#)
+#message(STATUS "QGPGUITOOLS_LIBRARY: ${QGPGUITOOLS_LIBRARY}")
+## Find QGpCoreMath
+#find_library(QGPCOREMATH_LIBRARY
+    #NAMES QGpCoreMath
+    #HINTS ${THIS_LIB_PATH}
+#)
+#message(STATUS "QGPCOREMATH_LIBRARY: ${QGPCOREMATH_LIBRARY}")
+## Find QGpGuiMath
+#find_library(QGPGUIMATH_LIBRARY
+    #NAMES QGpGuiMath
+    #HINTS ${THIS_LIB_PATH}
+#)
+#message(STATUS "QGPGUIMATH_LIBRARY: ${QGPGUIMATH_LIBRARY}")
+## Find SciFigs
+#find_library(SCIFIGS_LIBRARY
+    #NAMES SciFigs
+    #HINTS ${THIS_LIB_PATH}
+#)
+#message(STATUS "SCIFIGS_LIBRARY: ${SCIFIGS_LIBRARY}")
 ###
 
 ### Qt5 support
@@ -144,89 +168,32 @@ set(QT5_LIBRARIES Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Qml Qt5::Network Qt5::Pri
 #message(STATUS "Qt5Core_LIBRARIES: ${Qt5Core_LIBRARIES}")
 #message(STATUS "Qt5Core_INCLUDE_DIRS: ${Qt5Core_INCLUDE_DIRS}")
 #message(STATUS "Qt5Qml_INCLUDE_DIRS: ${Qt5Qml_INCLUDE_DIRS}")
-message(STATUS "CMAKE_CURRENT_BINARY_DIR: ${CMAKE_CURRENT_BINARY_DIR}")
-message(STATUS "Autogen goes to: ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_autogen")
 ###
 
 set(TARGET ${CMAKE_PROJECT_NAME})
 
 set(CPP_SRCS
-${THIS_REL_PATH}/src/AbstractMonoTool.cpp
-${THIS_REL_PATH}/src/AbstractMonoToolWidget.cpp
-${THIS_REL_PATH}/src/AbstractStation.cpp
-${THIS_REL_PATH}/src/AbstractSummary.cpp
-${THIS_REL_PATH}/src/CategoryGroupItem.cpp
-${THIS_REL_PATH}/src/FilterTimeWindows.cpp
-${THIS_REL_PATH}/src/LoadWinStatList.cpp
-${THIS_REL_PATH}/src/MonoParameters.cpp
-${THIS_REL_PATH}/src/MonoStation.cpp
-${THIS_REL_PATH}/src/NewNoiseModel.cpp
-${THIS_REL_PATH}/src/PeakEditor.cpp
-${THIS_REL_PATH}/src/PeakItemModel.cpp
-${THIS_REL_PATH}/src/PeakSearchRange.cpp
-${THIS_REL_PATH}/src/ReplaceLog.cpp
-${THIS_REL_PATH}/src/SetCategory.cpp
-${THIS_REL_PATH}/src/SpectrumStationSignals.cpp
-${THIS_REL_PATH}/src/StationLine.cpp
-${THIS_REL_PATH}/src/StationResults.cpp
-${THIS_REL_PATH}/src/StatisticResults.cpp
-${THIS_REL_PATH}/src/StudentTest.cpp
-${THIS_REL_PATH}/src/StudentTestCurveModel.cpp
-${THIS_REL_PATH}/src/SummaryMapOptions.cpp
-${THIS_REL_PATH}/src/WinResults.cpp
-${THIS_REL_PATH}/src/WinResultsOptions.cpp
+${THIS_REL_PATH}/src/Acquisition.cpp
+${THIS_REL_PATH}/src/AcquisitionSignals.cpp
+${THIS_REL_PATH}/src/main.cpp
 )
 
 # Headers got to include/*
 set(HEA_INC
-${THIS_REL_PATH}/src/MonoStation.h
+
 )
 
 # Headers got to include/GpCoreTools/*
 set(HEA_SRCS
-${THIS_REL_PATH}/src/AbstractMonoTool.h
-${THIS_REL_PATH}/src/AbstractMonoToolWidget.h
-${THIS_REL_PATH}/src/AbstractStation.h
-${THIS_REL_PATH}/src/AbstractSummary.h
-${THIS_REL_PATH}/src/CategoryGroupItem.h
-${THIS_REL_PATH}/src/FilterTimeWindows.h
-${THIS_REL_PATH}/src/LoadWinStatList.h
-${THIS_REL_PATH}/src/MonoParameters.h
-${THIS_REL_PATH}/src/MonoStationDLLExport.h
-${THIS_REL_PATH}/src/MonoStation.h
-${THIS_REL_PATH}/src/MonoStationInstallPath.h
-${THIS_REL_PATH}/src/MonoStationStatic.h
-${THIS_REL_PATH}/src/MonoStationVersion.h
-${THIS_REL_PATH}/src/NewNoiseModel.h
-${THIS_REL_PATH}/src/PeakEditor.h
-${THIS_REL_PATH}/src/PeakItemModel.h
-${THIS_REL_PATH}/src/PeakSearchRange.h
-${THIS_REL_PATH}/src/ReplaceLog.h
-${THIS_REL_PATH}/src/SetCategory.h
-${THIS_REL_PATH}/src/SpectrumStationSignals.h
+${THIS_REL_PATH}/src/AcquisitionSignals.h
 ${THIS_REL_PATH}/src/stable.h
-${THIS_REL_PATH}/src/StationLine.h
-${THIS_REL_PATH}/src/StationResults.h
-${THIS_REL_PATH}/src/StatisticResults.h
-${THIS_REL_PATH}/src/StudentTestCurveModel.h
-${THIS_REL_PATH}/src/StudentTest.h
-${THIS_REL_PATH}/src/SummaryMapOptions.h
-${THIS_REL_PATH}/src/WinResults.h
-${THIS_REL_PATH}/src/WinResultsOptions.h
+${THIS_REL_PATH}/src/vslarrayInstallPath.h
+${THIS_REL_PATH}/src/vslarrayVersion.h
 )
 
 # Headers got to include/*
 set(UI_SRCS
-${THIS_REL_PATH}/src/AbstractMonoToolWidget.ui
-${THIS_REL_PATH}/src/FilterTimeWindows.ui
-${THIS_REL_PATH}/src/LoadWinStatList.ui
-${THIS_REL_PATH}/src/PeakEditor.ui
-${THIS_REL_PATH}/src/PeakSearchRange.ui
-${THIS_REL_PATH}/src/ReplaceLog.ui
-${THIS_REL_PATH}/src/SetCategory.ui
-${THIS_REL_PATH}/src/StudentTest.ui
-${THIS_REL_PATH}/src/SummaryMapOptions.ui
-${THIS_REL_PATH}/src/WinResultsOptions.ui
+
 )
 
 #
@@ -251,22 +218,25 @@ set (LIBRARY_OUTPUT_PATH ${THIS_LIB_PATH})
 ### 
 
 # Add resources from file
-# qt5_add_resources(QRCS ${THIS_REL_PATH}/QGpGuiTools.qrc)
+# qt5_add_resources(QRCS ${THIS_REL_PATH}/figue.qrc)
 
-# Create shared library
-add_library(${PROJECT_NAME} SHARED ${CPP_SRCS} ${QRCS})
+# Create executable
+add_executable(${PROJECT_NAME} ${CPP_SRCS} ${UI_HEADERS} ${QRCS})
+#add_library(${PROJECT_NAME} SHARED ${CPP_SRCS})
 target_link_libraries(${PROJECT_NAME} ${ZLIB_LIBRARIES} ${MPFR_LIBRARIES} ${GMP_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} ${BLAS_LIBRARIES} ${LAPACK_LIBRARIES}) 
 target_link_libraries(${PROJECT_NAME} Threads::Threads)
 target_link_libraries(${PROJECT_NAME} ${QT5_LIBRARIES})
-# -lQGpCoreTools -lQGpGuiTools -lQGpCoreMath -lQGpGuiMath -lSciFigs -lGeopsyCore -lGeopsyGui
+# -lQGpCoreTools -lQGpCoreMath -lGeopsyCore -lQGpCoreWave -lQGpCompatibility -lDinverCore -lDinverDCCore -lGaussianMixture -lArrayCore
 target_link_libraries(${PROJECT_NAME} QGpCoreTools)
-target_link_libraries(${PROJECT_NAME} QGpGuiTools)
 target_link_libraries(${PROJECT_NAME} QGpCoreMath)
-target_link_libraries(${PROJECT_NAME} QGpGuiMath)
-target_link_libraries(${PROJECT_NAME} SciFigs)
 target_link_libraries(${PROJECT_NAME} GeopsyCore)
-target_link_libraries(${PROJECT_NAME} GeopsyGui)
+target_link_libraries(${PROJECT_NAME} QGpCoreWave)
+target_link_libraries(${PROJECT_NAME} QGpCompatibility)
+target_link_libraries(${PROJECT_NAME} DinverCore)
+target_link_libraries(${PROJECT_NAME} DinverDCCore)
+target_link_libraries(${PROJECT_NAME} QGpCoreStat)
+target_link_libraries(${PROJECT_NAME} ArrayCore)
 
 # Set VERSION
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
@@ -274,38 +244,22 @@ set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
 # Set SOVERSION. Major version.
 set_target_properties(${PROJECT_NAME} PROPERTIES SOVERSION 1)
 
-### Headers copies, PRE and POST BUILD
+### POST BUILD
 # Include headers (include/*)
-foreach( file_i ${HEA_INC})
-    file(
-        COPY ${CMAKE_CURRENT_SOURCE_DIR}/${file_i}
-        DESTINATION ${THIS_INC_PATH}
-    )    
-endforeach( file_i )
+#foreach( file_i ${HEA_INC})
+    #file(
+        #COPY ${CMAKE_CURRENT_SOURCE_DIR}/${file_i}
+        #DESTINATION ${THIS_INC_PATH}
+    #)    
+#endforeach( file_i )
 
-# All other headers (include/${PROJECT_NAME}/*)
-foreach( file_i ${HEA_SRCS})
-    file(
-        COPY ${CMAKE_CURRENT_SOURCE_DIR}/${file_i} 
-        DESTINATION ${THIS_INC_PATH}/${PROJECT_NAME}
-    )
-endforeach( file_i )
-
-foreach( file_i ${HEA_INC})
-    add_custom_command(
-        TARGET ${PROJECT_NAME}
-        POST_BUILD
-        COMMAND ${CMAKE_COMMAND}
-        ARGS -E copy ${CMAKE_CURRENT_SOURCE_DIR}/${file_i} ${THIS_INC_PATH}
-    )
-endforeach( file_i )
-
-# Generated UI headers to include/${PROJECT_NAME}/*
-add_custom_command(
-    TARGET ${PROJECT_NAME} POST_BUILD
-    COMMAND ${CMAKE_COMMAND}
-    ARGS -E copy ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_autogen/include/ui_* ${THIS_INC_PATH}/${PROJECT_NAME}    
-)
+## All other headers (include/${PROJECT_NAME}/*)
+#foreach( file_i ${HEA_SRCS})
+    #file(
+        #COPY ${CMAKE_CURRENT_SOURCE_DIR}/${file_i} 
+        #DESTINATION ${THIS_INC_PATH}/${PROJECT_NAME}
+    #)
+#endforeach( file_i )
 ###
 
 ### Install actions 
