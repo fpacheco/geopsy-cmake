@@ -169,8 +169,19 @@ if (CMAKE_MODULAR_BUILD)
         ${CMAKE_CURRENT_SOURCE_DIR} CMakeLists_geopsydamping.txt
         ${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsydamping CMakeLists.txt
     )
-    # Waran
-    
+    # Waran TODO
+    #copy_and_rename(
+        #${CMAKE_CURRENT_SOURCE_DIR} CMakeLists_WaranCore.txt
+        #${CMAKE_SOURCE_DIR}/geopsy-src/waran/WaranCore CMakeLists.txt
+    #)
+    #copy_and_rename(
+        #${CMAKE_CURRENT_SOURCE_DIR} CMakeLists_waran.txt
+        #${CMAKE_SOURCE_DIR}/geopsy-src/waran/waran CMakeLists.txt
+    #)
+    #copy_and_rename(
+        #${CMAKE_CURRENT_SOURCE_DIR} CMakeLists_warangps.txt
+        #${CMAKE_SOURCE_DIR}/geopsy-src/waran/warangps CMakeLists.txt
+    #)    
     # geopsy tools
     copy_and_rename(
         ${CMAKE_CURRENT_SOURCE_DIR} CMakeLists_geopsynr.txt
