@@ -5,7 +5,7 @@
 
 cmake_minimum_required(VERSION 3.9)
 
-project(QGpCoreStat VERSION 0.0.0 DESCRIPTION "QGpCoreStat description")
+project(geopsyarray VERSION 0.0.0 DESCRIPTION "geopsyarray description")
 
 ### Modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
@@ -35,7 +35,7 @@ if(CMAKE_MODULAR_BUILD)
     set(THIS_REL_PATH ".")
     #message(STATUS "****** Modular (src: ${THIS_REL_PATH}/src) ******")
 else()
-    set(THIS_REL_PATH "geopsy-src/lib/QGpCoreStat")
+    set(THIS_REL_PATH "geopsy-src/geopsy/tools/geopsyarray")
     #message(STATUS "****** Monolithic (src: ${THIS_REL_PATH}/src) ******")
 endif()
 
@@ -124,12 +124,12 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 # Find Qt5 and add components Widgets, Qml, Sql, Network
-find_package(Qt5 COMPONENTS Core Qml Network REQUIRED)
+find_package(Qt5 COMPONENTS Gui Widgets Core Qml Network REQUIRED)
 INCLUDE_DIRECTORIES(${Qt5Core_INCLUDE_DIRS})
 #INCLUDE_DIRECTORIES(${Qt5Qml_INCLUDE_DIRS})
 #INCLUDE_DIRECTORIES(${Qt5Network_INCLUDE_DIRS})
 
-set(QT5_LIBRARIES Qt5::Core Qt5::Qml Qt5::Network)
+set(QT5_LIBRARIES Qt5::Core Qt5::Qml Qt5::Network Qt5::Gui Qt5::Widgets)
 #message(STATUS "QT5_LIBRARIES: ${QT5_LIBRARIES}")
 #message(STATUS "Qt5Core_LIBRARIES: ${Qt5Core_LIBRARIES}")
 #message(STATUS "Qt5Core_INCLUDE_DIRS: ${Qt5Core_INCLUDE_DIRS}")
@@ -139,39 +139,50 @@ set(QT5_LIBRARIES Qt5::Core Qt5::Qml Qt5::Network)
 set(TARGET ${CMAKE_PROJECT_NAME})
 
 set(CPP_SRCS
-    ${THIS_REL_PATH}/src/Densities.cpp
-    ${THIS_REL_PATH}/src/GaussianMixtureParameters.cpp
-    ${THIS_REL_PATH}/src/HistogramDensities.cpp
-    ${THIS_REL_PATH}/src/HistogramReader.cpp
-    ${THIS_REL_PATH}/src/Likelihood.cpp
-    ${THIS_REL_PATH}/src/QGpCoreStat.cpp
-    ${THIS_REL_PATH}/src/SampleFilter.cpp
+${THIS_REL_PATH}/src/ArrayPlugin.cpp
+${THIS_REL_PATH}/src/FKTimeWindows.cpp
+${THIS_REL_PATH}/src/FKToolWidget.cpp
+${THIS_REL_PATH}/src/HRFKTimeWindows.cpp
+${THIS_REL_PATH}/src/LinearFKActiveArrayStations.cpp
+${THIS_REL_PATH}/src/LinearFKActiveResults.cpp
+${THIS_REL_PATH}/src/LinearFKActiveStationSignals.cpp
+${THIS_REL_PATH}/src/ToolLinearFKActive.cpp
+${THIS_REL_PATH}/src/ToolLinearFKActived.cpp
+${THIS_REL_PATH}/src/ToolLinearFKPassive.cpp
+${THIS_REL_PATH}/src/ToolSPAC.cpp
+${THIS_REL_PATH}/src/ToolSPACd.cpp
 )
 
 # Headers got to include/*
 set(HEA_INC
-    ${THIS_REL_PATH}/src/QGpCoreStat.h
+
 )
 
 # Headers got to include/GpCoreTools/*
 set(HEA_SRCS
-    ${THIS_REL_PATH}/src/Densities.h
-    ${THIS_REL_PATH}/src/GaussianMixtureParameters.h
-    ${THIS_REL_PATH}/src/HistogramDensities.h
-    ${THIS_REL_PATH}/src/HistogramReader.h
-    ${THIS_REL_PATH}/src/Likelihood.h
-    ${THIS_REL_PATH}/src/QGpCoreStatDLLExport.h
-    ${THIS_REL_PATH}/src/QGpCoreStat.h
-    ${THIS_REL_PATH}/src/QGpCoreStatInstallPath.h
-    ${THIS_REL_PATH}/src/QGpCoreStatStatic.h
-    ${THIS_REL_PATH}/src/QGpCoreStatVersion.h
-    ${THIS_REL_PATH}/src/SampleFilter.h
-    ${THIS_REL_PATH}/src/stable.h
+${THIS_REL_PATH}/src/ArrayPlugin.h
+${THIS_REL_PATH}/src/FKTimeWindows.h
+${THIS_REL_PATH}/src/FKToolWidget.h
+${THIS_REL_PATH}/src/geopsyarrayInstallPath.h
+${THIS_REL_PATH}/src/geopsyarrayVersion.h
+${THIS_REL_PATH}/src/HRFKTimeWindows.h
+${THIS_REL_PATH}/src/LinearFKActiveArrayStations.h
+${THIS_REL_PATH}/src/LinearFKActiveResults.h
+${THIS_REL_PATH}/src/LinearFKActiveStationSignals.h
+${THIS_REL_PATH}/src/stable.h
+${THIS_REL_PATH}/src/ToolLinearFKActived.h
+${THIS_REL_PATH}/src/ToolLinearFKActive.h
+${THIS_REL_PATH}/src/ToolLinearFKPassive.h
+${THIS_REL_PATH}/src/ToolSPACd.h
+${THIS_REL_PATH}/src/ToolSPAC.h
 )
 
 # Headers got to include/*
 set(UI_SRCS
-
+${THIS_REL_PATH}/src/FKTimeWindows.ui
+${THIS_REL_PATH}/src/FKToolWidget.ui
+${THIS_REL_PATH}/src/ToolLinearFKActived.ui
+${THIS_REL_PATH}/src/ToolSPACd.ui
 )
 
 #
@@ -205,15 +216,32 @@ foreach( file_i ${HEA_SRCS})
     )
 endforeach( file_i )
 
+# Add resources from file
+qt5_add_resources(QRCS ${THIS_REL_PATH}/geopsyarray.qrc)
+
 # Create shared library
-add_library(${PROJECT_NAME} SHARED ${CPP_SRCS})
+add_library(${PROJECT_NAME} SHARED ${CPP_SRCS} ${QRCS})
 target_link_libraries(${PROJECT_NAME} ${ZLIB_LIBRARIES} ${MPFR_LIBRARIES} ${GMP_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} Threads::Threads)
 target_link_libraries(${PROJECT_NAME} ${QT5_LIBRARIES})
-# -lQGpCoreTools -lQGpCoreMath -lDinverCore 
+# -lQGpCoreTools -lQGpGuiTools -lQGpCoreMath -lQGpGuiMath -lSciFigs -lGeopsyCore -lGeopsyGui -lQGpCoreWave 
+# -lArrayCore -lArrayGui -lQGpGuiWave -lDinverCore -lDinverGui -lDinverDCCore -lQGpCompatibility
 target_link_libraries(${PROJECT_NAME} QGpCoreTools)
+target_link_libraries(${PROJECT_NAME} QGpGuiTools)
 target_link_libraries(${PROJECT_NAME} QGpCoreMath)
+target_link_libraries(${PROJECT_NAME} QGpGuiMath)
+target_link_libraries(${PROJECT_NAME} SciFigs)
+target_link_libraries(${PROJECT_NAME} GeopsyCore)
+target_link_libraries(${PROJECT_NAME} GeopsyGui)
+target_link_libraries(${PROJECT_NAME} QGpCoreWave)
+target_link_libraries(${PROJECT_NAME} GeopsyCore)
+target_link_libraries(${PROJECT_NAME} ArrayCore)
+target_link_libraries(${PROJECT_NAME} ArrayGui)
+target_link_libraries(${PROJECT_NAME} QGpGuiWave)
 target_link_libraries(${PROJECT_NAME} DinverCore)
+target_link_libraries(${PROJECT_NAME} DinverGui)
+target_link_libraries(${PROJECT_NAME} DinverDCCore)
+target_link_libraries(${PROJECT_NAME} QGpCompatibility)
 
 # Set VERSION
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})

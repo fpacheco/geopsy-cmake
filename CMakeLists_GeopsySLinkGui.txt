@@ -5,7 +5,7 @@
 
 cmake_minimum_required(VERSION 3.9)
 
-project(GeopsySLinkGui VERSION 1.0.0 DESCRIPTION "GeopsySLinkGui description")
+project(GeopsySLinkGui VERSION 0.0.0 DESCRIPTION "GeopsySLinkGui description")
 
 ### Modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")

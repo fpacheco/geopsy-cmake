@@ -5,7 +5,7 @@
 
 cmake_minimum_required(VERSION 3.9)
 
-project(geopsyhv VERSION 1.0.0 DESCRIPTION "geopsyhv description")
+project(geopsyhv VERSION 0.0.0 DESCRIPTION "geopsyhv description")
 
 ### Modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
@@ -229,7 +229,7 @@ endforeach( file_i )
 qt5_add_resources(QRCS ${THIS_REL_PATH}/geopsyhv.qrc)
 
 # Create shared library
-add_library(${PROJECT_NAME} SHARED ${CPP_SRCS})
+add_library(${PROJECT_NAME} SHARED ${CPP_SRCS} ${QRCS})
 target_link_libraries(${PROJECT_NAME} ${ZLIB_LIBRARIES} ${MPFR_LIBRARIES} ${GMP_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} Threads::Threads)
 target_link_libraries(${PROJECT_NAME} ${QT5_LIBRARIES})

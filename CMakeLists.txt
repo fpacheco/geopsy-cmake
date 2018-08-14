@@ -192,8 +192,8 @@ if (CMAKE_MODULAR_BUILD)
         ${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsyhv CMakeLists.txt
     )
     copy_and_rename(
-        ${CMAKE_CURRENT_SOURCE_DIR} CMakeLists_geopsymotion.txt
-        ${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsymotion CMakeLists.txt
+        ${CMAKE_CURRENT_SOURCE_DIR} CMakeLists_geopsyptmotion.txt
+        ${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsyptmotion CMakeLists.txt
     )
     copy_and_rename(
         ${CMAKE_CURRENT_SOURCE_DIR} CMakeLists_geopsyrefra.txt
@@ -250,7 +250,7 @@ if (CMAKE_MODULAR_BUILD)
     add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsydamping)
     add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsyhv)
     add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsynr)
-    add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsymotion)
+    add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsyptmotion)
     add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsyrefra)
     add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/geopsytfa)
     add_subdirectory(${CMAKE_SOURCE_DIR}/geopsy-src/geopsy/tools/hvtfa)

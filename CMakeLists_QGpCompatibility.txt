@@ -5,7 +5,7 @@
 
 cmake_minimum_required(VERSION 3.9)
 
-project(QGpCompatibility VERSION 1.0.0 DESCRIPTION "QGpCompatibility description")
+project(QGpCompatibility VERSION 0.0.0 DESCRIPTION "QGpCompatibility description")
 
 ### Modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")

@@ -5,7 +5,7 @@
 
 cmake_minimum_required(VERSION 3.9)
 
-project(@@P_NAME@@ VERSION 1.0.0 DESCRIPTION "@@P_NAME@@ description")
+project(@@P_NAME@@ VERSION 0.0.0 DESCRIPTION "@@P_NAME@@ description")
 
 ### Modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
